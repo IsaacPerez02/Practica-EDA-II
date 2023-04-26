@@ -1,0 +1,3 @@
+C:/Users/Txuss/Desktop/Proyecto EDA II/Proyecto_EDA_II/cmake-build-debug/CMakeFiles/untitled4.dir
+C:/Users/Txuss/Desktop/Proyecto EDA II/Proyecto_EDA_II/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Txuss/Desktop/Proyecto EDA II/Proyecto_EDA_II/cmake-build-debug/CMakeFiles/rebuild_cache.dir
