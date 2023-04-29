@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/untitled4.dir/main.c.obj"
-  "CMakeFiles/untitled4.dir/main.c.obj.d"
+  "CMakeFiles/untitled4.dir/sources/main.c.obj"
+  "CMakeFiles/untitled4.dir/sources/main.c.obj.d"
+  "CMakeFiles/untitled4.dir/sources/user.c.obj"
+  "CMakeFiles/untitled4.dir/sources/user.c.obj.d"
   "libuntitled4.dll.a"
   "untitled4.exe"
   "untitled4.exe.manifest"

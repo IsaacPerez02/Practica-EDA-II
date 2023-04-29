@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/adria/Desktop/UPF/1r a\u00f1o/3r trimestre/Estructuras de datos y algoritmos II/Practica/Practica-EDA-II/cmake-build-debug"
+			"value" : "c:/Users/adria/Desktop/UPF/1r a\u00f1o/3r trimestre/Estructuras de datos y algoritmos II/Practica/Proyecto/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -475,7 +475,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/adria/Desktop/UPF/1r a\u00f1o/3r trimestre/Estructuras de datos y algoritmos II/Practica/Practica-EDA-II/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "C:/Users/adria/Desktop/UPF/1r a\u00f1o/3r trimestre/Estructuras de datos y algoritmos II/Practica/Proyecto/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -547,7 +547,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/adria/Desktop/UPF/1r a\u00f1o/3r trimestre/Estructuras de datos y algoritmos II/Practica/Practica-EDA-II"
+			"value" : "C:/Users/adria/Desktop/UPF/1r a\u00f1o/3r trimestre/Estructuras de datos y algoritmos II/Practica/Proyecto"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1179,7 +1179,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/adria/Desktop/UPF/1r a\u00f1o/3r trimestre/Estructuras de datos y algoritmos II/Practica/Practica-EDA-II/cmake-build-debug"
+			"value" : "C:/Users/adria/Desktop/UPF/1r a\u00f1o/3r trimestre/Estructuras de datos y algoritmos II/Practica/Proyecto/cmake-build-debug"
 		},
 		{
 			"name" : "untitled4_IS_TOP_LEVEL",
@@ -1203,7 +1203,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/adria/Desktop/UPF/1r a\u00f1o/3r trimestre/Estructuras de datos y algoritmos II/Practica/Practica-EDA-II"
+			"value" : "C:/Users/adria/Desktop/UPF/1r a\u00f1o/3r trimestre/Estructuras de datos y algoritmos II/Practica/Proyecto"
 		}
 	],
 	"kind" : "cache",
