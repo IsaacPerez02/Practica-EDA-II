@@ -49,11 +49,19 @@ cmake_ninja_workdir = C$:/Users/Txuss/Desktop/Proyecto$ EDA$ II/Proyecto_EDA_II/
 
 build cmake_object_order_depends_target_untitled4: phony || CMakeFiles/untitled4.dir
 
-build CMakeFiles/untitled4.dir/main.c.obj: C_COMPILER__untitled4_Debug C$:/Users/Txuss/Desktop/Proyecto$ EDA$ II/Proyecto_EDA_II/main.c || cmake_object_order_depends_target_untitled4
-  DEP_FILE = CMakeFiles\untitled4.dir\main.c.obj.d
+build CMakeFiles/untitled4.dir/sources/main.c.obj: C_COMPILER__untitled4_Debug C$:/Users/Txuss/Desktop/Proyecto$ EDA$ II/Proyecto_EDA_II/sources/main.c || cmake_object_order_depends_target_untitled4
+  DEP_FILE = CMakeFiles\untitled4.dir\sources\main.c.obj.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu11
   OBJECT_DIR = CMakeFiles\untitled4.dir
-  OBJECT_FILE_DIR = CMakeFiles\untitled4.dir
+  OBJECT_FILE_DIR = CMakeFiles\untitled4.dir\sources
+  TARGET_COMPILE_PDB = CMakeFiles\untitled4.dir\
+  TARGET_PDB = untitled4.pdb
+
+build CMakeFiles/untitled4.dir/sources/user.c.obj: C_COMPILER__untitled4_Debug C$:/Users/Txuss/Desktop/Proyecto$ EDA$ II/Proyecto_EDA_II/sources/user.c || cmake_object_order_depends_target_untitled4
+  DEP_FILE = CMakeFiles\untitled4.dir\sources\user.c.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu11
+  OBJECT_DIR = CMakeFiles\untitled4.dir
+  OBJECT_FILE_DIR = CMakeFiles\untitled4.dir\sources
   TARGET_COMPILE_PDB = CMakeFiles\untitled4.dir\
   TARGET_PDB = untitled4.pdb
 
@@ -65,7 +73,7 @@ build CMakeFiles/untitled4.dir/main.c.obj: C_COMPILER__untitled4_Debug C$:/Users
 #############################################
 # Link the executable untitled4.exe
 
-build untitled4.exe: C_EXECUTABLE_LINKER__untitled4_Debug CMakeFiles/untitled4.dir/main.c.obj
+build untitled4.exe: C_EXECUTABLE_LINKER__untitled4_Debug CMakeFiles/untitled4.dir/sources/main.c.obj CMakeFiles/untitled4.dir/sources/user.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\untitled4.dir
