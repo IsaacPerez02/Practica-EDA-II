@@ -14,8 +14,9 @@ enum Gustos {Videojuegos,
         Informática}; //Lista de gustos *CONSULTAR CON EL PROFE SI SE PUEDEN USAR ENUMERACIONES*
 
 typedef struct {
-    char nombre[USERNAME_CHARS];
-    char contraseña[PASSWORD_CHARS];
+    char id_name[USERNAME_LENGTH];
+    char nombre[USERNAME_LENGTH];
+    char contrasena[PASSWORD_LENGTH];
     int edad;
     char correo[EMAIL_LENGTH];
     char ubicacion[UBICATION_LENGTH];

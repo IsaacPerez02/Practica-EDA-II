@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include "../headers/user.h"
+#define ERROR -1
 
 int main() {
     int opcion_menu = -1;
