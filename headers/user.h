@@ -5,6 +5,7 @@
 #define PASSWORD_LENGTH 30 //Cantidad de caracteres máximo que puede tener una contraseña
 #define EMAIL_LENGTH 50 //Cantidad de caracteres máximo que puede tener un correo electrónico
 #define UBICATION_LENGTH 20 //cantidad de caracteres de la ciudad
+#define GUSTOS 20
 
 enum Gustos {Videojuegos,
         Deportes,
@@ -20,10 +21,15 @@ typedef struct {
     int edad;
     char correo[EMAIL_LENGTH];
     char ubicacion[UBICATION_LENGTH];
-    enum Gustos gustos[5];
+    char gustos1 [GUSTOS];
+    char gustos2 [GUSTOS];
+    char gustos3 [GUSTOS];
+    char gustos4 [GUSTOS];
+    char gustos5 [GUSTOS];
 } User;
 
-void init_user();
-void ord_user(FILE* fa);
+User* init_users();
+void create_user(User* u);
+void loading_users(FILE* fa);
 
 #endif //UNTITLED4_USER_H

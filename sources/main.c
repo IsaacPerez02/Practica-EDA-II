@@ -14,9 +14,17 @@ int main() {
         scanf("%d", &opcion_menu);
 
         if (opcion_menu == 1) {
-            FILE *fa = fopen("../resources/users.txt", "r");
-            if (fa == NULL) return ERROR;
-            ord_user(fa);
+            User u;
+            FILE *fa = fopen("../resources/users.txt", "a");
+            if (fa == NULL) success = ERROR;
+            if (success = SUCCESS) {
+                create_user(&us);
+
+                fprintf(fa, "%s %s %s %d %s %s %s %s %s %s %s", u[global_users].id_name, u[global_users].nombre, u[global_users].contrasena, u[global_users].edad, u[global_users].correo, u[global_users].ubicacion, u[global_users].gustos1, u[global_users].gustos2, u[global_users].gustos3, u[global_users].gustos4, users[i].gustos5));
+
+                global_users = global_users + 1;
+
+            }
         }
         else if (opcion_menu == 2) {
             //Añadir función para escribir un nombre de usuario y contraseña para logearse
