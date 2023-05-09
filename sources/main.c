@@ -1,16 +1,41 @@
 #include <stdio.h>
 #include "../headers/user.h"
 #define ERROR -1
+#define SUCCESS 1
+
+User login_usuario(User* us) {
+    char nombre_usuario[USERNAME_LENGTH];
+    char contrasena[PASSWORD_LENGTH];
+
+    printf("Introduce el nombre de usuario:\n");
+    scanf("%s", &nombre_usuario);
+    printf("Introduce la contrasena de este usuario:\n");
+    scanf("%s", &contrasena);
+
+    char f_usuario[USERNAME_LENGTH];
+    char f_contrasena[PASSWORD_LENGTH];
+
+    //WIP: Comprobar si existe el usuario en el archivo / lista dinámica
+
+
+}
 
 int main() {
     int opcion_menu = -1;
     int opcion_usuario = -1;
+    int success = SUCCESS;
+    int global_users = 0;
+
+    FILE *fread = fopen("../resources/users.txt", "r");
+    if (fread == NULL) success = ERROR;
+    User* us = init_users(fread);
+
     while (opcion_menu != 0) {
         printf("1.- Crear nuevo usuario\n");
         printf("2.- Listar todos los usuarios\n");
         printf("3.- Operar como otro usuario\n");
         printf("0.- Salir del programa\n");
-        printf("Elige una opcion: \n");
+        printf("Elige una opcion:\n");
         scanf("%d", &opcion_menu);
 
         if (opcion_menu == 1) {
@@ -27,14 +52,47 @@ int main() {
             }
         }
         else if (opcion_menu == 2) {
-            //Añadir función para escribir un nombre de usuario y contraseña para logearse
-            //Comprobar si el usuario existe
+            User usuario = login_usuario(us);
+
+            while(opcion_usuario != 0) {
+                printf("1.- Enviar solicitud de amistad\n");
+                printf("2.- Gestionar solicitudes pendientes\n");
+                printf("3.- Realizar una publicacion\n");
+                printf("4.- Listar las publicaciones de un usuario\n");
+                printf("0.- Cerrar sesion y volver al menu principal\n");
+                printf("Elige una opcion:\n");
+                scanf("%d", &opcion_usuario);
+
+                if (opcion_usuario == 1) {
+
+                }
+                else if (opcion_usuario == 2) {
+
+                }
+                else if (opcion_usuario == 3) {
+
+                }
+                else if (opcion_usuario == 4) {
+
+                }
+                else if (opcion_usuario == 0) {
+                    printf("Cerrando sesion...\n");
+                }
+                else {
+                    printf("Tienes que elegir una opcion correcta.\n");
+                }
+
+            }
         }
         else if (opcion_menu == 3) {
 
         }
+        else if (opcion_menu == 0) {
+            printf("\nSaliendo del programa...");
+        }
+        else {
+            printf("Tienes que elegir una opcion correcta.\n");
+        }
     }
-
-    printf("\nSaliendo del programa...");
 
 }
