@@ -13,7 +13,6 @@ int main() {
     int status = SUCCESS;
     char gustos[6][GUSTOS] = {"A", "B", "C", "D", "E", "F"}; //Gustos disponibles
     User_list *list;
-    list = init_list();
     User us;
 
     while (opcion_menu != 0) {

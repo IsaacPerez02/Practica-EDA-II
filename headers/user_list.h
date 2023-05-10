@@ -9,7 +9,6 @@ typedef struct User_list{
     User* us;
 }User_list;
 
-User_list* init_list ();
 User_list* init_user(User* us);
 User_list* add_user (User_list* list, User* us);
 User_list* delete_user (User_list* list, User* us);
