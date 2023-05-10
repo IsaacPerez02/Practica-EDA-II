@@ -35,6 +35,7 @@ void add_user (User_list* list, User* us){
         temp->next = new_user;
         new_user->prev = temp;
     }
+    printf("%s\n", list->us->nombre)
 }
 
 void delete_user (User_list * list, User* us){
