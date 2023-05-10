@@ -9,14 +9,6 @@
 #define EMAIL_LENGTH 50 //Cantidad de caracteres máximo que puede tener un correo electrónico
 #define UBICATION_LENGTH 20 //cantidad de caracteres de la ciudad
 
-User_list* init_list (){
-    User_list *list = NULL;
-    list = (User_list*) malloc(sizeof (User_list));
-    list->prev = NULL;
-    list->next = NULL;
-    list->us = NULL;
-    return list;
-}
 
 User_list* init_user(User* us){
     User_list* new_user = (User_list*) malloc(sizeof (User_list));
@@ -26,23 +18,20 @@ User_list* init_user(User* us){
     return new_user;
 }
 
-User_list* add_user (User_list* list, User* us){
+User_list* first_user(User* us){
+    User_list* first_user = init_user(us);
+    return first_user;
+}
+
+void add_user (User_list* list, User* us){
     User_list* new_user;
     new_user = init_user(us);
-    if (list->us == NULL){
-        list = new_user;
-        printf("Hola");
+    User_list* temp = list;
+    while (temp->next != NULL) {
+        temp = temp->next;
     }
-    else{
-        User_list* temp = list;
-        while (temp->next != NULL) {
-            temp = temp->next;
-        }
-        temp->next = new_user;
-        new_user->prev = temp;
-        printf("%s %s\n", temp->us->id_name, temp->next->us->id_name);
-    }
-    return list;
+    temp->next = new_user;
+    new_user->prev = temp;
 }
 
 User_list* delete_user (User_list * list, User* us){

@@ -17,7 +17,7 @@ typedef struct {
     char gustos [5][GUSTOS];
 } User;
 
-User create_user(char gustos[6][GUSTOS]);
+User* create_user(char gustos[6][GUSTOS]);
 void loading_users(FILE* fa);
 
 #endif //UNTITLED4_USER_H

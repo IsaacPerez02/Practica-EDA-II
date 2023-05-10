@@ -13,7 +13,7 @@ int main() {
     int status = SUCCESS;
     char gustos[6][GUSTOS] = {"A", "B", "C", "D", "E", "F"}; //Gustos disponibles
     User_list *list;
-    User us;
+    User* us;
 
     while (opcion_menu != 0) {
         printf("1.- Crear nuevo usuario\n");
@@ -25,7 +25,14 @@ int main() {
 
         if (opcion_menu == 1) {
             us = create_user(gustos);
-            list = add_user(list, &us);
+            if (list == NULL) {
+                list = first_user(us);
+                printf("%s\n", list->us->id_name);
+            }
+            else{
+                add_user(list, us);
+                printf("%s\n", list->us->id_name);
+            }
         } else if (opcion_menu == 2) {
             print_users(list);
         }

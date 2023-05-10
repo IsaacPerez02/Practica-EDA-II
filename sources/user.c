@@ -9,23 +9,23 @@
 #define UBICATION_LENGTH 20 //cantidad de caracteres de la ciudad
 #define GUSTOS 6
 
-User create_user (char gustos[6][GUSTOS]){
-    User u;
+User* create_user (char gustos[6][GUSTOS]){
+    User* u = (User*) malloc(sizeof (User));
     int indice;
     // Asignacion de variables de usuario a la estructura
     printf("Empieza a crear tu usuario...\n");
     printf("Introduzca su ID: \n");
-    scanf("%s", u.id_name);
+    scanf("%s", u->id_name);
     printf("Introduzca su Nombre: \n");
-    scanf("%s", u.nombre);
+    scanf("%s", u->nombre);
     printf("Introduzca su contraseña: \n");
-    scanf("%s", u.contrasena);
+    scanf("%s", u->contrasena);
     printf("Introduzca su edad: \n");
-    scanf("%d", &u.edad);
+    scanf("%d", &u->edad);
     printf("Introduzca su correo: \n");
-    scanf("%s", u.correo);
+    scanf("%s", u->correo);
     printf("Introduzca su ubicacion: \n");
-    scanf("%s", u.ubicacion);
+    scanf("%s", u->ubicacion);
     for (int i = 0; i < GUSTOS; i++){
         printf("%d. %s \n", i + 1, gustos[i]);
     }
@@ -34,7 +34,7 @@ User create_user (char gustos[6][GUSTOS]){
         printf("%d: \n", i + 1, gustos[i]);
         scanf("%d", &indice);
         indice--;
-        strcpy(u.gustos[i], gustos[indice]);
+        strcpy(u->gustos[i], gustos[indice]);
     }
     return u;
 }
