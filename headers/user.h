@@ -22,11 +22,6 @@ typedef struct {
     char gustos5 [GUSTOS];
 } User;
 
-typedef struct {
-    User* usuarios[20];
-    int tamano;
-} User_List;
-
 User* init_users();
 void create_user(User* u);
 void loading_users(FILE* fa);

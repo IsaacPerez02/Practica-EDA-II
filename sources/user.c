@@ -19,17 +19,18 @@ void create_user (User* u){
     // Asignacion de variables de usuario a la estructura
     printf("Empieza a crear tu usuario...\n");
     printf("Introduzca su ID: \n");
-    scanf("%s", &u.id_name);
+    scanf("%s", &u->id_name);
     printf("Introduzca su Nombre: \n");
-    scanf("%s", &u.nombre);
+    scanf("%s", &u->nombre);
     printf("Introduzca su contraseña: \n");
-    scanf("%s", &u.contrasena);
+    scanf("%s", &u->contrasena);
     printf("Introduzca su edad: \n");
-    scanf("%d", &u.edad);
+    scanf("%d", &u->edad);
     printf("Introduzca su correo: \n");
-    scanf("%s", &u.correo);
+    scanf("%s", &u->correo);
     printf("Introduzca su ubicacion: \n");
-    scanf("%s", &u.ubicacion);
+    scanf("%s", &u->ubicacion);
+
 }
 
 void loading_users(FILE * fa){

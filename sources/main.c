@@ -1,11 +1,14 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "../headers/user.h"
+#include "../headers/user_list.h"
 #define ERROR -1
 #define SUCCESS 1
 
 int main() {
     int opcion_menu = -1;
-    int opcion_usuario = -1;
+    int opcion_usuario;
     int success = SUCCESS;
     int global_users = 0;
 
@@ -35,36 +38,41 @@ int main() {
             }
         }
         else if (opcion_menu == 2) {
-            User usuario = login_usuario(us);
+            User usuario = login_user(us);
 
-            while(opcion_usuario != 0) {
-                printf("1.- Enviar solicitud de amistad\n");
-                printf("2.- Gestionar solicitudes pendientes\n");
-                printf("3.- Realizar una publicacion\n");
-                printf("4.- Listar las publicaciones de un usuario\n");
-                printf("0.- Cerrar sesion y volver al menu principal\n");
-                printf("Elige una opcion:\n");
-                scanf("%d", &opcion_usuario);
+            if (strcmp(usuario.id_name, "NULL")) {
+                printf("Nombre de usuario o contrasena incorrectos.");
+            }
+            else {
+                opcion_usuario = -1;
+                while(opcion_usuario != 0) {
+                    printf("1.- Enviar solicitud de amistad\n");
+                    printf("2.- Gestionar solicitudes pendientes\n");
+                    printf("3.- Realizar una publicacion\n");
+                    printf("4.- Listar las publicaciones de un usuario\n");
+                    printf("0.- Cerrar sesion y volver al menu principal\n");
+                    printf("Elige una opcion:\n");
+                    scanf("%d", &opcion_usuario);
 
-                if (opcion_usuario == 1) {
+                    if (opcion_usuario == 1) {
 
+                    }
+                    else if (opcion_usuario == 2) {
+
+                    }
+                    else if (opcion_usuario == 3) {
+
+                    }
+                    else if (opcion_usuario == 4) {
+
+                    }
+                    else if (opcion_usuario == 0) {
+                        printf("Cerrando sesion...\n");
+                    }
+                    else {
+                        printf("Tienes que elegir una opcion correcta.\n");
+                    }
                 }
-                else if (opcion_usuario == 2) {
-
-                }
-                else if (opcion_usuario == 3) {
-
-                }
-                else if (opcion_usuario == 4) {
-
-                }
-                else if (opcion_usuario == 0) {
-                    printf("Cerrando sesion...\n");
-                }
-                else {
-                    printf("Tienes que elegir una opcion correcta.\n");
-                }
-
             }
         }
         else if (opcion_menu == 3) {
