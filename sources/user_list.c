@@ -61,38 +61,21 @@ void print_users(User_list* list){
     }
 }
 
-/*User login_user(User_list *list, int* count) {
-    //if count = 3 acceso denegado
-    char nombre_usuario[USERNAME_LENGTH];
-    char contrasena[PASSWORD_LENGTH];
 
-    printf("Introduce el nombre de usuario:\n");
-    scanf("%s", &nombre_usuario);
-    printf("Introduce la contrasena de este usuario:\n");
-    scanf("%s", &contrasena);
-
-    User check_user;
-    strcpy(check_user.id_name, nombre_usuario);
-    strcpy(check_user.contrasena, contrasena);
-
-    //Si no existe el usuario, devolvemos un usuario fallido
-    User failed_user;
-    strcpy(failed_user.id_name, "NULL");
-    return failed_user;
-}
-
+/*
 User search_user(User_list* list, User check_user) {
     User_list* heap = list;
-    User user;
     while (check_user.id_name != heap->us->id_name) {
-        if (check_user.contrasena != heap->us->contrasena) {
-            //user.id_name = "Hola"; <- Error y no sé por qué
-            return user;
+        if (check_user.contrasena != '\0') {
+            if (check_user.contrasena != heap->us->contrasena) {
+                check_user.id_name = '\0';
+                return check_user;
+            }
         }
         heap = list->next;
     }
 
-    user = *heap->us;
-    return user;
+    check_user = *heap->us;
+    return check_user;
 }
 */

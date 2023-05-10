@@ -30,7 +30,16 @@ int main() {
         } else if (opcion_menu == 2) {
             print_users(list);
         }
-            /*if (strcmp(usuario.id_name, "NULL")) {
+        else if (opcion_menu == 3) {
+            /*
+            User check_us;
+            printf("Introduce el nombre de usuario:\n");
+            scanf("%s", &check_us.nombre_usuario);
+            printf("Introduce la contrasena de este usuario:\n");
+            scanf("%s", &check_us.contrasena);
+            check_us = search_user(list, check_us);
+
+            if (strcmp(check_us.id_name, '\0')) {
                 printf("Nombre de usuario o contrasena incorrectos.");
             }
             else {
@@ -64,11 +73,9 @@ int main() {
                         printf("Tienes que elegir una opcion correcta.\n");
                     }
                 }
-            }
+            }*/
         }
-        else if (opcion_menu == 3) {
 
-        }
         else if (opcion_menu == 0) {
             printf("\nSaliendo del programa...");
         }
