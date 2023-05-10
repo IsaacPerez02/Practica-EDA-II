@@ -7,12 +7,6 @@
 #define UBICATION_LENGTH 20 //cantidad de caracteres de la ciudad
 #define GUSTOS 20
 
-enum Gustos {Videojuegos,
-        Deportes,
-        Musica,
-        Literatura,
-        Matematicas,
-        Informática}; //Lista de gustos *CONSULTAR CON EL PROFE SI SE PUEDEN USAR ENUMERACIONES*
 
 typedef struct {
     char id_name[USERNAME_LENGTH];

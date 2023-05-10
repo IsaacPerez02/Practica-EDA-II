@@ -14,8 +14,8 @@ User* init_users (){
     User* us = (User*) malloc(sizeof (User));
     return us;
 }
-void create_user (User* u){
 
+void create_user (User* u){
     // Asignacion de variables de usuario a la estructura
     printf("Empieza a crear tu usuario...\n");
     printf("Introduzca su ID: \n");
@@ -32,8 +32,6 @@ void create_user (User* u){
     scanf("%s", &u.ubicacion);
 }
 
-
-//ordenamos todos los usuarios
 void loading_users(FILE * fa){
     int success, i = 0;
     User users[MAX_USERS];

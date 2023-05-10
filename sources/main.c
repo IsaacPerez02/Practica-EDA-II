@@ -3,23 +3,6 @@
 #define ERROR -1
 #define SUCCESS 1
 
-User login_usuario(User* us) {
-    char nombre_usuario[USERNAME_LENGTH];
-    char contrasena[PASSWORD_LENGTH];
-
-    printf("Introduce el nombre de usuario:\n");
-    scanf("%s", &nombre_usuario);
-    printf("Introduce la contrasena de este usuario:\n");
-    scanf("%s", &contrasena);
-
-    char f_usuario[USERNAME_LENGTH];
-    char f_contrasena[PASSWORD_LENGTH];
-
-    //WIP: Comprobar si existe el usuario en el archivo / lista dinámica
-
-
-}
-
 int main() {
     int opcion_menu = -1;
     int opcion_usuario = -1;
