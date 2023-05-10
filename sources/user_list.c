@@ -18,14 +18,20 @@ User_list* init_list (){
     return list;
 }
 
-void add_user (User_list* list, User* us){
+User_list* init_user(User* us){
     User_list* new_user = (User_list*) malloc(sizeof (User_list));
     new_user->us = us;
     new_user->next = NULL;
     new_user->prev = NULL;
+    return new_user;
+}
+
+User_list* add_user (User_list* list, User* us){
+    User_list* new_user;
+    new_user = init_user(us);
     if (list->us == NULL){
         list = new_user;
-        list->prev = NULL;
+        printf("Hola");
     }
     else{
         User_list* temp = list;
@@ -34,11 +40,12 @@ void add_user (User_list* list, User* us){
         }
         temp->next = new_user;
         new_user->prev = temp;
+        printf("%s %s\n", temp->us->id_name, temp->next->us->id_name);
     }
-    printf("%s\n", list->us->nombre)
+    return list;
 }
 
-void delete_user (User_list * list, User* us){
+User_list* delete_user (User_list * list, User* us){
     User_list* heap = list;
     while (heap->us->id_name != us->id_name){
         heap = list->next;
@@ -51,13 +58,12 @@ void delete_user (User_list * list, User* us){
         heap->prev->next = heap->next;
     }
     free(heap);
+    return list;
 }
 
 void print_users(User_list* list){
     User_list* heap = list;
-    printf("%s\n", list->us->id_name);
     while (heap != NULL){
-        printf("HOLA");
         printf("%s %s %s %d %s %s %s %s %s %s %s\n", heap->us->id_name, heap->us->nombre, heap->us->contrasena, heap->us->edad, heap->us->ubicacion, heap->us->correo, heap->us->gustos[0], heap->us->gustos[1], heap->us->gustos[2], heap->us->gustos[3], heap->us->gustos[4]);
         heap = heap->next;
     }

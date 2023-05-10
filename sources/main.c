@@ -26,7 +26,7 @@ int main() {
 
         if (opcion_menu == 1) {
             us = create_user(gustos);
-            add_user(list, &us);
+            list = add_user(list, &us);
         } else if (opcion_menu == 2) {
             print_users(list);
         }

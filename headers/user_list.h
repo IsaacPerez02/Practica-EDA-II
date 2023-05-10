@@ -10,8 +10,9 @@ typedef struct User_list{
 }User_list;
 
 User_list* init_list ();
-void add_user (User_list* list, User* us);
-void delete_user (User_list* list, User* us);
+User_list* init_user(User* us);
+User_list* add_user (User_list* list, User* us);
+User_list* delete_user (User_list* list, User* us);
 void print_users(User_list* list);
 User search_user(User_list * list, User check_user);
 
