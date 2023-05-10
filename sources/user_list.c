@@ -10,23 +10,32 @@
 #define UBICATION_LENGTH 20 //cantidad de caracteres de la ciudad
 
 User_list* init_list (){
-    User_list * list = NULL;
+    User_list * list;
     list = (User_list*) malloc(sizeof (User_list));
     list->prev = NULL;
     list->next = NULL;
+    list->us = NULL;
+    list->count = 0;
     return list;
 }
 
 
 void add_user (User_list* list, User* us){
+    printf ("Hello\n");
     User_list* heap = list;
     while (heap->next != NULL){
         heap = list->next;
     }
-    heap->next = (User_list*) malloc(sizeof (User_list));
-    heap->next->us = us;
-    heap->next->prev = heap;
-    heap->next->next = NULL;
+    if (list->count == 0){
+        heap->us = us;
+    }
+    else{
+        heap->next = (User_list*) malloc(sizeof (User_list));
+        heap->next->us = us;
+        heap->next->prev = heap;
+        heap->next->next = NULL;
+    }
+    list->count++;
 }
 
 void delete_user (User_list * list, User* us){
@@ -42,11 +51,21 @@ void delete_user (User_list * list, User* us){
         heap->prev->next = heap->next;
     }
     free(heap);
+    list->count--;
 }
 
+void print_users(User_list* list){
+    User_list* heap = list;
+    printf("%d\n", list->count);
+    for (int i = 0; i < list->count; i++){
+        printf("%s %s %s %d %s %s\n", heap->us->id_name, heap->us->nombre, heap->us->contrasena, heap->us->edad, heap->us->ubicacion, heap->us->correo /*heap->us->gustos[0], heap->us->gustos[1], heap->us->gustos[2], heap->us->gustos[3], heap->us->gustos[4]*/);
+        if (heap->next != NULL){
+            heap = heap->next;
+        }
+    }
+}
 
-
-User login_user(User_list *list, int* count) {
+/*User login_user(User_list *list, int* count) {
     //if count = 3 acceso denegado
     char nombre_usuario[USERNAME_LENGTH];
     char contrasena[PASSWORD_LENGTH];
@@ -69,7 +88,6 @@ User login_user(User_list *list, int* count) {
 User search_user(User_list* list, User check_user) {
     User_list* heap = list;
     User user;
-
     while (check_user.id_name != heap->us->id_name) {
         if (check_user.contrasena != heap->us->contrasena) {
             //user.id_name = "Hola"; <- Error y no sé por qué
@@ -81,3 +99,4 @@ User search_user(User_list* list, User check_user) {
     user = *heap->us;
     return user;
 }
+*/

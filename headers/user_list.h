@@ -7,11 +7,13 @@ typedef struct User_list{
     struct User_list* prev;
     struct User_list* next;
     User* us;
+    int count;
 }User_list;
 
 User_list* init_list ();
 void add_user (User_list * list, User* us);
-void delete_user (User_list * list, User* us);
+void delete_user (User_list* list, User* us);
+void print_users(User_list* list);
 User login_user(User_list * list);
 User search_user(User_list * list, User check_user);
 

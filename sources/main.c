@@ -11,10 +11,11 @@ int main() {
     int opcion_usuario;
     int success = SUCCESS;
     int global_users = 0;
+    char gustos[6][GUSTOS] = {"A", "B", "C", "D", "E", "F"};
+    User_list* list;
+    User us;
+    list = init_list();
 
-    FILE *fread = fopen("../resources/users.txt", "r");
-    if (fread == NULL) success = ERROR;
-    User* us = init_users(fread);
 
     while (opcion_menu != 0) {
         printf("1.- Crear nuevo usuario\n");
@@ -25,27 +26,19 @@ int main() {
         scanf("%d", &opcion_menu);
 
         if (opcion_menu == 1) {
-            User u;
-            FILE *fa = fopen("../resources/users.txt", "a");
-            if (fa == NULL) success = ERROR;
-            if (success = SUCCESS) {
-                create_user(&us);
-
-                fprintf(fa, "%s %s %s %d %s %s %s %s %s %s %s", u[global_users].id_name, u[global_users].nombre, u[global_users].contrasena, u[global_users].edad, u[global_users].correo, u[global_users].ubicacion, u[global_users].gustos1, u[global_users].gustos2, u[global_users].gustos3, u[global_users].gustos4, users[i].gustos5));
-
-                global_users = global_users + 1;
-
-            }
+            us = create_user(gustos);
+            add_user(list, &us);
         }
         else if (opcion_menu == 2) {
-            User usuario = login_user(us);
-
-            if (strcmp(usuario.id_name, "NULL")) {
+            print_users(list);
+        }
+            /*if (strcmp(usuario.id_name, "NULL")) {
                 printf("Nombre de usuario o contrasena incorrectos.");
             }
             else {
                 opcion_usuario = -1;
                 while(opcion_usuario != 0) {
+                    printf("Debes introducir una de las opciones\n");
                     printf("1.- Enviar solicitud de amistad\n");
                     printf("2.- Gestionar solicitudes pendientes\n");
                     printf("3.- Realizar una publicacion\n");
@@ -83,7 +76,7 @@ int main() {
         }
         else {
             printf("Tienes que elegir una opcion correcta.\n");
-        }
+        }*/
     }
 
 }
