@@ -7,11 +7,11 @@
 #define SUCCESS 1
 
 int main() {
-    int opcion_menu = -1;
-    int opcion_usuario;
-    int success = SUCCESS;
-    int global_users = 0;
-    char gustos[6][GUSTOS] = {"A", "B", "C", "D", "E", "F"};
+    //Declaración de variables
+    int opcion_menu = -1; //Opción del menú principal que el usuario escribirá por consola
+    int opcion_usuario; //Opción de menú de operar como otro usuario
+    int status = SUCCESS;
+    char gustos[6][GUSTOS] = {"A", "B", "C", "D", "E", "F"}; //Gustos disponibles
     User_list *list;
     list = init_list();
     User us;
