@@ -10,7 +10,7 @@
 #define UBICATION_LENGTH 20 //cantidad de caracteres de la ciudad
 
 User_list* init_list (){
-    User_list * list;
+    User_list *list = NULL;
     list = (User_list*) malloc(sizeof (User_list));
     list->prev = NULL;
     list->next = NULL;
@@ -19,18 +19,21 @@ User_list* init_list (){
 }
 
 void add_user (User_list* list, User* us){
-    User_list* heap = list;
-    while (heap->next != NULL){
-        heap = list->next;
-    }
-    if (list == 0){
-        heap->us = us;
+    User_list* new_user = (User_list*) malloc(sizeof (User_list));
+    new_user->us = us;
+    new_user->next = NULL;
+    new_user->prev = NULL;
+    if (list->us == NULL){
+        list = new_user;
+        list->prev = NULL;
     }
     else{
-        heap->next = (User_list*) malloc(sizeof (User_list));
-        heap->next->us = us;
-        heap->next->prev = heap;
-        heap->next->next = NULL;
+        User_list* temp = list;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = new_user;
+        new_user->prev = temp;
     }
 }
 
@@ -47,17 +50,15 @@ void delete_user (User_list * list, User* us){
         heap->prev->next = heap->next;
     }
     free(heap);
-    list->count--;
 }
 
 void print_users(User_list* list){
     User_list* heap = list;
-    printf("%d\n", list->count);
-    for (int i = 0; i < list->count; i++){
+    printf("%s\n", list->us->id_name);
+    while (heap != NULL){
+        printf("HOLA");
         printf("%s %s %s %d %s %s %s %s %s %s %s\n", heap->us->id_name, heap->us->nombre, heap->us->contrasena, heap->us->edad, heap->us->ubicacion, heap->us->correo, heap->us->gustos[0], heap->us->gustos[1], heap->us->gustos[2], heap->us->gustos[3], heap->us->gustos[4]);
-        if (heap->next != NULL){
-            heap = heap->next;
-        }
+        heap = heap->next;
     }
 }
 
