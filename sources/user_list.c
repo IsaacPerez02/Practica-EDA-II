@@ -15,18 +15,15 @@ User_list* init_list (){
     list->prev = NULL;
     list->next = NULL;
     list->us = NULL;
-    list->count = 0;
     return list;
 }
 
-
 void add_user (User_list* list, User* us){
-    printf ("Hello\n");
     User_list* heap = list;
     while (heap->next != NULL){
         heap = list->next;
     }
-    if (list->count == 0){
+    if (list == 0){
         heap->us = us;
     }
     else{
@@ -35,7 +32,6 @@ void add_user (User_list* list, User* us){
         heap->next->prev = heap;
         heap->next->next = NULL;
     }
-    list->count++;
 }
 
 void delete_user (User_list * list, User* us){
@@ -58,7 +54,7 @@ void print_users(User_list* list){
     User_list* heap = list;
     printf("%d\n", list->count);
     for (int i = 0; i < list->count; i++){
-        printf("%s %s %s %d %s %s\n", heap->us->id_name, heap->us->nombre, heap->us->contrasena, heap->us->edad, heap->us->ubicacion, heap->us->correo /*heap->us->gustos[0], heap->us->gustos[1], heap->us->gustos[2], heap->us->gustos[3], heap->us->gustos[4]*/);
+        printf("%s %s %s %d %s %s %s %s %s %s %s\n", heap->us->id_name, heap->us->nombre, heap->us->contrasena, heap->us->edad, heap->us->ubicacion, heap->us->correo, heap->us->gustos[0], heap->us->gustos[1], heap->us->gustos[2], heap->us->gustos[3], heap->us->gustos[4]);
         if (heap->next != NULL){
             heap = heap->next;
         }

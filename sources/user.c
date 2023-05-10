@@ -34,7 +34,7 @@ User create_user (char gustos[6][GUSTOS]){
         printf("%d: \n", i + 1, gustos[i]);
         scanf("%d", &indice);
         indice--;
-        strcpy(&u.gustos[i], gustos[indice]);
+        strcpy(u.gustos[i], gustos[indice]);
     }
     return u;
 }

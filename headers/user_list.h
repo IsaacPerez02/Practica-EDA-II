@@ -7,7 +7,6 @@ typedef struct User_list{
     struct User_list* prev;
     struct User_list* next;
     User* us;
-    int count;
 }User_list;
 
 User_list* init_list ();
