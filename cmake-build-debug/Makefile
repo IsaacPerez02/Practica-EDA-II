@@ -56,10 +56,10 @@ RM = "C:\Program Files\JetBrains\CLion 2022.3.1\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "C:\Users\adria\Desktop\UPF\1r año\3r trimestre\Estructuras de datos y algoritmos II\Practica\Proyecto"
+CMAKE_SOURCE_DIR = "C:\Users\adria\Desktop\UPF\1r\3r trimestre\Estructuras de datos y algoritmos II\Practica\Proyecto"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "C:\Users\adria\Desktop\UPF\1r año\3r trimestre\Estructuras de datos y algoritmos II\Practica\Proyecto\cmake-build-debug"
+CMAKE_BINARY_DIR = "C:\Users\adria\Desktop\UPF\1r\3r trimestre\Estructuras de datos y algoritmos II\Practica\Proyecto\cmake-build-debug"
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -86,9 +86,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\adria\Desktop\UPF\1r año\3r trimestre\Estructuras de datos y algoritmos II\Practica\Proyecto\cmake-build-debug\CMakeFiles" "C:\Users\adria\Desktop\UPF\1r año\3r trimestre\Estructuras de datos y algoritmos II\Practica\Proyecto\cmake-build-debug\\CMakeFiles\progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\adria\Desktop\UPF\1r\3r trimestre\Estructuras de datos y algoritmos II\Practica\Proyecto\cmake-build-debug\CMakeFiles" "C:\Users\adria\Desktop\UPF\1r\3r trimestre\Estructuras de datos y algoritmos II\Practica\Proyecto\cmake-build-debug\\CMakeFiles\progress.marks"
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\adria\Desktop\UPF\1r año\3r trimestre\Estructuras de datos y algoritmos II\Practica\Proyecto\cmake-build-debug\CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\adria\Desktop\UPF\1r\3r trimestre\Estructuras de datos y algoritmos II\Practica\Proyecto\cmake-build-debug\CMakeFiles" 0
 .PHONY : all
 
 # The main clean target
@@ -176,6 +176,30 @@ sources/user.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled4.dir\build.make CMakeFiles/untitled4.dir/sources/user.c.s
 .PHONY : sources/user.c.s
 
+sources/user_list.obj: sources/user_list.c.obj
+.PHONY : sources/user_list.obj
+
+# target to build an object file
+sources/user_list.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled4.dir\build.make CMakeFiles/untitled4.dir/sources/user_list.c.obj
+.PHONY : sources/user_list.c.obj
+
+sources/user_list.i: sources/user_list.c.i
+.PHONY : sources/user_list.i
+
+# target to preprocess a source file
+sources/user_list.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled4.dir\build.make CMakeFiles/untitled4.dir/sources/user_list.c.i
+.PHONY : sources/user_list.c.i
+
+sources/user_list.s: sources/user_list.c.s
+.PHONY : sources/user_list.s
+
+# target to generate assembly for a file
+sources/user_list.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled4.dir\build.make CMakeFiles/untitled4.dir/sources/user_list.c.s
+.PHONY : sources/user_list.c.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -191,6 +215,9 @@ help:
 	@echo ... sources/user.obj
 	@echo ... sources/user.i
 	@echo ... sources/user.s
+	@echo ... sources/user_list.obj
+	@echo ... sources/user_list.i
+	@echo ... sources/user_list.s
 .PHONY : help
 
 
