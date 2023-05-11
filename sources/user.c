@@ -1,3 +1,4 @@
+
 #include "../headers/user.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -56,6 +57,15 @@ User* create_user (char gustos[6][GUSTOS]){
 
     printf("Introduzca su correo: \n");
     scanf("%s", u->correo);
+
+    status = verify_correo_user(u->correo);
+    while (status == FALSE) {
+        printf("Introduzca su correo: \n");
+        scanf("%s", u->correo);
+        status = verify_correo_user(u->correo);
+    }
+    printf("El correo ha sido introducido correctamente.\n");
+
     printf("Introduzca su ubicacion: \n");
     scanf("%s", u->ubicacion);
     status = verify_ciudad_user(u->ubicacion);
