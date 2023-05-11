@@ -78,10 +78,16 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/adria/Desktop/UPF/1r/3r trimestre/Estructuras de datos y algoritmos II/Practica/Proyecto/headers/friends_stack.h">
+			<Option target="untitled4"/>
+		</Unit>
 		<Unit filename="C:/Users/adria/Desktop/UPF/1r/3r trimestre/Estructuras de datos y algoritmos II/Practica/Proyecto/headers/user.h">
 			<Option target="untitled4"/>
 		</Unit>
 		<Unit filename="C:/Users/adria/Desktop/UPF/1r/3r trimestre/Estructuras de datos y algoritmos II/Practica/Proyecto/headers/user_list.h">
+			<Option target="untitled4"/>
+		</Unit>
+		<Unit filename="C:/Users/adria/Desktop/UPF/1r/3r trimestre/Estructuras de datos y algoritmos II/Practica/Proyecto/sources/friends_stack.c">
 			<Option target="untitled4"/>
 		</Unit>
 		<Unit filename="C:/Users/adria/Desktop/UPF/1r/3r trimestre/Estructuras de datos y algoritmos II/Practica/Proyecto/sources/main.c">

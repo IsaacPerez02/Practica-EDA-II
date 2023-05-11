@@ -128,6 +128,30 @@ untitled4/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled4.dir\build.make CMakeFiles/untitled4.dir/build
 .PHONY : untitled4/fast
 
+sources/friends_stack.obj: sources/friends_stack.c.obj
+.PHONY : sources/friends_stack.obj
+
+# target to build an object file
+sources/friends_stack.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled4.dir\build.make CMakeFiles/untitled4.dir/sources/friends_stack.c.obj
+.PHONY : sources/friends_stack.c.obj
+
+sources/friends_stack.i: sources/friends_stack.c.i
+.PHONY : sources/friends_stack.i
+
+# target to preprocess a source file
+sources/friends_stack.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled4.dir\build.make CMakeFiles/untitled4.dir/sources/friends_stack.c.i
+.PHONY : sources/friends_stack.c.i
+
+sources/friends_stack.s: sources/friends_stack.c.s
+.PHONY : sources/friends_stack.s
+
+# target to generate assembly for a file
+sources/friends_stack.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled4.dir\build.make CMakeFiles/untitled4.dir/sources/friends_stack.c.s
+.PHONY : sources/friends_stack.c.s
+
 sources/main.obj: sources/main.c.obj
 .PHONY : sources/main.obj
 
@@ -209,6 +233,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... untitled4
+	@echo ... sources/friends_stack.obj
+	@echo ... sources/friends_stack.i
+	@echo ... sources/friends_stack.s
 	@echo ... sources/main.obj
 	@echo ... sources/main.i
 	@echo ... sources/main.s
