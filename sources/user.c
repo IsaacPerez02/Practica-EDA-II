@@ -2,7 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define MAX_USERS 2
+#include <ctype.h>
+
+#define TRUE 1
+#define FALSE 0
+
 #define USERNAME_LENGTH 20 //Cantidad de caracteres máximo que puede tener un nombre de usuario
 #define PASSWORD_LENGTH 30 //Cantidad de caracteres máximo que puede tener una contraseña
 #define EMAIL_LENGTH 50 //Cantidad de caracteres máximo que puede tener un correo electrónico
@@ -16,10 +20,29 @@ User* create_user (char gustos[6][GUSTOS]){
     printf("Empieza a crear tu usuario...\n");
     printf("Introduzca su ID: \n");
     scanf("%s", u->id_name);
-    printf("Introduzca su Nombre: \n");
+
+    //Introducir el nombre
+    printf("Introduzca su nombre: \n");
     scanf("%s", u->nombre);
-    printf("Introduzca su contraseña: \n");
+    status = verify_name_user(u->nombre);
+    while(status == FALSE) {
+        printf("Introduzca su nombre: \n");
+        scanf("%s", u->nombre);
+        status = verify_name_user(u->nombre);
+    }
+    printf("El nombre ha sido introducido correctamente.\n");
+
+    //Introducir la contraseña
+    printf("Introduzca su contrasena: \n");
     scanf("%s", u->contrasena);
+    status = verify_password_user(u->contrasena);
+    while (status == FALSE) {
+        printf("Introduzca su contrasena: \n");
+        scanf("%s", u->contrasena);
+        status = verify_password_user(u->contrasena);
+    }
+    printf("La contrasena ha sido introducida correctamente.");
+
     printf("Introduzca su edad: \n");
     scanf("%d", &u->edad);
 
