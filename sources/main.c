@@ -25,6 +25,7 @@ int main() {
 
         if (opcion_menu == 1) {
             us = create_user(gustos);
+
             if (list == NULL) {
                 list = first_user(us);
                 printf("%s\n", list->us->id_name);

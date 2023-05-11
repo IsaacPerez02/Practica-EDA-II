@@ -9,6 +9,7 @@
 
 typedef struct {
     char id_name[USERNAME_LENGTH];
+    int code;
     char nombre[USERNAME_LENGTH];
     char contrasena[PASSWORD_LENGTH];
     int edad;
@@ -18,6 +19,13 @@ typedef struct {
 } User;
 
 User* create_user(char gustos[6][GUSTOS]);
+int verify_id_name_user(char* id);
+int verify_name_user(char* name);
+int verify_password_user(char* pass);
+int verify_correo_user(char* correo);
+int verify_edad_user(int edad);
+int verify_ciudad_user(char* city);
+int verify_gusto_user(char* gusto);
 void loading_users(FILE* fa);
 
 #endif //UNTITLED4_USER_H
