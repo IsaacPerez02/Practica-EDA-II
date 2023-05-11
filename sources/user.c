@@ -89,6 +89,10 @@ User* create_user (char gustos[6][GUSTOS]){
     return u;
 }
 
+User* init_user_txt(FILE* fa){
+
+}
+
 int verify_id_name_user(char* id){
 
 }
