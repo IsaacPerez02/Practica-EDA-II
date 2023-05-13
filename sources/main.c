@@ -10,10 +10,21 @@ int main() {
     //Declaración de variables
     int opcion_menu = -1; //Opción del menú principal que el usuario escribirá por consola
     int opcion_usuario; //Opción de menú de operar como otro usuario
-    int status = SUCCESS;
+    int status = SUCCESS, success;
     char gustos[6][GUSTOS] = {"A", "B", "C", "D", "E", "F"}; //Gustos disponibles
-    User_list *list;
+    User_list* list;
     User* us;
+
+    FILE* init = fopen("../resources/users.txt", "r");
+    if (init == NULL) status = ERROR;
+    if (status == SUCCESS){
+        us  = loading_users(init);
+        list = first_user(us);
+        while (success > 10){
+            add_user(list, us);
+            us  = loading_users(init);
+        }
+    }
 
     while (opcion_menu != 0) {
         printf("1.- Crear nuevo usuario\n");

@@ -27,6 +27,6 @@ int verify_correo_user(char* correo);
 int verify_edad_user(int edad);
 int verify_ciudad_user(char* city);
 int verify_gusto_user(char* gusto); //FALTA
-void loading_users(FILE* fa);
+User* loading_users(FILE* fa);
 
 #endif //UNTITLED4_USER_H

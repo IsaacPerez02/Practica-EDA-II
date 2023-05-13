@@ -1,2 +1,2 @@
-Perez_ekz Isaac rodolfa 19 Isaac.perez02@estudiant.upf.edu Viladecans Videojuegos Deportes Musica Literatura Matematicas
-Adrian_12 Adrian rod 22 Adrian.montes01@estudiant.upf.edu Barcelona Videojuegos Deportes Musica Literatura Matematicas
+Perez_ekz,Isaac,rodolfa,19,Isaac.perez02@estudiant.upf.edu,Viladecans,Videojuegos,Deportes,Musica,Literatura,Matematicas
+Adrian_12,Adrian,rod,22,Adrian.montes01@estudiant.upf.edu,Barcelona,Videojuegos,Deportes,Musica,Literatura,Matematicas

@@ -90,11 +90,9 @@ User* create_user (char gustos[6][GUSTOS]){
 }
 
 User* init_user_txt(FILE* fa){
-
 }
 
 int verify_id_name_user(char* id){
-
 }
 
 int verify_name_user(char* name) {
@@ -211,12 +209,11 @@ int verify_gusto_user(char* gusto){
 }
 
 
-/*void loading_users(FILE * fa){
-    int success, i = 0;
-    User users[MAX_USERS];
-    success = fscanf(fa, "%s %s %s %d %s %s %s %s %s %s %s", users[i].id_name, users[i].nombre, users[i].contrasena, &users[i].edad, users[i].correo, users[i].ubicacion, users[i].gustos1, users[i].gustos2, users[i].gustos3, users[i].gustos4, users[i].gustos5);
-    while (success > 10){
-        i++;
-        success = fscanf(fa, "%s %s %s %d %s %s %s %s %s %s %s", users[i].id_name, users[i].nombre, users[i].contrasena, &users[i].edad, users[i].correo, users[i].ubicacion, users[i].gustos1, users[i].gustos2, users[i].gustos3, users[i].gustos4, users[i].gustos5);
+User* loading_users(FILE * fa){
+    User* us;
+    int status_function;
+    status_function = fscanf(fa, "%s%,s,%s,%d,%s,%s,%s,%s,%s,%s,%s", us->id_name, us->nombre, us->contrasena, &us->edad, us->correo, us->ubicacion, us->gustos[0], us->gustos[1], us->gustos[2], us->gustos[3], us->gustos[4]);
+    if (status_function > 10) {
+        return us;
     }
-}*/
+}

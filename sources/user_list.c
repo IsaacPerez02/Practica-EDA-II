@@ -58,21 +58,14 @@ void print_users(User_list* list){
     }
 }
 
-
-/*
-User search_user(User_list* list, User check_user) {
+User* search_user(User_list* list, char check_user) {
     User_list* heap = list;
-    while (check_user.id_name != heap->us->id_name) {
-        if (check_user.contrasena != '\0') {
-            if (check_user.contrasena != heap->us->contrasena) {
-                check_user.id_name = '\0';
-                return check_user;
-            }
+    while (heap->next != NULL){
+        if (heap->us->id_name == check_user){
+            return heap;
         }
-        heap = list->next;
+        heap = heap->next;
     }
-
-    check_user = *heap->us;
-    return check_user;
+    printf("Ese usuario no existe!");
+    return NULL;
 }
-*/
