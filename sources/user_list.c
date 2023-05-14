@@ -69,3 +69,20 @@ User* search_user(User_list* list, char check_user) {
     printf("Ese usuario no existe!");
     return NULL;
 }
+
+User_list* loading_users(FILE * fa){
+    User* us;
+    User_list* list;
+    int* count;
+    us = init_user_txt(fa, count);
+    while (count > 10) {
+        if (list == NULL) {
+            list = first_user(us);
+        }
+        else {
+            add_user(list, us);
+        }
+        us = init_user_txt(fa, count);
+    }
+    return list;
+}

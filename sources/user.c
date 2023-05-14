@@ -13,6 +13,7 @@
 #define EMAIL_LENGTH 50 //Cantidad de caracteres máximo que puede tener un correo electrónico
 #define UBICATION_LENGTH 20 //cantidad de caracteres de la ciudad
 #define GUSTOS 6
+#define MAX_LENGTH 200
 
 User* create_user (char gustos[6][GUSTOS]){
     User* u = (User*) malloc(sizeof (User));
@@ -89,7 +90,12 @@ User* create_user (char gustos[6][GUSTOS]){
     return u;
 }
 
-User* init_user_txt(FILE* fa){
+User* init_user_txt(FILE* fa, int* count){
+    int count_function;
+    char buffer[MAX_LENGTH];
+    User* us = (User*) malloc(sizeof (User));
+    fgets(buffer, MAX_LENGTH, fa);
+    return us;
 }
 
 int verify_id_name_user(char* id){
@@ -206,14 +212,4 @@ int verify_ciudad_user(char* city) {
 
 int verify_gusto_user(char* gusto){
     int status = TRUE;
-}
-
-
-User* loading_users(FILE * fa){
-    User* us;
-    int status_function;
-    status_function = fscanf(fa, "%s%,s,%s,%d,%s,%s,%s,%s,%s,%s,%s", us->id_name, us->nombre, us->contrasena, &us->edad, us->correo, us->ubicacion, us->gustos[0], us->gustos[1], us->gustos[2], us->gustos[3], us->gustos[4]);
-    if (status_function > 10) {
-        return us;
-    }
 }

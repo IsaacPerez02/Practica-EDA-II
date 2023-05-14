@@ -15,6 +15,8 @@ void add_user (User_list* list, User* us);
 User_list* delete_user (User_list* list, User* us);
 void print_users(User_list* list);
 User* search_user(User_list * list, char check_user); //FALTA HACERLA CORRECTAMENTE
-void save_all_users(User_list* list, FILE* fa); //FALTA
+User_list* loading_users(FILE* fa);
+void save_all_users(User_list* list, FILE* fa); //FALTA, Isaac lo hace
+
 
 #endif //UNTITLED4_USER_LIST_H
