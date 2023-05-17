@@ -1,6 +1,8 @@
 
 #include "../headers/user.h"
 #include "../headers/user_list.h"
+#define FALSE 0
+#define TRUE 1
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

@@ -5,7 +5,9 @@
 
 typedef struct {
     User* friends[MAX_FRIENDS];
+    int code;
     int top;
+    int size;
 }Friends;
 
 Friends* init_friends(); //FALTA DESARROLLAR TODAS LAS FUNCIONES PARA LOS AMIGOS INTRODUCIDOS EN LA COLA DE CADA USUARIO ASI COMO

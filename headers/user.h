@@ -17,11 +17,13 @@ typedef struct {
     char correo[EMAIL_LENGTH];
     char ubicacion[UBICATION_LENGTH];
     char gustos [5][GUSTOS];
+    //Friends amigos;
 } User;
 
 User* create_user(char gustos[6][GUSTOS]);
 User* init_user_txt(FILE* fa); //FALTA, Isaac esta en ello
 int verify_id_name_user(char* id); //FALTA
+int create_code();
 int verify_name_user(char* name);
 int verify_password_user(char* pass);
 int verify_correo_user(char* correo);

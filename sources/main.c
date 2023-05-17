@@ -45,8 +45,8 @@ int main() {
         }
         else if (opcion_menu == 3) {
 
-            char* login_user;
-            char* login_pass;
+            char login_user[USERNAME_LENGTH];
+            char login_pass[PASSWORD_LENGTH];
             User check_us;
             printf("Introduce el nombre de usuario:\n");
             scanf("%s", &login_user);
@@ -71,7 +71,7 @@ int main() {
                         scanf("%d", &opcion_usuario);
 
                         if (opcion_usuario == 1) {
-                            char* check_friend_name;
+                            char check_friend_name[USERNAME_LENGTH];
                             User friend;
                             printf("Escribe el nombre de usuario al que quieras agregar como amigo:\n");
                             scanf("%s", &check_friend_name);
