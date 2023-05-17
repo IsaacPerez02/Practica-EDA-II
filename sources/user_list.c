@@ -27,6 +27,7 @@ void add_user (User_list* list, User* us){
     User_list* new_user;
     new_user = init_user(us);
     User_list* temp = list;
+
     while (temp->next != NULL) {
         temp = temp->next;
     }
@@ -58,15 +59,25 @@ void print_users(User_list* list){
     }
 }
 
-User* search_user(User_list* list, char check_user) {
+User* search_user(User_list* list, char* check_user) {
     User_list* heap = list;
     while (heap->next != NULL){
-        if (heap->us->id_name == check_user){
-            return heap;
+        if (strcmp(heap->us->id_name, check_user) == 0) {
+            return heap->us;
         }
         heap = heap->next;
     }
-    printf("Ese usuario no existe!");
+    return NULL;
+}
+
+User* check_user_password(User_list * list, char* check_password) {
+    User_list* heap = list;
+    while (heap->next != NULL) {
+        if (strcmp(heap->us->contrasena, check_password) == 0) {
+            return heap->us;
+        }
+        heap = heap->next;
+    }
     return NULL;
 }
 
@@ -74,8 +85,10 @@ User_list* loading_users(FILE * fa){
     User* us;
     User_list* list;
     int* count;
+    count = 0;
     us = init_user_txt(fa, count);
-    while (count > 10) {
+    printf("%s", us->id_name);
+    /*while (count > 10) {
         if (list == NULL) {
             list = first_user(us);
         }
@@ -84,5 +97,5 @@ User_list* loading_users(FILE * fa){
         }
         us = init_user_txt(fa, count);
     }
-    return list;
+    return list;*/
 }

@@ -13,7 +13,6 @@
 #define EMAIL_LENGTH 50 //Cantidad de caracteres máximo que puede tener un correo electrónico
 #define UBICATION_LENGTH 20 //cantidad de caracteres de la ciudad
 #define GUSTOS 6
-#define MAX_LENGTH 200
 
 User* create_user (char gustos[6][GUSTOS]){
     User* u = (User*) malloc(sizeof (User));
@@ -22,6 +21,8 @@ User* create_user (char gustos[6][GUSTOS]){
     printf("Empieza a crear tu usuario...\n");
     printf("Introduzca su ID: \n");
     scanf("%s", u->id_name);
+    //variables de los gustos
+    int gusto1, gusto2, gusto3, gusto4, gusto5;
 
     //Introducir el nombre
     printf("Introduzca su nombre: \n");
@@ -35,15 +36,15 @@ User* create_user (char gustos[6][GUSTOS]){
     printf("El nombre ha sido introducido correctamente.\n");
 
     //Introducir la contraseña
-    printf("Introduzca su contrasena: \n");
+    printf("Introduzca su contrasena (longitud 8, 1 minuscula, 1 mayuscula y 1 numero): \n");
     scanf("%s", u->contrasena);
     status = verify_password_user(u->contrasena);
     while (status == FALSE) {
-        printf("Introduzca su contrasena: \n");
+        printf("Introduzca su contrasena (longitud 8, 1 minuscula, 1 mayuscula y 1 numero): \n");
         scanf("%s", u->contrasena);
         status = verify_password_user(u->contrasena);
     }
-    printf("La contrasena ha sido introducida correctamente.");
+    printf("La contrasena ha sido introducida correctamente.\n");
 
     printf("Introduzca su edad: \n");
     scanf("%d", &u->edad);
@@ -80,9 +81,9 @@ User* create_user (char gustos[6][GUSTOS]){
     for (int i = 0; i < GUSTOS; i++){
         printf("%d. %s \n", i + 1, gustos[i]);
     }
-    printf("Introduzca sus gustos uno por uno: \n");
+    printf("Introduzca sus gustos uno por uno (Ha de escoger una opcion numerica ej: 1, 2, 3...): \n");
     for (int i = 0; i < 5; i++){
-        printf("%d: \n", i + 1, gustos[i]);
+        printf("%d: \n", i + 1);
         scanf("%d", &indice);
         indice--;
         strcpy(u->gustos[i], gustos[indice]);
@@ -91,10 +92,11 @@ User* create_user (char gustos[6][GUSTOS]){
 }
 
 User* init_user_txt(FILE* fa, int* count){
-    int count_function;
-    char buffer[MAX_LENGTH];
     User* us = (User*) malloc(sizeof (User));
-    fgets(buffer, MAX_LENGTH, fa);
+    int count_func;
+    count_func = fscanf(fa, "%s %s %s %d %s %s %s %s %s %s %s", us->id_name, us->nombre, us->contrasena, &us->edad, us->correo, us->ubicacion, us->gustos[0], us->gustos[1], us->gustos[2], us->gustos[3], us->gustos[4]);
+    printf("%s", us->id_name);
+    *count = count_func;
     return us;
 }
 
@@ -119,47 +121,67 @@ int verify_password_user(char* pass) {
     int mayusculas = 0;
     int numeros = 0;
     int i = 0; //El índice equivale a la longitud de la contraseña
+    char mensaje_error[500] = {'\n'}; //Mensaje de error si no se cumplen todas las condiciones. Concatenaremos un
+    //un string indicando qué condiciones faltan al final.
+    int condiciones_cumplidas = 0; //Por cada condición cumplida, sumamos 1. Si se cumplen todas, la contraseña es correcta
 
     while (pass[i] != '\0') {
         //Comprobamos si contiene una minúscula
-        if (97 >= pass[i] || pass[i] <= 122) {
+        if (islower(pass[i]) > 0) {
             minusculas++;
         }
 
         //Comprobamos si contiene una mayúscula
-        if (65 >= pass[i] || pass[i] <= 90) {
+        if (isupper(pass[i]) > 0) {
             mayusculas++;
         }
 
         //Comprobamos si contiene un número
-        if (48 >= pass[i] || pass[i] <= 57) {
+        if (isdigit(pass[i]) > 0) {
             numeros++;
         }
 
         i++;
     }
 
+    //Comprobamos si se han cumplido todas las condiciones de la contraseña
+    //Longitud
     if (i >= 8) {
-        if (minusculas >= 1) {
-            if (mayusculas >= 1) {
-                if (numeros >= 1) {
-                    return TRUE;
-                }
-                else {
-                    printf("No has introducido un numero en tu contrasena.\n");
-                }
-            }
-             else {
-                 printf("No has introducido una mayuscula en tu contrasena.\n");
-             }
-        } else {
-            printf("No has introducido una minuscula en tu contrasena.\n");
-        }
+        condiciones_cumplidas++;
     }
     else {
-        printf("Tu contrasena tiene longitud %d. Debe de tener longitud de 8 o mas.\n", i);
+        strcat(mensaje_error, "Tu contrasena debe contener una longitud de 8 o mas.\n");
     }
 
+    //Minúsculas
+    if (minusculas >= 1) {
+        condiciones_cumplidas++;
+    }
+    else {
+        strcat(mensaje_error, "Tu contrasena debe contener al menos una minuscula\n");
+    }
+
+    //Mayúsculas
+    if (mayusculas >= 1) {
+        condiciones_cumplidas++;
+    }
+    else {
+        strcat(mensaje_error, "Tu contrasena debe contener al menos una mayuscula\n");
+    }
+
+    //Números
+    if (numeros >= 1) {
+        condiciones_cumplidas++;
+    }
+    else {
+        strcat(mensaje_error, "Tu contrasena debe contener al menos un numero\n");
+    }
+
+    if (condiciones_cumplidas == 4) {
+        return TRUE;
+    }
+    printf("Faltan datos en tu contrasena:");
+    printf("%s", mensaje_error);
     return FALSE;
 }
 
@@ -210,6 +232,8 @@ int verify_ciudad_user(char* city) {
 }
 
 
-int verify_gusto_user(char* gusto){
-    int status = TRUE;
+int verify_gusto_user(char* gustos, int j){
+    int STATUS = 0;
+    for (int i = 0; i < 5; ++i) {
+    }
 }
