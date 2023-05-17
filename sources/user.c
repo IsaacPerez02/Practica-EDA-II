@@ -96,6 +96,7 @@ User* init_user_txt(FILE* fa){
     char id_name[USERNAME_LENGTH], name[USERNAME_LENGTH], contrasena[PASSWORD_LENGTH], ubicacion[UBICATION_LENGTH], correo[USERNAME_LENGTH], gustos[5][GUSTOS];
     int edad;
     User* us = (User*) malloc(sizeof (User));
+    printf("%d", sizeof (User));
     int count_func;
     count_func = fscanf(fa, "%s %s %s %d %s %s %s %s %s %s %s", id_name, name, contrasena, &edad, correo, ubicacion, gustos[0], gustos[1], gustos[2], gustos[3], gustos[4]);
     if (count_func == 11){

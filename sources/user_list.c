@@ -13,6 +13,7 @@
 
 
 void first_user(User* us, User_list** list){
+    printf("No entiendo\n");
     User_list* first = (User_list*) malloc(sizeof (User_list));
     first->next = NULL;
     first->prev = NULL;
@@ -38,7 +39,7 @@ void loading_users(FILE * fa, User_list** list){
     User* us;
     us = init_user_txt(fa);
     while (us != NULL) {
-        if (list == NULL) {
+        if (*list == NULL) {
             first_user(us, list);
         }
         else{
