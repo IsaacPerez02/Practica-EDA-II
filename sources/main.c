@@ -34,10 +34,10 @@ int main() {
             us = create_user(gustos);
 
             if (list == NULL) {
-                first_user(us, &list);
+                first_user_created(us, &list);
             }
             else{
-                add_user(&list, us);
+                add_user_created(&list, us);
             }
         }
         else if (opcion_menu == 2) {

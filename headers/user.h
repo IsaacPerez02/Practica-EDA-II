@@ -10,18 +10,17 @@
 
 typedef struct {
     char id_name[USERNAME_LENGTH];
-    int code;
+    //int code;
     char nombre[USERNAME_LENGTH];
     char contrasena[PASSWORD_LENGTH];
     int edad;
     char correo[EMAIL_LENGTH];
     char ubicacion[UBICATION_LENGTH];
-    char gustos [5][GUSTOS];
+    //char gustos [5][GUSTOS];
     //Friends amigos;
 } User;
 
 User* create_user(char gustos[6][GUSTOS]);
-User* init_user_txt(FILE* fa); //FALTA, Isaac esta en ello
 int verify_id_name_user(char* id); //FALTA
 int create_code();
 int verify_name_user(char* name);
