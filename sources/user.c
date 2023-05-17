@@ -83,38 +83,13 @@ User* create_user (char gustos[6][GUSTOS]){
         printf("%d. %s \n", i + 1, gustos[i]);
     }
     printf("Introduzca sus gustos uno por uno (Ha de escoger una opcion numerica ej: 1, 2, 3...): \n");
-    for (int i = 0; i < 5; i++){
+    /*for (int i = 0; i < 5; i++){
         printf("%d: \n", i + 1);
         scanf("%d", &indice);
         indice--;
         strcpy(u->gustos[i], gustos[indice]);
-    }
+    }*/
     return u;
-}
-
-User* init_user_txt(FILE* fa){
-    char id_name[USERNAME_LENGTH], name[USERNAME_LENGTH], contrasena[PASSWORD_LENGTH], ubicacion[UBICATION_LENGTH], correo[USERNAME_LENGTH], gustos[5][GUSTOS];
-    int edad;
-    User* us = (User*) malloc(sizeof (User));
-    printf("%d", sizeof (User));
-    int count_func;
-    count_func = fscanf(fa, "%s %s %s %d %s %s %s %s %s %s %s", id_name, name, contrasena, &edad, correo, ubicacion, gustos[0], gustos[1], gustos[2], gustos[3], gustos[4]);
-    if (count_func == 11){
-        strcpy(us->id_name, id_name);
-        strcpy(us->nombre, name);
-        strcpy(us->contrasena, contrasena);
-        us->edad = edad;
-        us->code = 1;
-        strcpy(us->correo, correo);
-        strcpy(us->ubicacion, ubicacion);
-        strcpy(us->gustos[0], gustos[0]);
-        strcpy(us->gustos[1], gustos[1]);
-        strcpy(us->gustos[2], gustos[2]);
-        strcpy(us->gustos[3], gustos[3]);
-        strcpy(us->gustos[4], gustos[4]);
-        return us;
-    }
-    return NULL;
 }
 
 int verify_id_name_user(char* id){
