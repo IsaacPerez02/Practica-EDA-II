@@ -26,6 +26,6 @@ int verify_password_user(char* pass);
 int verify_correo_user(char* correo);
 int verify_edad_user(int edad);
 int verify_ciudad_user(char* city);
-int verify_gusto_user(char* gusto); //FALTA
+int verify_gusto_user(char* gusto, int j); //FALTA
 
 #endif //UNTITLED4_USER_H
