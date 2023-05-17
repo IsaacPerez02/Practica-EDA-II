@@ -1,4 +1,5 @@
 #include <stdio.h>
+
 #ifndef UNTITLED4_USER_H
 #define UNTITLED4_USER_H
 #define USERNAME_LENGTH 20 //Cantidad de caracteres máximo que puede tener un nombre de usuario
@@ -19,7 +20,7 @@ typedef struct {
 } User;
 
 User* create_user(char gustos[6][GUSTOS]);
-User* init_user_txt(FILE* fa, int* count); //FALTA, Isaac esta en ello
+User* init_user_txt(FILE* fa); //FALTA, Isaac esta en ello
 int verify_id_name_user(char* id); //FALTA
 int verify_name_user(char* name);
 int verify_password_user(char* pass);

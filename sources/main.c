@@ -12,13 +12,13 @@ int main() {
     int opcion_usuario; //Opción de menú de operar como otro usuario
     int status = SUCCESS;
     char gustos[6][GUSTOS] = {"A", "B", "C", "D", "E", "F"}; //Gustos disponibles
-    User_list* list;
+    User_list* list = NULL;
     User* us;
 
     FILE* init = fopen("../resources/users.txt", "r");
     if (init == NULL) status = ERROR;
     if (status == SUCCESS){
-        list = loading_users(init);
+        loading_users(init, &list);
     }
     if (status == SUCCESS) fclose(init);
 
@@ -34,10 +34,10 @@ int main() {
             us = create_user(gustos);
 
             if (list == NULL) {
-                list = first_user(us);
+                first_user(us, &list);
             }
             else{
-                add_user(list, us);
+                add_user(&list, us);
             }
         }
         else if (opcion_menu == 2) {
