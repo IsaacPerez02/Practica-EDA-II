@@ -11,6 +11,7 @@ typedef struct User_list{
 
 void first_user(User* us, User_list** list);
 void add_user (User_list** list, User* us);
+void add_file_users(User_list** list); //mandar todos los datos
 void delete_user (User_list** list, User* us);
 void print_users(User_list* list);
 User* search_user(User_list * list, char* check_user); //FALTA HACERLA CORRECTAMENTE

@@ -14,7 +14,7 @@
 
 void first_user(User* us, User_list** list){
     printf("No entiendo\n");
-    User_list* first = (User_list*) malloc(sizeof (User_list));
+    User_list* first = (User_list*) calloc(1, sizeof (User_list)); //User_list->User malloc
     first->next = NULL;
     first->prev = NULL;
     first->us = us;
@@ -37,8 +37,10 @@ void add_user (User_list** list, User* us){
 
 void loading_users(FILE * fa, User_list** list){
     User* us;
-    us = init_user_txt(fa);
-    while (us != NULL) {
+    char id_name[USERNAME_LENGTH], name[USERNAME_LENGTH], contrasena[PASSWORD_LENGTH], ubicacion[UBICATION_LENGTH], correo[USERNAME_LENGTH], gustos[5][GUSTOS];
+    int edad;
+    while (fscanf(fa, "%s %s %s %d %s %s %s %s %s %s %s", id_name, name, contrasena, &edad, correo, ubicacion, gustos[0], gustos[1], gustos[2], gustos[3], gustos[4]) > 10) { //leer datos aquí
+
         if (*list == NULL) {
             first_user(us, list);
         }
