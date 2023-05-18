@@ -78,17 +78,36 @@ User* create_user (char gustos[6][GUSTOS]){
     }
     printf("La ciudad ha sido introducida correctamente.\n");
 
+
     for (int i = 0; i < GUSTOS; i++){
         printf("%d. %s \n", i + 1, gustos[i]);
     }
-    printf("Introduzca sus gustos uno por uno (Ha de escoger una opcion numerica ej: 1, 2, 3...): \n");
-    /*for (int i = 0; i < 5; i++){
-        printf("%d: \n", i + 1);
-        scanf("%d", &indice);
-        indice--;
-        strcpy(u->gustos[i], gustos[indice]);
-    }*/
-    return u;
+
+    /*Creacion de gustos*/
+    int char_gustos[5] = {0,0,0,0, 0};
+    int auxiliar, contador = 0, state = 0;
+    while (contador < 5){
+        printf("Introduzca su gusto: ");
+        scanf("%d", &auxiliar);
+        for (int i = 0; i < 5; ++i){
+            if (char_gustos[i] == auxiliar){
+                state = 0;
+                break;
+            }
+            else{
+                state = 1;
+            }
+        }
+        if (state == 1){
+            char_gustos[contador] = auxiliar;
+            printf("El gusto ha sido registrado correctamente\n");
+            contador ++;
+        }
+        else if (state == 0){
+            printf("El gusto ya ha sido escogido...\n");
+        }
+    }
+
 }
 
 int verify_id_name_user(char* id){
