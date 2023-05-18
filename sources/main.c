@@ -33,7 +33,6 @@ int main() {
 
         if (opcion_menu == 1) {
             us = create_user(gustos);
-
             if (list == NULL) {
                 first_user_created(&list, us);
             }

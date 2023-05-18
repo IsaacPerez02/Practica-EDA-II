@@ -79,11 +79,11 @@ User* create_user (char gustos[6][GUSTOS]){
     printf("La ciudad ha sido introducida correctamente.\n");
 
 
-    for (int i = 0; i < GUSTOS; i++){
+    /*for (int i = 0; i < GUSTOS; i++){
         printf("%d. %s \n", i + 1, gustos[i]);
-    }
+    }*/
 
-    /*Creacion de gustos*/
+    /*Creacion de gustos
     int char_gustos[5] = {0,0,0,0, 0};
     int auxiliar, contador = 0, state = 0;
     while (contador < 5){
@@ -106,8 +106,8 @@ User* create_user (char gustos[6][GUSTOS]){
         else if (state == 0){
             printf("El gusto ya ha sido escogido...\n");
         }
-    }
-
+    }*/
+    return u;
 }
 
 int verify_id_name_user(char* id){
