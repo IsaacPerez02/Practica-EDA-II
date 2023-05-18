@@ -79,34 +79,13 @@ User* create_user (char gustos[6][GUSTOS]){
     printf("La ciudad ha sido introducida correctamente.\n");
 
 
-    /*for (int i = 0; i < GUSTOS; i++){
+    for (int i = 0; i < GUSTOS; i++){
         printf("%d. %s \n", i + 1, gustos[i]);
-    }*/
+    }
 
-    /*Creacion de gustos
-    int char_gustos[5] = {0,0,0,0, 0};
-    int auxiliar, contador = 0, state = 0;
-    while (contador < 5){
-        printf("Introduzca su gusto: ");
-        scanf("%d", &auxiliar);
-        for (int i = 0; i < 5; ++i){
-            if (char_gustos[i] == auxiliar){
-                state = 0;
-                break;
-            }
-            else{
-                state = 1;
-            }
-        }
-        if (state == 1){
-            char_gustos[contador] = auxiliar;
-            printf("El gusto ha sido registrado correctamente\n");
-            contador ++;
-        }
-        else if (state == 0){
-            printf("El gusto ya ha sido escogido...\n");
-        }
-    }*/
+    //Creacion de gustos
+    verify_gusto_user();
+
     return u;
 }
 
@@ -242,8 +221,29 @@ int verify_ciudad_user(char* city) {
 }
 
 
-int verify_gusto_user(char* gustos, int j){
-    int STATUS = 0;
-    for (int i = 0; i < 5; ++i) {
+int verify_gusto_user(User* u){
+
+    int char_gustos[5] = {0,0,0,0, 0};
+    int auxiliar, contador = 0, state = 0;
+    while (contador < 5){
+        printf("Introduzca su gusto: ");
+        scanf("%d", &auxiliar);
+        for (int i = 0; i < 5; ++i){
+            if (char_gustos[i] == auxiliar){
+                state = 0;
+                break;
+            }
+            else{
+                state = 1;
+            }
+        }
+        if (state == 1){
+            char_gustos[contador] = auxiliar;
+            printf("El gusto ha sido registrado correctamente\n");
+            contador ++;
+        }
+        else if (state == 0){
+            printf("El gusto ya ha sido escogido...\n");
+        }
     }
 }
