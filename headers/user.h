@@ -16,7 +16,7 @@ typedef struct {
     int edad;
     char correo[EMAIL_LENGTH];
     char ubicacion[UBICATION_LENGTH];
-    //char gustos [5][GUSTOS];
+    char gustos [5][GUSTOS];
     //Friends amigos;
 } User;
 

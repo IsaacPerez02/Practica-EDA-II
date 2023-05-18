@@ -24,6 +24,7 @@ void print_users(User_list* list);
 User* search_user(User_list * list, char* check_user); //FALTA HACERLA CORRECTAMENTE
 void loading_users(FILE* fa, User_list** list);
 void save_all_users(User_list* list, FILE* fa); //FALTA, Isaac lo hace
+User* check_user_password(User_list * list, char id_name[MAX_ID_NAME_LENGHT] ,char password[MAX_PASSWORD_LENGHT]);
 
 
 #endif //UNTITLED4_USER_LIST_H

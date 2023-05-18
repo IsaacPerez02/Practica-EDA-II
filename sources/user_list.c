@@ -6,10 +6,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define USERNAME_LENGTH 20 //Cantidad de caracteres máximo que puede tener un nombre de usuario
-#define PASSWORD_LENGTH 30 //Cantidad de caracteres máximo que puede tener una contraseña
-#define EMAIL_LENGTH 50 //Cantidad de caracteres máximo que puede tener un correo electrónico
-#define UBICATION_LENGTH 20 //cantidad de caracteres de la ciudad
+#define MAX_ID_NAME_LENGHT 20
+#define MAX_NAME_LENGHT 20
+#define MAX_PASSWORD_LENGHT 20
+#define MAX_CORREO_LENGHT 30
+#define MAX_CITY_LENGHT 20
+#include <time.h>
 
 
 void first_user(User_list** list, char id_name[MAX_ID_NAME_LENGHT], char name[MAX_NAME_LENGHT], int edad, char password[MAX_PASSWORD_LENGHT], char correo[MAX_CORREO_LENGHT], char ciudad[MAX_CITY_LENGHT]){
@@ -26,7 +28,7 @@ void first_user(User_list** list, char id_name[MAX_ID_NAME_LENGHT], char name[MA
     *list = first;
 }
 
-void add_user (User_list** list, char id_name[MAX_ID_NAME_LENGHT], char name[MAX_NAME_LENGHT], int edad, char password[MAX_PASSWORD_LENGHT], char correo[MAX_CORREO_LENGHT], char ciudad[MAX_CITY_LENGHT]){
+void add_user(User_list** list, char id_name[MAX_ID_NAME_LENGHT], char name[MAX_NAME_LENGHT], int edad, char password[MAX_PASSWORD_LENGHT], char correo[MAX_CORREO_LENGHT], char ciudad[MAX_CITY_LENGHT]){
     User_list* new_user = (User_list*) malloc(sizeof (User_list));
     new_user->us = (User*) malloc(sizeof (User));
     strcpy(new_user->us->id_name, id_name);
@@ -34,10 +36,10 @@ void add_user (User_list** list, char id_name[MAX_ID_NAME_LENGHT], char name[MAX
     strcpy(new_user->us->contrasena, password);
     strcpy(new_user->us->ubicacion, ciudad);
     strcpy(new_user->us->correo, correo);
+    new_user->us->edad = edad;
     new_user->next = NULL;
     new_user->prev = NULL;
     User_list* temp = *list;
-
     while (temp->next != NULL) {
         temp = temp->next;
     }
@@ -46,7 +48,7 @@ void add_user (User_list** list, char id_name[MAX_ID_NAME_LENGHT], char name[MAX
 }
 
 void first_user_created(User_list** list, User* us){
-    User_list* first = (User_list*) calloc(1, sizeof (User_list)); //User_list->User malloc
+    User_list* first = (User_list*) calloc(1, sizeof (User_list));
     first->next = NULL;
     first->prev = NULL;
     first->us = us;
@@ -59,7 +61,6 @@ void add_user_created (User_list** list, User* us){
     new_user->prev = NULL;
     new_user->us = us;
     User_list* temp = *list;
-
     while (temp->next != NULL) {
         temp = temp->next;
     }
@@ -68,7 +69,7 @@ void add_user_created (User_list** list, User* us){
 }
 
 void loading_users(FILE * fa, User_list** list){
-    char id_name[USERNAME_LENGTH], name[USERNAME_LENGTH], contrasena[PASSWORD_LENGTH], ubicacion[UBICATION_LENGTH], correo[USERNAME_LENGTH], gustos[5][GUSTOS];
+    char id_name[MAX_ID_NAME_LENGHT], name[MAX_NAME_LENGHT], contrasena[MAX_PASSWORD_LENGHT], ubicacion[MAX_CITY_LENGHT], correo[MAX_CORREO_LENGHT], gustos[5][GUSTOS];
     int edad;
     while (fscanf(fa, "%s %s %s %d %s %s", id_name, name, contrasena, &edad, correo, ubicacion) > 5) { //leer datos aquí
         if (*list == NULL) {
@@ -123,14 +124,54 @@ User* search_user(User_list* list, char* check_user) {
     return NULL;
 }
 
-User* check_user_password(User_list * list, char* check_password) {
+User* check_user_password(User_list * list, char id_name[MAX_ID_NAME_LENGHT] ,char password[MAX_PASSWORD_LENGHT]){
     User_list* heap = list;
     while (heap->next != NULL) {
-        if (strcmp(heap->us->contrasena, check_password) == 0) {
-            return heap->us;
+        if (strcmp(id_name, heap->us->id_name) == 0){
+            if(strcmp(password, heap->us->contrasena) == 0){
+                printf("Bienvenido, %s\n", id_name);
+                return heap->us; //devolvemos el usuario que inicia sesion
+            }
+            else {
+                return NULL;
+            }
         }
         heap = heap->next;
     }
-    return NULL;
+    //por si casualmente el usuario en iniciar sesion es el ultimo de la lista volvemos a comprobar
+    if (strcmp(id_name, heap->us->id_name) == 0){
+        if(strcmp(password, heap->us->contrasena) == 0){
+            return heap->us; //devolvemos el usuario que inicia sesion
+        }
+        else {
+            return NULL;
+        }
+    }
+    return NULL; //si no esta devolvemos NULL
+}
+
+//Genera un número del 100000 al 999999
+int create_code(User_list** list) {
+    int code;
+    time_t t;
+
+    User_list* temp = *list; //Creamos una copia de la lista para navegar por todos los usuarios
+    srand((unsigned) time(&t));
+    code = rand() % 1000000 + 100000; //Generamos un código
+
+    //Comprobamos en cada usuario si su código coincide con el código generado
+    while (temp->next != NULL) {
+        //Si es el caso, creamos otro código y volvemos a revisar todos los usuarios
+        if (code == temp->us->code) {
+            srand((unsigned) time(&t));
+            code = rand() % 1000000 + 100000;
+            temp = *list;
+        }
+        else { //Si no es el caso, pasamos a revisar al siguiente usuario
+            temp = temp->next;
+        }
+    }
+
+    return code; //Al final, devolvemos el código que no coincida con ningún otro usuario
 }
 
