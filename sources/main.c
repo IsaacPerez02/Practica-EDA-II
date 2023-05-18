@@ -10,13 +10,14 @@ int main() {
     //Declaración de variables
     int opcion_menu = -1; //Opción del menú principal que el usuario escribirá por consola
     int opcion_usuario; //Opción de menú de operar como otro usuario
-    int status = SUCCESS;
+    int status = SUCCESS; //Variable para comprobar si el archivo de usuarios existe
     char gustos[6][GUSTOS] = {"A", "B", "C", "D", "E", "F"}; //Gustos disponibles
-    User_list* list = NULL;
-    User* us;
+    User_list* list = NULL; //Lista de usuarios
+    User* us; //Variable para la creación de un usuario
 
+    //Comprobamos que el archivo existe
     FILE* init = fopen("../resources/users.txt", "r");
-    if (init == NULL) status = ERROR;
+    if (init == NULL) status = ERROR; //
     if (status == SUCCESS){
         loading_users(init, &list);
     }
@@ -44,7 +45,6 @@ int main() {
             print_users(list);
         }
         else if (opcion_menu == 3) {
-
             char login_user[USERNAME_LENGTH];
             char login_pass[PASSWORD_LENGTH];
             User* check_us;

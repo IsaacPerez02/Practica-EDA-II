@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include <time.h>
 
 #define TRUE 1
 #define FALSE 0
@@ -93,15 +92,6 @@ User* create_user (char gustos[6][GUSTOS]){
 }
 
 int verify_id_name_user(char* id){
-}
-
-//Genera un número del 10000 al 99999
-int create_code() {
-    int code;
-    time_t t;
-    srand((unsigned) time(&t));
-    code = rand() % 100000 + 10000;
-    return code;
 }
 
 int verify_name_user(char* name) {

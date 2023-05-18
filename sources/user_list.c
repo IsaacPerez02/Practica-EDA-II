@@ -60,6 +60,8 @@ void add_user_created (User_list** list, User* us){
     new_user->next = NULL;
     new_user->prev = NULL;
     new_user->us = us;
+    new_user->us->code = create_code(list);
+    printf("%d\n", new_user->us->code); //GENERAR CÓDIGO
     User_list* temp = *list;
     while (temp->next != NULL) {
         temp = temp->next;
