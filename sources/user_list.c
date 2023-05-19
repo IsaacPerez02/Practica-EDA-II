@@ -11,6 +11,8 @@
 #define MAX_PASSWORD_LENGHT 20
 #define MAX_CORREO_LENGHT 30
 #define MAX_CITY_LENGHT 20
+#define MAX_GUSTOS 6
+#define GUSTOS_LENGTH 20
 #include <time.h>
 
 
@@ -61,7 +63,6 @@ void add_user_created (User_list** list, User* us){
     new_user->prev = NULL;
     new_user->us = us;
     new_user->us->code = create_code(list);
-    printf("%d\n", new_user->us->code); //GENERAR CÓDIGO
     User_list* temp = *list;
     while (temp->next != NULL) {
         temp = temp->next;
@@ -71,7 +72,7 @@ void add_user_created (User_list** list, User* us){
 }
 
 void loading_users(FILE * fa, User_list** list){
-    char id_name[MAX_ID_NAME_LENGHT], name[MAX_NAME_LENGHT], contrasena[MAX_PASSWORD_LENGHT], ubicacion[MAX_CITY_LENGHT], correo[MAX_CORREO_LENGHT], gustos[5][GUSTOS];
+    char id_name[MAX_ID_NAME_LENGHT], name[MAX_NAME_LENGHT], contrasena[MAX_PASSWORD_LENGHT], ubicacion[MAX_CITY_LENGHT], correo[MAX_CORREO_LENGHT], gustos[MAX_GUSTOS][GUSTOS_LENGTH];
     int edad;
     while (fscanf(fa, "%s %s %s %d %s %s", id_name, name, contrasena, &edad, correo, ubicacion) > 5) { //leer datos aquí
         if (*list == NULL) {

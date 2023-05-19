@@ -12,17 +12,16 @@
 #define PASSWORD_LENGTH 30 //Cantidad de caracteres máximo que puede tener una contraseña
 #define EMAIL_LENGTH 50 //Cantidad de caracteres máximo que puede tener un correo electrónico
 #define UBICATION_LENGTH 20 //cantidad de caracteres de la ciudad
-#define GUSTOS 6
+#define MAX_GUSTOS 6
+#define GUSTOS_LENGTH 20
 
-User* create_user (char gustos[6][GUSTOS]){
+User* create_user (char gustos[MAX_GUSTOS][GUSTOS_LENGTH]){
     User* u = (User*) malloc(sizeof (User));
-    int indice, status;
+    int indice, status, status_gusto;
     // Asignacion de variables de usuario a la estructura
     printf("Empieza a crear tu usuario...\n");
     printf("Introduzca su ID: \n");
     scanf("%s", u->id_name);
-    //variables de los gustos
-    int gusto1, gusto2, gusto3, gusto4, gusto5;
 
     //Introducir el nombre
     printf("Introduzca su nombre: \n");
@@ -46,6 +45,7 @@ User* create_user (char gustos[6][GUSTOS]){
     }
     printf("La contrasena ha sido introducida correctamente.\n");
 
+    //Introducir la edad
     printf("Introduzca su edad: \n");
     scanf("%d", &u->edad);
 
@@ -57,6 +57,7 @@ User* create_user (char gustos[6][GUSTOS]){
     }
     printf("La edad ha sido introducida correctamente.\n");
 
+    //Introducir el correo
     printf("Introduzca su correo: \n");
     scanf("%s", u->correo);
 
@@ -68,6 +69,7 @@ User* create_user (char gustos[6][GUSTOS]){
     }
     printf("El correo ha sido introducido correctamente.\n");
 
+    //Introducir ubicación
     printf("Introduzca su ubicacion: \n");
     scanf("%s", u->ubicacion);
     status = verify_ciudad_user(u->ubicacion);
@@ -78,14 +80,23 @@ User* create_user (char gustos[6][GUSTOS]){
     }
     printf("La ciudad ha sido introducida correctamente.\n");
 
-
-    for (int i = 0; i < GUSTOS; i++){
+    //Introducir gustos
+    for (int i = 0; i < MAX_GUSTOS; i++){
         printf("%d. %s \n", i + 1, gustos[i]);
     }
-
-    //Creacion de gustos
-    verify_gusto_user();
-
+    for (int i = 0; i < 5; i++) {
+        printf("Introduzca su gusto: \n");
+        scanf("%d", &indice);
+        indice--;
+        status_gusto = verify_gusto_user(u->gustos, gustos[indice]);
+        while (status_gusto != TRUE) {
+            printf("El gusto ya ha sido introducido!\nIntroduzca de nuevo un gusto diferente:\n");
+            scanf("%d", &indice);
+            indice--;
+            status_gusto = verify_gusto_user(u->gustos, gustos[indice]);
+        }
+        strcpy(u->gustos[i], gustos[indice]);
+    }
     return u;
 }
 
@@ -221,29 +232,11 @@ int verify_ciudad_user(char* city) {
 }
 
 
-int verify_gusto_user(User* u){
-
-    int char_gustos[5] = {0,0,0,0, 0};
-    int auxiliar, contador = 0, state = 0;
-    while (contador < 5){
-        printf("Introduzca su gusto: ");
-        scanf("%d", &auxiliar);
-        for (int i = 0; i < 5; ++i){
-            if (char_gustos[i] == auxiliar){
-                state = 0;
-                break;
-            }
-            else{
-                state = 1;
-            }
-        }
-        if (state == 1){
-            char_gustos[contador] = auxiliar;
-            printf("El gusto ha sido registrado correctamente\n");
-            contador ++;
-        }
-        else if (state == 0){
-            printf("El gusto ya ha sido escogido...\n");
+int verify_gusto_user(char gustos[5][GUSTOS_LENGTH], char gusto[GUSTOS_LENGTH]){
+    for (int i = 0; i < 5; i++){
+        if (strcmp(gustos[i], gusto) == 0) {
+            return FALSE;
         }
     }
+    return TRUE;
 }

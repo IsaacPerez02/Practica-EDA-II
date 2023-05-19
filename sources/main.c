@@ -11,7 +11,7 @@ int main() {
     int opcion_menu = -1; //Opción del menú principal que el usuario escribirá por consola
     int opcion_usuario; //Opción de menú de operar como otro usuario
     int status = SUCCESS; //Variable para comprobar si el archivo de usuarios existe
-    char gustos[6][GUSTOS] = {"A", "B", "C", "D", "E", "F"}; //Gustos disponibles
+    char gustos[MAX_GUSTOS][GUSTOS_LENGTH] = {"A", "B", "C", "D", "E", "F"}; //Gustos disponibles
     User_list* list = NULL; //Lista de usuarios
     User* us; //Variable para la creación de un usuario
 
