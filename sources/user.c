@@ -12,7 +12,7 @@
 #define PASSWORD_LENGTH 30 //Cantidad de caracteres máximo que puede tener una contraseña
 #define EMAIL_LENGTH 50 //Cantidad de caracteres máximo que puede tener un correo electrónico
 #define UBICATION_LENGTH 20 //cantidad de caracteres de la ciudad
-#define MAX_GUSTOS 6
+#define MAX_GUSTOS 10
 #define GUSTOS_LENGTH 20
 
 User* create_user (char gustos[MAX_GUSTOS][GUSTOS_LENGTH]){

@@ -11,12 +11,12 @@
 #define MAX_PASSWORD_LENGHT 20
 #define MAX_CORREO_LENGHT 30
 #define MAX_CITY_LENGHT 20
-#define MAX_GUSTOS 6
+#define MAX_GUSTOS 10
 #define GUSTOS_LENGTH 20
 #include <time.h>
 
 
-void first_user(User_list** list, char id_name[MAX_ID_NAME_LENGHT], char name[MAX_NAME_LENGHT], int edad, char password[MAX_PASSWORD_LENGHT], char correo[MAX_CORREO_LENGHT], char ciudad[MAX_CITY_LENGHT]){
+void first_user(User_list** list, char id_name[MAX_ID_NAME_LENGHT], char name[MAX_NAME_LENGHT], int code, int edad, char password[MAX_PASSWORD_LENGHT], char correo[MAX_CORREO_LENGHT], char ciudad[MAX_CITY_LENGHT], char gustos[5][GUSTOS_LENGTH]){
     User_list* first = (User_list*) malloc(sizeof (User_list));
     first->us = (User*) malloc(sizeof (User));
     strcpy(first->us->id_name, id_name);
@@ -24,13 +24,14 @@ void first_user(User_list** list, char id_name[MAX_ID_NAME_LENGHT], char name[MA
     strcpy(first->us->contrasena, password);
     strcpy(first->us->ubicacion, ciudad);
     strcpy(first->us->correo, correo);
+    first->us->code = code;
     first->us->edad = edad;
     first->next = NULL;
     first->prev = NULL;
     *list = first;
 }
 
-void add_user(User_list** list, char id_name[MAX_ID_NAME_LENGHT], char name[MAX_NAME_LENGHT], int edad, char password[MAX_PASSWORD_LENGHT], char correo[MAX_CORREO_LENGHT], char ciudad[MAX_CITY_LENGHT]){
+void add_user(User_list** list, char id_name[MAX_ID_NAME_LENGHT], char name[MAX_NAME_LENGHT], int code, int edad, char password[MAX_PASSWORD_LENGHT], char correo[MAX_CORREO_LENGHT], char ciudad[MAX_CITY_LENGHT], char gustos[5][GUSTOS_LENGTH]){
     User_list* new_user = (User_list*) malloc(sizeof (User_list));
     new_user->us = (User*) malloc(sizeof (User));
     strcpy(new_user->us->id_name, id_name);
@@ -50,18 +51,22 @@ void add_user(User_list** list, char id_name[MAX_ID_NAME_LENGHT], char name[MAX_
 }
 
 void first_user_created(User_list** list, User* us){
+    int code = create_code(list);
     User_list* first = (User_list*) calloc(1, sizeof (User_list));
     first->next = NULL;
     first->prev = NULL;
     first->us = us;
+    first->us->code = code;
     *list = first;
 }
 
 void add_user_created (User_list** list, User* us){
+    int code = create_code(list);
     User_list* new_user = (User_list*) malloc(sizeof (User_list));
     new_user->next = NULL;
     new_user->prev = NULL;
     new_user->us = us;
+    new_user->us->code = code;
     new_user->us->code = create_code(list);
     User_list* temp = *list;
     while (temp->next != NULL) {
@@ -72,14 +77,14 @@ void add_user_created (User_list** list, User* us){
 }
 
 void loading_users(FILE * fa, User_list** list){
-    char id_name[MAX_ID_NAME_LENGHT], name[MAX_NAME_LENGHT], contrasena[MAX_PASSWORD_LENGHT], ubicacion[MAX_CITY_LENGHT], correo[MAX_CORREO_LENGHT], gustos[MAX_GUSTOS][GUSTOS_LENGTH];
-    int edad;
-    while (fscanf(fa, "%s %s %s %d %s %s", id_name, name, contrasena, &edad, correo, ubicacion) > 5) { //leer datos aquí
+    char id_name[MAX_ID_NAME_LENGHT], name[MAX_NAME_LENGHT], contrasena[MAX_PASSWORD_LENGHT], ubicacion[MAX_CITY_LENGHT], correo[MAX_CORREO_LENGHT], gustos[5][GUSTOS_LENGTH];
+    int edad, code;
+    while (fscanf(fa, "%s %s %d %s %d %s %s %s %s %s %s %s", id_name, name, &code, contrasena, &edad, correo, ubicacion, gustos[0], gustos[1], gustos[2], gustos[3], gustos[4]) > 5) { //leer datos aquí
         if (*list == NULL) {
-            first_user(list, id_name, name, edad, contrasena, correo, ubicacion);
+            first_user(list, id_name, name, code, edad, contrasena, correo, ubicacion, gustos);
         }
         else{
-            add_user(list, id_name, name, edad, contrasena, correo, ubicacion);
+            add_user(list, id_name, name, code, edad, contrasena, correo, ubicacion, gustos);
         }
     }
 }
@@ -87,10 +92,10 @@ void loading_users(FILE * fa, User_list** list){
 void save_all_users(User_list* list, FILE* fa){
     User_list* heap = list;
     while (heap->next != NULL){
-        fprintf(fa, "%s %s %s %d %s %s\n", heap->us->id_name, heap->us->nombre, heap->us->contrasena, heap->us->edad, heap->us->correo, heap->us->ubicacion);
+        fprintf(fa, "%s %s %d %s %d %s %s %s %s %s %s %s\n", heap->us->id_name, heap->us->nombre, heap->us->code, heap->us->contrasena, heap->us->edad, heap->us->correo, heap->us->ubicacion, heap->us->gustos[0], heap->us->gustos[1], heap->us->gustos[2], heap->us->gustos[3], heap->us->gustos[4]);
         heap = heap->next;
     }
-    fprintf(fa, "%s %s %s %d %s %s\n", heap->us->id_name, heap->us->nombre, heap->us->contrasena, heap->us->edad, heap->us->correo, heap->us->ubicacion);
+    fprintf(fa, "%s %s %d %s %d %s %s %s %s %s %s %s\n", heap->us->id_name, heap->us->nombre, heap->us->code, heap->us->contrasena, heap->us->edad, heap->us->correo, heap->us->ubicacion, heap->us->gustos[0], heap->us->gustos[1], heap->us->gustos[2], heap->us->gustos[3], heap->us->gustos[4]);
 }
 
 void delete_user (User_list** list, User* us){
@@ -111,7 +116,7 @@ void delete_user (User_list** list, User* us){
 void print_users(User_list* list){
     User_list* heap = list;
     while (heap != NULL){
-        printf("%s %s %s %d %s %s\n", heap->us->id_name, heap->us->nombre, heap->us->contrasena, heap->us->edad, heap->us->ubicacion, heap->us->correo/*, heap->us->gustos[0], heap->us->gustos[1], heap->us->gustos[2], heap->us->gustos[3], heap->us->gustos[4]*/);
+        printf("%s %s %d %s %d %s %s %s %s %s %s %s\n", heap->us->id_name, heap->us->nombre, heap->us->code, heap->us->contrasena, heap->us->edad, heap->us->ubicacion, heap->us->correo, heap->us->gustos[0], heap->us->gustos[1], heap->us->gustos[2], heap->us->gustos[3], heap->us->gustos[4]);
         heap = heap->next;
     }
 }
@@ -157,10 +162,12 @@ User* check_user_password(User_list * list, char id_name[MAX_ID_NAME_LENGHT] ,ch
 int create_code(User_list** list) {
     int code;
     time_t t;
-
     User_list* temp = *list; //Creamos una copia de la lista para navegar por todos los usuarios
     srand((unsigned) time(&t));
     code = rand() % 1000000 + 100000; //Generamos un código
+    if (temp == NULL){
+        return code;
+    }
 
     //Comprobamos en cada usuario si su código coincide con el código generado
     while (temp->next != NULL) {
@@ -174,7 +181,6 @@ int create_code(User_list** list) {
             temp = temp->next;
         }
     }
-
     return code; //Al final, devolvemos el código que no coincida con ningún otro usuario
 }
 
