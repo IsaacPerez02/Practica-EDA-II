@@ -1,38 +1,52 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <locale.h>
 #include "../headers/user.h"
 #include "../headers/user_list.h"
 #define ERROR -1
 #define SUCCESS 1
+#define LINEA_ASTERISCOS "********************"
 
 int main() {
+    setlocale(LC_ALL, ""); //Para poder poner tildes
     //Declaración de variables
     int opcion_menu = -1; //Opción del menú principal que el usuario escribirá por consola
     int opcion_usuario; //Opción de menú de operar como otro usuario
     int status = SUCCESS; //Variable para comprobar si el archivo de usuarios existe
-    char gustos[MAX_GUSTOS][GUSTOS_LENGTH] = {"Deporte", "Arte", "Informatica", "Niños", "Animales", "Videojuegos", "Fiesta", "Estudiar", "Viajes", "Politica"}; //Gustos disponibles
+    char gustos[MAX_GUSTOS][GUSTOS_LENGTH] = {"Deporte", "Arte", "Informática", "Religión", "Animales", "Videojuegos", "Fiesta", "Estudiar", "Viajes", "Política"}; //Gustos disponibles
     User_list* list = NULL; //Lista de usuarios
     User* us; //Variable para la creación de un usuario
 
-    //Comprobamos que el archivo existe
+    //Comprobamos que el archivo existe. Si existe, cargamos la lista de usuarios del archivo y mostramos el menú
+    //Si no existe el archivo, cerramos el programa
     FILE* init = fopen("../resources/users.txt", "r");
-    if (init == NULL) status = ERROR; //
+    if (init == NULL) status = ERROR;
     if (status == SUCCESS){
         loading_users(init, &list);
+        fclose(init);
     }
-    if (status == SUCCESS) fclose(init);
+    else {
+        return 0;
+    }
 
+    //Menú de gestión del administrador. Opciones:
+    //1: Crea un nuevo usuario y lo añade a la lista
+    //2: Lista la información de todos los usuarios de la lista
+    //3: Iniciamos sesión con un usuario. Para ello, necesitamos el nombre de usuario y su contraseña
     while (opcion_menu != 0) {
+        printf("\n%s\n", LINEA_ASTERISCOS);
         printf("1.- Crear nuevo usuario\n");
         printf("2.- Listar todos los usuarios\n");
         printf("3.- Operar como otro usuario\n");
         printf("0.- Salir del programa\n");
-        printf("Elige una opcion:\n");
+        printf("Elija una opción:\n");
         scanf("%d", &opcion_menu);
 
         if (opcion_menu == 1) {
             us = create_user(gustos);
+
+            //Añadimos el usuario en la lista
             if (list == NULL) {
                 first_user_created(&list, us);
             }
@@ -47,37 +61,48 @@ int main() {
             char login_user[USERNAME_LENGTH];
             char login_pass[PASSWORD_LENGTH];
             User* check_us;
-            printf("Introduce el nombre de usuario:\n");
+            printf("\n%s\n", LINEA_ASTERISCOS);
+            printf("Introduzca el nombre de usuario:\n");
             scanf("%s", login_user);
-            printf("Introduce la contraseña:\n");
+            printf("Introduzca la contraseña:\n");
             scanf("%s", login_pass);
+            //Comprobamos si el nombre de usuario introducido se encuentra en la lista de usuarios
             check_us = check_user_password(list, login_user, login_pass);
 
+            //Si el usuario se encuentra en la lista, abrimos el menú de gestión del usuario
             if (check_us != NULL) {
+                printf("Bienvenido, %s.\n", check_us->id_name);
                 opcion_usuario = -1;
+                //Menú de gestión del usuario. Opciones:
+                //1: Envia una solicitud de amistad a un usuario que hemos introducido por consola
+                //2: Muestra la lista de solicitudes de amistad del usuario. El usuario podrá aceptar o rechazar la solicitud
+                //3: Escribe un mensaje por consola y lo añade al timeline
+                //4: Muestra todas las publicaciones de un usuario específico
+                //5: Muestra todas las publicaciones de todos tus amigos
                 while(opcion_usuario != 0) {
+                    printf("\n%s\n", LINEA_ASTERISCOS);
                     printf("1.- Enviar solicitud de amistad\n");
                     printf("2.- Gestionar solicitudes pendientes\n");
-                    printf("3.- Realizar una publicacion\n");
+                    printf("3.- Realizar una publicación\n");
                     printf("4.- Listar las publicaciones de un usuario\n");
                     printf("5.- Revisar timeline\n");
-                    printf("0.- Cerrar sesion y volver al menu principal\n");
-                    printf("Elige una opcion:\n");
+                    printf("0.- Cerrar sesión y volver al menú principal\n");
+                    printf("Elija una opción:\n");
                     scanf("%d", &opcion_usuario);
 
                     if (opcion_usuario == 1) {
                         char check_friend_name[USERNAME_LENGTH];
                         User* friend;
-                        printf("Introduce el nombre de usuario al que quieras agregar como amigo:\n");
+                        printf("Introduzca el nombre de usuario al que quiera agregar como amigo:\n");
                         scanf("%s", check_friend_name);
 
                         friend = search_user(list, check_friend_name);
                         if (friend != NULL) {
                             //Enviar solicitud a usuario
-                            printf("Solicitud enviada\n");
+                            printf("Solicitud enviada.\n");
                         }
                         else {
-                            printf("Ese usuario no existe\n");
+                            printf("Ese usuario no existe.\n");
                         }
                     }
                     else if (opcion_usuario == 2) {
@@ -89,7 +114,7 @@ int main() {
                     else if (opcion_usuario == 4) {
                         char check_user_name[USERNAME_LENGTH];
                         User* user;
-                        printf("Introduce el nombre de usuario al que quieras mirar sus publicaciones:\n");
+                        printf("Introduzca el nombre de usuario al que quiera mirar sus publicaciones:\n");
                         scanf("%s", check_user_name);
 
                         user = search_user(list, check_user_name);
@@ -97,17 +122,17 @@ int main() {
                             //Mostrar publicaciones del usuario seleccionado
                         }
                         else {
-                            printf("Ese usuario no existe\n");
+                            printf("Ese usuario no existe.\n");
                         }
                     }
                     else if (opcion_usuario == 5) {
                         //Mostrar las publicaciones de todos los amigos
                     }
                     else if (opcion_usuario == 0) {
-                        printf("Cerrando sesion...\n");
+                        printf("Cerrando sesión...\n");
                     }
                     else {
-                        printf("Tienes que elegir una opcion correcta.\n");
+                        printf("Tiene que elegir una opción correcta.\n");
                     }
                 }
             }
@@ -119,17 +144,23 @@ int main() {
         else if (opcion_menu == 0) {
             status = SUCCESS;
             FILE* finish = fopen("../resources/users.txt", "w");
+            //Comprobamos que el archivo existe. Si existe, guardamos todos los usuarios que hayamos agregado en el
+            //archivo y salimos del programa
+            //En caso de que el archivo no exista, saldrá un mensaje de error
             if (finish == NULL) status = ERROR;
             if (status == SUCCESS){
                 save_all_users(list, finish);
-            }
-            if (status == SUCCESS) {
                 fclose(finish);
             }
-            printf("\nSaliendo del programa...");
+            else {
+                printf("¡¡No se ha encontrado el archivo!! ¡¡Los usuarios agregados NO van a ser guardados!!\n");
+            }
+            printf("\n%s\n", LINEA_ASTERISCOS);
+            printf("Saliendo del programa...");
+            return 1;
         }
         else {
-            printf("Tienes que elegir una opcion correcta.\n");
+            printf("Tiene que elegir una opción correcta.\n");
         }
     }
 }
