@@ -26,6 +26,11 @@ void first_user(User_list** list, char id_name[MAX_ID_NAME_LENGHT], char name[MA
     strcpy(first->us->correo, correo);
     first->us->code = code;
     first->us->edad = edad;
+    strcpy(first->us->gustos[0], gustos[0]);
+    strcpy(first->us->gustos[1], gustos[1]);
+    strcpy(first->us->gustos[2], gustos[2]);
+    strcpy(first->us->gustos[3], gustos[3]);
+    strcpy(first->us->gustos[4], gustos[4]);
     first->next = NULL;
     first->prev = NULL;
     *list = first;
@@ -39,7 +44,13 @@ void add_user(User_list** list, char id_name[MAX_ID_NAME_LENGHT], char name[MAX_
     strcpy(new_user->us->contrasena, password);
     strcpy(new_user->us->ubicacion, ciudad);
     strcpy(new_user->us->correo, correo);
+    new_user->us->code = code;
     new_user->us->edad = edad;
+    strcpy(new_user->us->gustos[0], gustos[0]);
+    strcpy(new_user->us->gustos[1], gustos[1]);
+    strcpy(new_user->us->gustos[2], gustos[2]);
+    strcpy(new_user->us->gustos[3], gustos[3]);
+    strcpy(new_user->us->gustos[4], gustos[4]);
     new_user->next = NULL;
     new_user->prev = NULL;
     User_list* temp = *list;

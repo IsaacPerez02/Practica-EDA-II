@@ -74,6 +74,7 @@ int main() {
                         friend = search_user(list, check_friend_name);
                         if (friend != NULL) {
                             //Enviar solicitud a usuario
+                            printf("Solicitud enviada\n");
                         }
                         else {
                             printf("Ese usuario no existe\n");
