@@ -4,8 +4,8 @@
 #define MAX_FRIENDS 10
 
 typedef struct {
-    User* friends[MAX_FRIENDS];
     int code;
+    User friends[MAX_FRIENDS];
     int top;
     int size;
 }Friends;
