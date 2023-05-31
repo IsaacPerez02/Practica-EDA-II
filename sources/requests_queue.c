@@ -36,7 +36,7 @@ int first(Requests requests) {
     }
 }
 
-Requests* add_request(Requests* requests_queue, int code_user, int friend_code) {
+Requests* accept_request(Requests* requests_queue, int code_user, int friend_code) {
     int tail = requests_queue[code_user].tail; //Índice del tail
     requests_queue[code_user].code_friends[tail] = friend_code; //Aceptamos la solicitud (le asignamos el código de amigo)
     requests_queue[code_user].tail++; //Pasamos a la siguiente posición del tail

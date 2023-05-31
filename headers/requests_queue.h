@@ -23,7 +23,7 @@ Requests* init_requests();
 int is_empty(Requests requests);
 int is_full(Requests requests);
 int first(Requests requests);
-Requests* add_request(Requests* requests_queue, int code_user, int friend_code);
+Requests* accept_request(Requests* requests_queue, int code_user, int friend_code);
 Requests* delete_request(Requests* requests_queue, int code_user);
 
 #endif //UNTITLED4_REQUESTS_QUEUE_H
