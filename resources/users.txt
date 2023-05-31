@@ -1,2 +1,3 @@
 Perez_ekz Isaac 124420 12345678Aa 19 isaac.perez02@estudiant.upf.edu Viladecans Informatica Estudiar Viajes Videojuegos Fiesta
-Thaynunx Adrian 124711 HolaKKK333 22 adrian.montes01@estudiant.upf.edu Barcelona Informatica Videojuegos Arte Deporte Animales
+Thaynunx Adrian 124711 HolaKKK333 22 adrian.montes01@estudiant.upf.edBarcelona Barcelona Informatica Videojuegos Arte Deporte Animales
+Bermejon Alberto 115651 123456hjgu4jNJSD 19 alberto@gmail.com Viladecans Deporte Informatica Videojuegos Politica Estudiar

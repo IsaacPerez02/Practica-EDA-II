@@ -10,7 +10,12 @@ typedef struct {
     int size;
 }Friends;
 
-Friends* init_friends(); //FALTA DESARROLLAR TODAS LAS FUNCIONES PARA LOS AMIGOS INTRODUCIDOS EN LA COLA DE CADA USUARIO ASI COMO
-                         //ENTRELAZAR LOS AMIGOS DE CADA USUARIO CON SU ESTRUCTURA DE DATOS
+
+
+Friends* init_friends();
+int count_friends(int friends[MAX_FRIENDS]);
+int request(char id_name[MAX_ID_NAME_LENGHT], User_list* list);
+void add_friend(int id_code, User_list* list);
+
 
 #endif //UNTITLED4_FRIENDS_STACK_H

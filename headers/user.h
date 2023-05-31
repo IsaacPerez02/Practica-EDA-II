@@ -5,6 +5,7 @@
 #define PASSWORD_LENGTH 30 //Cantidad de caracteres máximo que puede tener una contraseña
 #define EMAIL_LENGTH 50 //Cantidad de caracteres máximo que puede tener un correo electrónico
 #define UBICATION_LENGTH 20 //cantidad de caracteres de la ciudad
+#define MAX_FRIENDS 10
 #define MAX_GUSTOS 10
 #define GUSTOS_LENGTH 20
 
@@ -17,7 +18,7 @@ typedef struct {
     char correo[EMAIL_LENGTH];
     char ubicacion[UBICATION_LENGTH];
     char gustos [MAX_GUSTOS][GUSTOS_LENGTH];
-    //Friends amigos;
+    int code_amigos[MAX_FRIENDS];
 } User;
 
 User* create_user(char gustos[MAX_GUSTOS][GUSTOS_LENGTH]);

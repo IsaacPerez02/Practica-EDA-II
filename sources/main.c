@@ -4,6 +4,7 @@
 #include <locale.h>
 #include "../headers/user.h"
 #include "../headers/user_list.h"
+#include "../headers/friends_stack.h"
 #define ERROR -1
 #define SUCCESS 1
 #define LINEA_ASTERISCOS "********************"

@@ -151,10 +151,21 @@ void print_users(User_list* list){
 }
 
 //Función de buscar a un usuario de la lista por su nombre de usuario. Si está en la lista, lo devolvemos
-User* search_user(User_list* list, char* check_user) {
+User* search_user_id_name(User_list* list, char* check_user) {
     User_list* heap = list;
     while (heap->next != NULL){
         if (strcmp(heap->us->id_name, check_user) == 0) {
+            return heap->us;
+        }
+        heap = heap->next;
+    }
+    return NULL;
+}
+
+User* search_user_code(User_list* list, int code){
+    User_list* heap = list;
+    while (heap->next != NULL){
+        if (heap->us->code == code) {
             return heap->us;
         }
         heap = heap->next;

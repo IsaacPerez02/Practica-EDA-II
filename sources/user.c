@@ -8,12 +8,14 @@
 #define TRUE 1
 #define FALSE 0
 
-#define USERNAME_LENGTH 20 //Cantidad de caracteres máximo que puede tener un nombre de usuario
-#define PASSWORD_LENGTH 30 //Cantidad de caracteres máximo que puede tener una contraseña
-#define EMAIL_LENGTH 50 //Cantidad de caracteres máximo que puede tener un correo electrónico
-#define UBICATION_LENGTH 20 //cantidad de caracteres de la ciudad
+#define MAX_ID_NAME_LENGHT 20
+#define MAX_NAME_LENGHT 20
+#define MAX_PASSWORD_LENGHT 20
+#define MAX_CORREO_LENGHT 30
+#define MAX_CITY_LENGHT 20
 #define MAX_GUSTOS 10
 #define GUSTOS_LENGTH 20
+#define ERROR -1
 #define LINEA_ASTERISCOS "********************"
 
 //Función para crear el usuario. Se pedirá de rellenar todos los campos necesarios
