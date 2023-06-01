@@ -5,9 +5,10 @@
 #include "../headers/user.h"
 #include "../headers/user_list.h"
 #include "../headers/friends_stack.h"
+#include "../headers/requests_queue.h"
 #define ERROR -1
 #define SUCCESS 1
-#define LINEA_ASTERISCOS "********************"
+#define LINEA_ASTERISCOS "******************************"
 
 int main() {
     setlocale(LC_ALL, ""); //Para poder poner tildes
@@ -16,7 +17,8 @@ int main() {
     int opcion_usuario; //Opción de menú de operar como otro usuario
     int status = SUCCESS; //Variable para comprobar si el archivo de usuarios existe
     char gustos[MAX_GUSTOS][GUSTOS_LENGTH] = {"Deporte", "Arte", "Informática", "Religión", "Animales", "Videojuegos", "Fiesta", "Estudiar", "Viajes", "Política"}; //Gustos disponibles
-    User_list* list = NULL; //Lista de usuarios
+    User_list* users_list = NULL; //Lista de usuarios
+    Requests* requests_list = NULL; //Lista de solicitudes de amistad de todos los usuarios del sistema
     User* us; //Variable para la creación de un usuario
 
     //Comprobamos que el archivo existe. Si existe, cargamos la lista de usuarios del archivo y mostramos el menú
@@ -24,12 +26,15 @@ int main() {
     FILE* init = fopen("../resources/users.txt", "r");
     if (init == NULL) status = ERROR;
     if (status == SUCCESS){
-        loading_users(init, &list);
+        loading_users(init, &users_list);
+        loading_requests_code(&requests_list, &users_list);
         fclose(init);
     }
     else {
         return 0;
     }
+
+    //printf("%d\n", get_size(requests_list, &users_list));
 
     //Menú de gestión del administrador. Opciones:
     //1: Crea un nuevo usuario y lo añade a la lista
@@ -48,15 +53,15 @@ int main() {
             us = create_user(gustos);
 
             //Añadimos el usuario en la lista
-            if (list == NULL) {
-                first_user_created(&list, us);
+            if (users_list == NULL) {
+                first_user_created(&users_list, us);
             }
             else{
-                add_user_created(&list, us);
+                add_user_created(&users_list, us);
             }
         }
         else if (opcion_menu == 2) {
-            print_users(list);
+            print_users(users_list);
         }
         else if (opcion_menu == 3) {
             char login_user[USERNAME_LENGTH];
@@ -68,7 +73,7 @@ int main() {
             printf("Introduzca la contraseña:\n");
             scanf("%s", login_pass);
             //Comprobamos si el nombre de usuario introducido se encuentra en la lista de usuarios
-            check_us = check_user_password(list, login_user, login_pass);
+            check_us = check_user_password(users_list, login_user, login_pass);
 
             //Si el usuario se encuentra en la lista, abrimos el menú de gestión del usuario
             if (check_us != NULL) {
@@ -97,7 +102,7 @@ int main() {
                         printf("Introduzca el nombre de usuario al que quiera agregar como amigo:\n");
                         scanf("%s", check_friend_name);
 
-                        friend = search_user(list, check_friend_name);
+                        friend = search_user_id_name(users_list, check_friend_name);
                         if (friend != NULL) {
                             //Enviar solicitud a usuario
                             printf("Solicitud enviada.\n");
@@ -118,7 +123,7 @@ int main() {
                         printf("Introduzca el nombre de usuario al que quiera mirar sus publicaciones:\n");
                         scanf("%s", check_user_name);
 
-                        user = search_user(list, check_user_name);
+                        user = search_user_id_name(users_list, check_user_name);
                         if (user != NULL) {
                             //Mostrar publicaciones del usuario seleccionado
                         }
@@ -150,7 +155,7 @@ int main() {
             //En caso de que el archivo no exista, saldrá un mensaje de error
             if (finish == NULL) status = ERROR;
             if (status == SUCCESS){
-                save_all_users(list, finish);
+                save_all_users(users_list, finish);
                 fclose(finish);
             }
             else {

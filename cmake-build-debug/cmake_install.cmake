@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/Txuss/Desktop/Proyecto EDA II/Proyecto_EDA_II
+# Install script for directory: C:/Users/adria/Desktop/UPF/1r/3r trimestre/Estructuras de datos y algoritmos II/Practica/Proyecto
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/Txuss/Desktop/Proyecto EDA II/Proyecto_EDA_II/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/adria/Desktop/UPF/1r/3r trimestre/Estructuras de datos y algoritmos II/Practica/Proyecto/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

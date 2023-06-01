@@ -7,10 +7,8 @@
 #define MAX_CITY_LENGHT 20
 #define MAX_WORD_LENGHT 20
 #include <stdio.h>
-#include "../headers/user.h"
-#include "../headers/friends_stack.h"
-#include "../headers/requests_queue.h"
-#include "../headers/dicctionary_topic.h"
+#include "user.h"
+#include "dicctionary_topic.h"
 
 typedef struct User_list{
     struct User_list* prev;
