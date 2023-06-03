@@ -96,7 +96,7 @@ void add_user_created (User_list** list, User* us){
 void loading_users(FILE * fa, User_list** list){
     char id_name[MAX_ID_NAME_LENGHT], name[MAX_NAME_LENGHT], contrasena[MAX_PASSWORD_LENGHT], ubicacion[MAX_CITY_LENGHT], correo[MAX_CORREO_LENGHT], gustos[5][GUSTOS_LENGTH];
     int edad, code;
-    while (fscanf(fa, "%s %s %d %s %d %s %s %s %s %s %s %s", id_name, name, &code, contrasena, &edad, correo, ubicacion, gustos[0], gustos[1], gustos[2], gustos[3], gustos[4]) > 5) { //leer datos aquí
+    while (fscanf(fa, "%s %s %d %s %d %s %s %s %s %s %s %s", id_name, name, &code, contrasena, &edad, correo, ubicacion, gustos[0], gustos[1], gustos[2], gustos[3], gustos[4]) > 11) { //leer datos aquí
         if (*list == NULL) {
             first_user(list, id_name, name, code, edad, contrasena, correo, ubicacion, gustos);
         }
@@ -138,10 +138,10 @@ void print_users(User_list* list){
     while (heap != NULL){
         printf("***Nombre usuario: %s***\n", heap->us->id_name);
         printf("Nombre: %s\n", heap->us->nombre);
-        printf("Código: %d\n", heap->us->code);
-        printf("Contraseña: %s\n", heap->us->contrasena);
+        printf("Codigo: %d\n", heap->us->code);
+        printf("Contrasena: %s\n", heap->us->contrasena);
         printf("Edad: %d\n", heap->us->edad);
-        printf("Ubicación: %s\n", heap->us->ubicacion);
+        printf("Ubicacion: %s\n", heap->us->ubicacion);
         printf("Correo: %s\n", heap->us->correo);
         printf("Gustos: %s, %s, %s, %s, %s\n", heap->us->gustos[0], heap->us->gustos[1], heap->us->gustos[2], heap->us->gustos[3], heap->us->gustos[4]);
         //printf("%s %s %d %s %d %s %s %s %s %s %s %s\n", heap->us->id_name, heap->us->nombre, heap->us->code, heap->us->contrasena, heap->us->edad, heap->us->ubicacion, heap->us->correo, heap->us->gustos[0], heap->us->gustos[1], heap->us->gustos[2], heap->us->gustos[3], heap->us->gustos[4]);
@@ -153,7 +153,7 @@ void print_users(User_list* list){
 //Función de buscar a un usuario de la lista por su nombre de usuario. Si está en la lista, lo devolvemos
 User* search_user_id_name(User_list* list, char* check_user) {
     User_list* heap = list;
-    while (heap->next != NULL){
+    while (heap != NULL){
         if (strcmp(heap->us->id_name, check_user) == 0) {
             return heap->us;
         }
@@ -164,7 +164,7 @@ User* search_user_id_name(User_list* list, char* check_user) {
 
 User* search_user_code(User_list* list, int code){
     User_list* heap = list;
-    while (heap->next != NULL){
+    while (heap != NULL){
         if (heap->us->code == code) {
             return heap->us;
         }
@@ -176,7 +176,7 @@ User* search_user_code(User_list* list, int code){
 //Función de verificar el nombre de usuario y su contraseña para poder iniciar sesión
 User* check_user_password(User_list * list, char id_name[MAX_ID_NAME_LENGHT] ,char password[MAX_PASSWORD_LENGHT]){
     User_list* heap = list;
-    while (heap->next != NULL) {
+    while (heap != NULL) {
         if (strcmp(id_name, heap->us->id_name) == 0){
             if(strcmp(password, heap->us->contrasena) == 0){
                 return heap->us; //devolvemos el usuario que inicia sesion
