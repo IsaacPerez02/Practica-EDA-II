@@ -87,9 +87,10 @@ int main() {
                     printf("\n%s\n", LINEA_ASTERISCOS);
                     printf("1.- Enviar solicitud de amistad\n");
                     printf("2.- Gestionar solicitudes pendientes\n");
-                    printf("3.- Realizar una publicacion\n");
-                    printf("4.- Listar las publicaciones de un usuario\n");
-                    printf("5.- Revisar timeline\n");
+                    printf("3.- Listar amigos\n");
+                    printf("4.- Realizar una publicacion\n");
+                    printf("5.- Listar las publicaciones de un usuario\n");
+                    printf("6.- Revisar timeline\n");
                     printf("0.- Cerrar sesion y volver al menu principal\n");
                     printf("Elija una opcion:\n");
                     scanf("%d", &option_usuario);
@@ -117,6 +118,12 @@ int main() {
 
                     }
                     else if (option_usuario == 4) {
+
+                    }
+                    else if (option_usuario == 5) {
+
+                    }
+                    else if (option_usuario == 6) {
                         char check_user_name[USERNAME_LENGTH];
                         User* user;
                         printf("Introduzca el nombre de usuario al que quiera mirar sus publicaciones:\n");
@@ -129,9 +136,6 @@ int main() {
                         else {
                             printf("Ese usuario no existe.\n");
                         }
-                    }
-                    else if (option_usuario == 5) {
-                        //Mostrar las publicaciones de todos los amigos
                     }
                     else if (option_usuario == 0) {
                         printf("Cerrando sesion...\n");

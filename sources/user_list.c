@@ -144,7 +144,7 @@ void print_users(User_list* list){
         printf("Ubicacion: %s\n", heap->us->ubicacion);
         printf("Correo: %s\n", heap->us->correo);
         printf("Gustos: %s, %s, %s, %s, %s\n", heap->us->gustos[0], heap->us->gustos[1], heap->us->gustos[2], heap->us->gustos[3], heap->us->gustos[4]);
-        //printf("%s %s %d %s %d %s %s %s %s %s %s %s\n", heap->us->id_name, heap->us->nombre, heap->us->code, heap->us->contrasena, heap->us->edad, heap->us->ubicacion, heap->us->correo, heap->us->gustos[0], heap->us->gustos[1], heap->us->gustos[2], heap->us->gustos[3], heap->us->gustos[4]);
+        //printf("%s %s %d %s %d %s %s %s %s %s %s %s\n", heap->us->id_name, heap->us->nombre, heap->us->code_user, heap->us->contrasena, heap->us->edad, heap->us->ubicacion, heap->us->correo, heap->us->gustos[0], heap->us->gustos[1], heap->us->gustos[2], heap->us->gustos[3], heap->us->gustos[4]);
         printf("%s\n", LINEA_GUION);
         heap = heap->next;
     }
