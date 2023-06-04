@@ -1,3 +1,3 @@
-C:/Users/Txuss/Desktop/Proyecto EDA II/Proyecto_EDA_II/cmake-build-debug/CMakeFiles/untitled4.dir
-C:/Users/Txuss/Desktop/Proyecto EDA II/Proyecto_EDA_II/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Txuss/Desktop/Proyecto EDA II/Proyecto_EDA_II/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/adria/Desktop/UPF/1r/3r trimestre/Estructuras de datos y algoritmos II/Practica/Proyecto/cmake-build-debug/CMakeFiles/untitled4.dir
+C:/Users/adria/Desktop/UPF/1r/3r trimestre/Estructuras de datos y algoritmos II/Practica/Proyecto/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/adria/Desktop/UPF/1r/3r trimestre/Estructuras de datos y algoritmos II/Practica/Proyecto/cmake-build-debug/CMakeFiles/rebuild_cache.dir

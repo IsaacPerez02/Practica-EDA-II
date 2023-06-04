@@ -19,7 +19,11 @@
 #define ERROR -1
 #define LINEA_ASTERISCOS "********************"
 
-//Función para crear el usuario. Se pedirá de rellenar todos los campos necesarios
+/**
+ * Crea a un nuevo usuario
+ * @param gustos: Gustos que podrá elegir el usuario
+ * @return: Devuelve al usuario recién creado con casi todos sus campos completos
+ */
 User* create_user (char gustos[MAX_GUSTOS][GUSTOS_LENGTH]){
     User* u = (User*) malloc(sizeof (User));
     int indice, status, status_gusto;
@@ -110,6 +114,9 @@ User* create_user (char gustos[MAX_GUSTOS][GUSTOS_LENGTH]){
         }
         strcpy(u->gustos[i], gustos[indice]);
     }
+
+    init_requests(&u->requests);
+
     printf("\n%s\n", LINEA_ASTERISCOS);
     return u;
 }
@@ -118,7 +125,11 @@ int verify_id_name_user(char* id){
 
 }
 
-//Comprobamos que el nombre introducido no tenga números
+/**
+ * Comprueba que el nombre real introducido no tenga números
+ * @param name: Nombre real introducido
+ * @return: TRUE si el nombre real no tiene números; FALSE si tiene números
+ */
 int verify_name_user(char* name) {
     int i = 0;
     while (name[i] != '\0') { //\0 = NULL
@@ -131,7 +142,15 @@ int verify_name_user(char* name) {
     return TRUE;
 }
 
-//La contraseña debe de tener longitud 8 o superior, 1 minúscula, 1 mayúscula y 1 número
+/**
+ * Comprueba que la contraseña introducida cumpla los siguientes requisitos:
+ * · Contenga 8 letras o más
+ * · Contenga 1 minúscula o más
+ * · Contenga 1 mayúscula o más
+ * · Contenga 1 número o más
+ * @param pass: Contraseña introducida
+ * @return: Devuelve TRUE si se cumplen todas las condiciones; FALSE si no se cumplen todas las condiciones
+ */
 int verify_password_user(char* pass) {
     int minusculas = 0;
     int mayusculas = 0;
@@ -201,7 +220,11 @@ int verify_password_user(char* pass) {
     return FALSE;
 }
 
-//El correo debe de contener una @
+/**
+ * Comprueba que el correo electrónico introducido contenga @
+ * @param correo: Correo electrónico introducido
+ * @return: Devuelve TRUE si el correo introducido contiene @; FALSE si no contiene @
+ */
 int verify_correo_user(char* correo) {
     int i = 0;
     int contador = 0;
@@ -223,7 +246,11 @@ int verify_correo_user(char* correo) {
     }
 }
 
-//La edad del usuario debe ser un valor positivo y tiene que ser mayor de 18 años
+/**
+ * Comprueba que la edad introducida sea un número positivo y mayor que 18
+ * @param edad: Edad introducida
+ * @return: Devuelve TRUE si la edad introducida es un número positivo mayor que 18; FALSE si no cumple las dos condiciones
+ */
 int verify_edad_user(int edad) {
     if (0 < edad && edad < 18) {
         printf("La edad mínima debe ser de 18 años.\n");
@@ -236,7 +263,11 @@ int verify_edad_user(int edad) {
     return TRUE;
 }
 
-//Comprobamos que la ciudad introducida no tenga números
+/**
+ * Comprueba que la ciudad introducida no tenga números
+ * @param city: Ciudad introducida
+ * @return: Devuelve TRUE si la ciudad introducida no tiene números; FALSE si no es el caso
+ */
 int verify_ciudad_user(char* city) {
     int i = 0;
     while(city[i] != '\0'){
@@ -249,7 +280,12 @@ int verify_ciudad_user(char* city) {
     return TRUE;
 }
 
-//Función para comprobar que no se haya introducido un gusto repetido
+/**
+ * Comprueba que no se introduzca un gusto que se haya introducido con anterioridad
+ * @param gustos: Lista de gustos elegidos
+ * @param gusto: Gusto elegido
+ * @return: Devuelve TRUE si el gusto recién elegido no coincide con un gusto anterior; FALSE si no es el caso
+ */
 int verify_gusto_user(char gustos[5][GUSTOS_LENGTH], char gusto[GUSTOS_LENGTH]){
     for (int i = 0; i < 5; i++){
         if (strcmp(gustos[i], gusto) == 0) {

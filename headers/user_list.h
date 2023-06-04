@@ -11,6 +11,12 @@
 #include "user.h"
 #include "dicctionary_topic.h"
 
+/**
+ * Lista de usuarios del sistema
+ * prev: Usuario (nodo) anterior de la lista de usuarios
+ * next: Usuario (nodo) siguiente de la lista de usuarios
+ * us: Usuario (nodo) actual
+ */
 typedef struct User_list{
     struct User_list* prev;
     struct User_list* next;
@@ -30,6 +36,11 @@ User* search_user_code(User_list* list, int code);
 void loading_users(FILE* fa, User_list** list);
 void save_all_users(User_list* list, FILE* fa); //FALTA, Isaac lo hace
 User* check_user_password(User_list * list, char id_name[MAX_ID_NAME_LENGHT] ,char password[MAX_PASSWORD_LENGHT]);
+
+//Funciones de las solicitudes
+void add_request_to_user_list(User_list** user_list, char* friend_name, int code_user);
+void manage_requests(User_list** user_list, int code_user);
+void print_requests(User_list* user_list, Requests requests);
 
 
 #endif //UNTITLED4_USER_LIST_H

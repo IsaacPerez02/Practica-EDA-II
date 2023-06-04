@@ -27,25 +27,26 @@ void addPublicationToTimeline(Usuario* user, const char* text) {
     }
 }
 
-// Función para mostrar el timeline de un usuario
-void showTimeline(const Usuario* user) {
-    printf("Timeline de %s:\n", user->username);
-    Publication* current = user->timeline;
-    int count = 1;
-    while (current != NULL) {
-        printf("%d. %s\n", count, current->text);
-        current = current->next;
-        count++;
+void addPost(Node* timeline, char text[MAX_TEXT_LENGTH + 1]){
+    Node* newNode = init_node(text);
+    if (timeline == NULL){
+        timeline = newNode;
+    }
+    else{
+        Node* heap = timeline;
+        while (heap->next != NULL){
+            heap = heap->next;
+        }
+        heap->next = newNode;
+        newNode->prev = heap;
     }
 }
 
-// Función para liberar la memoria utilizada por las publicaciones
-void freeTimeline(Usuario* user) {
-    Publication* current = user->timeline;
-    while (current != NULL) {
-        Publication* next = current->next;
-        free(current);
-        current = next;
+void printTimeline(Node* timeline){
+    Node* heap = timeline;
+    while (heap->next != NULL){
+        printf("%s\n", heap->text);
+        heap = heap->next;
     }
-    user->timeline = NULL;
+    printf("%s\n", heap->text);
 }

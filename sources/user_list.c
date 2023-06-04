@@ -18,7 +18,18 @@
 #define LINEA_ASTERISCOS "********************"
 #define LINEA_GUION "---------------"
 
-//Función para añadir al primer usuario a la lista en caso de que solo haya un usuario en el archivo de usuarios
+/**
+ * Añade a un usuario del archivo de usuarios a la lista de usuarios si esta está vacía
+ * @param list: Lista de usuarios
+ * @param id_name: Nombre de usuario
+ * @param name: Nombre real del usuario
+ * @param code: Código del usuario
+ * @param edad: Edad del usuario
+ * @param password: Contraseña del usuario
+ * @param correo: Correo electrónico del usuario
+ * @param ciudad: Localización del usuario
+ * @param gustos: Preferencias del usuario
+ */
 void first_user(User_list** list, char id_name[MAX_ID_NAME_LENGHT], char name[MAX_NAME_LENGHT], int code, int edad, char password[MAX_PASSWORD_LENGHT], char correo[MAX_CORREO_LENGHT], char ciudad[MAX_CITY_LENGHT], char gustos[5][GUSTOS_LENGTH]){
     User_list* first = (User_list*) malloc(sizeof (User_list));
     first->us = (User*) malloc(sizeof (User));
@@ -34,12 +45,24 @@ void first_user(User_list** list, char id_name[MAX_ID_NAME_LENGHT], char name[MA
     strcpy(first->us->gustos[2], gustos[2]);
     strcpy(first->us->gustos[3], gustos[3]);
     strcpy(first->us->gustos[4], gustos[4]);
+    init_requests(&first->us->requests);
     first->next = NULL;
     first->prev = NULL;
     *list = first;
 }
 
-//Función para añadir a un usuario a la lista con usuarios ya introducidos del archivo de usuarios
+/**
+ * Añade a un usuario del archivo de usuarios a la lista de usuarios si esta no está vacía
+ * @param list: Lista de usuarios
+ * @param id_name: Nombre de usuario
+ * @param name: Nombre real del usuario
+ * @param code: Código del usuario
+ * @param edad: Edad del usuario
+ * @param password: Contraseña del usuario
+ * @param correo: Correo electrónico del usuario
+ * @param ciudad: Localización del usuario
+ * @param gustos: Preferencias del usuario
+ */
 void add_user(User_list** list, char id_name[MAX_ID_NAME_LENGHT], char name[MAX_NAME_LENGHT], int code, int edad, char password[MAX_PASSWORD_LENGHT], char correo[MAX_CORREO_LENGHT], char ciudad[MAX_CITY_LENGHT], char gustos[5][GUSTOS_LENGTH]){
     User_list* new_user = (User_list*) malloc(sizeof (User_list));
     new_user->us = (User*) malloc(sizeof (User));
@@ -55,6 +78,7 @@ void add_user(User_list** list, char id_name[MAX_ID_NAME_LENGHT], char name[MAX_
     strcpy(new_user->us->gustos[2], gustos[2]);
     strcpy(new_user->us->gustos[3], gustos[3]);
     strcpy(new_user->us->gustos[4], gustos[4]);
+    init_requests(&new_user->us->requests);
     new_user->next = NULL;
     new_user->prev = NULL;
     User_list* temp = *list;
@@ -65,7 +89,11 @@ void add_user(User_list** list, char id_name[MAX_ID_NAME_LENGHT], char name[MAX_
     new_user->prev = temp;
 }
 
-//Creamos el código del usuario introducido y creamos la lista en caso de que la lista esté vacía
+/**
+ * Se crea el código del usuario recién creado y se añade a la lista de usuarios si esta está vacía
+ * @param list: Lista de usuarios
+ * @param us: Usuario recién creado
+ */
 void first_user_created(User_list** list, User* us){
     int code = create_code(list);
     User_list* first = (User_list*) calloc(1, sizeof (User_list));
@@ -76,7 +104,11 @@ void first_user_created(User_list** list, User* us){
     *list = first;
 }
 
-//Creamos el código del usuario introducido y lo añadimos a la lista de usuarios
+/**
+ * Se crea el código del usuario recién creado y se añade a la lista de usuarios si esta no está vacía
+ * @param list: Lista de usuarios
+ * @param us: Usuario recién creado
+ */
 void add_user_created (User_list** list, User* us){
     int code = create_code(list);
     User_list* new_user = (User_list*) malloc(sizeof (User_list));
@@ -93,7 +125,11 @@ void add_user_created (User_list** list, User* us){
     new_user->prev = temp;
 }
 
-//Cogemos a todos los usuarios del archivo y los añadimos a la lista
+/**
+ * Al comenzar el programa, carga a todos los usuarios del archivo y se guardan en la lista de usuarios del sistema
+ * @param fa: Archivo de usuarios
+ * @param list: Lista de usuarios
+ */
 void loading_users(FILE * fa, User_list** list){
     char id_name[MAX_ID_NAME_LENGHT], name[MAX_NAME_LENGHT], contrasena[MAX_PASSWORD_LENGHT], ubicacion[MAX_CITY_LENGHT], correo[MAX_CORREO_LENGHT], gustos[5][GUSTOS_LENGTH];
     int edad, code;
@@ -107,7 +143,12 @@ void loading_users(FILE * fa, User_list** list){
     }
 }
 
-//Al cerrar el programa, guardamos a todos los usuarios de la lista en el archivo
+/**
+ * Al cerrar el programa, guarda a todos los usuarios de la lista en el archivo (incluso a los que se han agregado
+ * durante la ejecución del programa)
+ * @param list: Lista de usuarios
+ * @param fa: Archivo donde guardaremos a todos los usuarios
+ */
 void save_all_users(User_list* list, FILE* fa){
     User_list* heap = list;
     while (heap->next != NULL){
@@ -117,7 +158,11 @@ void save_all_users(User_list* list, FILE* fa){
     fprintf(fa, "%s %s %d %s %d %s %s %s %s %s %s %s\n", heap->us->id_name, heap->us->nombre, heap->us->code, heap->us->contrasena, heap->us->edad, heap->us->correo, heap->us->ubicacion, heap->us->gustos[0], heap->us->gustos[1], heap->us->gustos[2], heap->us->gustos[3], heap->us->gustos[4]);
 }
 
-//Borramos a un usuario introducido de la lista
+/**
+ * Borra a un usuario introducido de la lista
+ * @param list: Lista de usuarios
+ * @param us: Usuario que queremos borrar
+ */
 void delete_user (User_list** list, User* us){
     User_list* heap = *list;
     while (heap->us->id_name != us->id_name){
@@ -133,7 +178,10 @@ void delete_user (User_list** list, User* us){
     free(heap);
 }
 
-//Mostramos la información de todos los usuarios de la lista
+/**
+ * Muestra la información de todos los usuarios de la lista
+ * @param list: Lista de usuarios
+ */
 void print_users(User_list* list){
     User_list* heap = list;
     while (heap != NULL){
@@ -151,7 +199,12 @@ void print_users(User_list* list){
     }
 }
 
-//Función de buscar a un usuario de la lista por su nombre de usuario. Si está en la lista, lo devolvemos
+/**
+ * Busca a un usuario de la lista por nombre de usuario
+ * @param list: Lista de usuarios
+ * @param check_user: Nombre de usuario que estamos buscando
+ * @return: Devuelve al usuario si se encuentra en la lista. Si no, devuelve NULL
+ */
 User* search_user_id_name(User_list* list, char* check_user) {
     User_list* heap = list;
     while (heap != NULL){
@@ -163,6 +216,12 @@ User* search_user_id_name(User_list* list, char* check_user) {
     return NULL;
 }
 
+/**
+ * Busca a un usuario de la lista por código
+ * @param list: Lista de usuarios
+ * @param code: Código del usuario que estamos buscando
+ * @return: Devuelve al usuario si se encuentra en la lista. Si no, devuelve NULL
+ */
 User* search_user_code(User_list* list, int code){
     User_list* heap = list;
     while (heap != NULL){
@@ -177,7 +236,13 @@ User* search_user_code(User_list* list, int code){
     return NULL;
 }
 
-//Función de verificar el nombre de usuario y su contraseña para poder iniciar sesión
+/**
+ * Verifica el nombre de usuario y su contraseña para poder iniciar sesión
+ * @param list: Lista de usuarios
+ * @param id_name: Nombre de usuario
+ * @param password: Contraseña del usuario
+ * @return: Devuelve al usuario si los credenciales son correctos. Si no, devuelve NULL
+ */
 User* check_user_password(User_list * list, char id_name[MAX_ID_NAME_LENGHT] ,char password[MAX_PASSWORD_LENGHT]){
     User_list* heap = list;
     while (heap != NULL) {
@@ -203,7 +268,11 @@ User* check_user_password(User_list * list, char id_name[MAX_ID_NAME_LENGHT] ,ch
     return NULL; //si no esta devolvemos NULL
 }
 
-//Genera un número del 100000 al 999999
+/**
+ * Genera un número del 100000 al 999999
+ * @param list: Lista de usuarios
+ * @return: Código generado al azar del 100000 al 999999
+ */
 int create_code(User_list** list) {
     int code;
     time_t t;
@@ -229,3 +298,93 @@ int create_code(User_list** list) {
     return code; //Al final, devolvemos el código que no coincida con ningún otro usuario
 }
 
+/**
+ * Modifica la cola de solicitudes de un usuario de la lista
+ * @param user_list: Lista de usuarios
+ * @param friend_name: Nombre del amigo al que se envia la solicitud
+ * @param code_user: Código del usuario que envia la solicitud
+ */
+void add_request_to_user_list(User_list** user_list, char* friend_name, int code_user) {
+    //Recorremos todos los nodos de la lista de usuarios hasta que el nombre de uno de ellos coincida con el del
+    //usuario al que queremos enviar la solicitud
+    User_list* heap = *user_list;
+    while (heap != NULL) {
+        if (strcmp(heap->us->id_name, friend_name) == 0) {
+            //Una vez encontrado, le enviamos la solicitud con nuestro código
+            add_request(&(heap->us->requests), code_user);
+            break;
+        }
+        heap = heap->next;
+    }
+}
+
+/**
+ * Gestiona la cola de solicitudes de un usuario de la lista
+ * @param user_list: Lista de usuarios
+ * @param code_user: Código del usuario gestionando las solicitudes
+ */
+void manage_requests(User_list** user_list, int code_user) {
+    //Recorremos todos los nodos de la lista de usuarios hasta que el código de uno de ellos coincida con el del
+    //usuario que quiere gestionar sus solicitudes
+    User_list* heap = *user_list;
+    int option_requests = -1;
+    while (heap != NULL) {
+        if (heap->us->code == code_user) {
+            if (is_empty(&(heap->us->requests))) {
+                printf("No tienes solicitudes pendientes.\n");
+            }
+            else { //Una vez encontrado, mostramos por consola todas sus solicitudes y le damos la opción de aceptarlas o rechazarlas
+                print_requests(*user_list, heap->us->requests);
+
+                while (option_requests != 0) {
+                    int head = heap->us->requests.head;
+                    printf("\n%s\n", LINEA_ASTERISCOS);
+                    printf("Que deseas hacer con la solicitud de %s?\n", search_user_code(*user_list, heap->us->requests.code_request[head])->id_name);
+                    printf("1.- Aceptar\n");
+                    printf("2.- Rechazar\n");
+                    printf("0.- Atras\n");
+                    printf("Elija una opcion:\n");
+                    scanf("%d", &option_requests);
+
+                    if (option_requests == 1) {
+                        //Aceptar solicitud
+                        delete_request(&(heap->us->requests));
+                        printf("Solicitud aceptada\n");
+                    }
+                    else if (option_requests == 2) {
+                        //Rechazar solicitud
+                        delete_request(&(heap->us->requests));
+                        printf("Solicitud rechazada.\n");
+                    }
+                    else {
+                        printf("Escoja una opcion correcta.\n");
+                    }
+
+                    if (heap->us->requests.size == 0) {
+                        option_requests = 0;
+                    }
+
+                    if (option_requests == 0) {
+                        printf("Saliendo de la gestion de solicitudes...\n");
+                    }
+                }
+            }
+            break;
+        }
+        heap = heap->next;
+    }
+}
+
+/**
+ * Imprime la cola de solicitudes de un usuario por consola
+ * @param user_list: Lista de usuarios
+ * @param requests: Cola de solicitudes del usuario
+ */
+void print_requests(User_list* user_list, Requests requests) {
+    int request = 1; //Número de la solicitud
+    printf("\n%s\n", LINEA_ASTERISCOS);
+    for (int i = requests.head; i < requests.tail; i++) {
+        printf("%d.- %s\n", request, search_user_code(user_list, requests.code_request[i])->id_name);
+        request++;
+    }
+}

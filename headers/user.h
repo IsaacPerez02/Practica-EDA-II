@@ -11,7 +11,18 @@
 #define MAX_GUSTOS 10
 #define GUSTOS_LENGTH 20
 
-
+/**
+ * Usuario del sistema
+ * id_name: Nombre de usuario
+ * code: Código del usuario
+ * nombre: Nombre real del usuario
+ * contrasena: Contraseña del usuario
+ * edad: Edad del usuario
+ * correo: Correo electrónico del usuario
+ * ubicacion: Localización del usuario
+ * Gustos: Preferencias del usuario
+ * requests: Cola de solicitudes del usuario
+ */
 typedef struct {
     char id_name[USERNAME_LENGTH];
     int code;
@@ -22,11 +33,11 @@ typedef struct {
     char ubicacion[UBICATION_LENGTH];
     char gustos [MAX_GUSTOS][GUSTOS_LENGTH];
     int code_amigos[MAX_FRIENDS];
-    Requests requests[MAX_FRIENDS];
+    Requests requests;
 } User;
 
 User* create_user(char gustos[MAX_GUSTOS][GUSTOS_LENGTH]);
-int verify_id_name_user(char* id); //FALTA
+int verify_id_name_user(char* id);
 int verify_name_user(char* name);
 int verify_password_user(char* pass);
 int verify_correo_user(char* correo);

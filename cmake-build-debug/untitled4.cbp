@@ -84,6 +84,9 @@
 		<Unit filename="C:/Users/adria/Desktop/UPF/1r/3r trimestre/Estructuras de datos y algoritmos II/Practica/Proyecto/headers/friends_stack.h">
 			<Option target="untitled4"/>
 		</Unit>
+		<Unit filename="C:/Users/adria/Desktop/UPF/1r/3r trimestre/Estructuras de datos y algoritmos II/Practica/Proyecto/headers/manage_requests_queue.h">
+			<Option target="untitled4"/>
+		</Unit>
 		<Unit filename="C:/Users/adria/Desktop/UPF/1r/3r trimestre/Estructuras de datos y algoritmos II/Practica/Proyecto/headers/publications_users.h">
 			<Option target="untitled4"/>
 		</Unit>
@@ -103,6 +106,9 @@
 			<Option target="untitled4"/>
 		</Unit>
 		<Unit filename="C:/Users/adria/Desktop/UPF/1r/3r trimestre/Estructuras de datos y algoritmos II/Practica/Proyecto/sources/main.c">
+			<Option target="untitled4"/>
+		</Unit>
+		<Unit filename="C:/Users/adria/Desktop/UPF/1r/3r trimestre/Estructuras de datos y algoritmos II/Practica/Proyecto/sources/manage_requests_queue.c">
 			<Option target="untitled4"/>
 		</Unit>
 		<Unit filename="C:/Users/adria/Desktop/UPF/1r/3r trimestre/Estructuras de datos y algoritmos II/Practica/Proyecto/sources/publications_users.c">

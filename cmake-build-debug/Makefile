@@ -200,6 +200,30 @@ sources/main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled4.dir\build.make CMakeFiles/untitled4.dir/sources/main.c.s
 .PHONY : sources/main.c.s
 
+sources/manage_requests_queue.obj: sources/manage_requests_queue.c.obj
+.PHONY : sources/manage_requests_queue.obj
+
+# target to build an object file
+sources/manage_requests_queue.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled4.dir\build.make CMakeFiles/untitled4.dir/sources/manage_requests_queue.c.obj
+.PHONY : sources/manage_requests_queue.c.obj
+
+sources/manage_requests_queue.i: sources/manage_requests_queue.c.i
+.PHONY : sources/manage_requests_queue.i
+
+# target to preprocess a source file
+sources/manage_requests_queue.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled4.dir\build.make CMakeFiles/untitled4.dir/sources/manage_requests_queue.c.i
+.PHONY : sources/manage_requests_queue.c.i
+
+sources/manage_requests_queue.s: sources/manage_requests_queue.c.s
+.PHONY : sources/manage_requests_queue.s
+
+# target to generate assembly for a file
+sources/manage_requests_queue.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled4.dir\build.make CMakeFiles/untitled4.dir/sources/manage_requests_queue.c.s
+.PHONY : sources/manage_requests_queue.c.s
+
 sources/publications_users.obj: sources/publications_users.c.obj
 .PHONY : sources/publications_users.obj
 
@@ -314,6 +338,9 @@ help:
 	@echo ... sources/main.obj
 	@echo ... sources/main.i
 	@echo ... sources/main.s
+	@echo ... sources/manage_requests_queue.obj
+	@echo ... sources/manage_requests_queue.i
+	@echo ... sources/manage_requests_queue.s
 	@echo ... sources/publications_users.obj
 	@echo ... sources/publications_users.i
 	@echo ... sources/publications_users.s
