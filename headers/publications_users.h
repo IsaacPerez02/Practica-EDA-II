@@ -1,11 +1,25 @@
 #ifndef UNTITLED4_PUBLICATIONS_USERS_H
 #define UNTITLED4_PUBLICATIONS_USERS_H
-#define MAX_WORDS 120
+#include "../headers/user.h"
+#define MAX_CHARACTERS 120
 
-typedef struct Publications {
-    char publication[MAX_WORDS];
-    struct Publications* next;
-    struct Publications* last;
-}Publications;
+// Definición de la estructura de una publicación
+typedef struct Publication {
+    char text[MAX_CHARACTERS + 1];
+    struct Publication* next;
+} Publication;
+
+// Definición de la estructura de un usuario
+typedef struct User1 {
+    char username[50];
+    Publication* timeline;
+} Usuario;
+
+
+Publication* createPublication(const char* text);
+void addPublicationToTimeline(Usuario* user, const char* text);
+void showTimeline(const Usuario* user);
+void freeTimeline(Usuario* user);
+
 
 #endif //UNTITLED4_PUBLICATIONS_USERS_H

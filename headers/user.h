@@ -11,6 +11,7 @@
 #define MAX_GUSTOS 10
 #define GUSTOS_LENGTH 20
 
+
 typedef struct {
     char id_name[USERNAME_LENGTH];
     int code;

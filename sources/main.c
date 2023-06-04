@@ -124,7 +124,15 @@ int main() {
 
                     }
                     else if (option_usuario == 4) {
+                        Usuario user1;
+                        strcpy(user1.username, "Usuario1");
+                        user1.timeline = NULL;
 
+                        char text[MAX_CHARACTERS + 1];
+                        printf("Escriba su pubicacion (maximo %d caracteres): ", MAX_CHARACTERS);
+                        scanf("%s", &text);  // Leer hasta 120 caracteres o hasta que se encuentre una nueva línea
+                        addPublicationToTimeline(&user1, text);
+                        freeTimeline(&user1);
                     }
                     else if (option_usuario == 5) {
                         char check_user_name[USERNAME_LENGTH];
