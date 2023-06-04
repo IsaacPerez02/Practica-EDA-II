@@ -3,23 +3,16 @@
 #include "../headers/user.h"
 #define MAX_CHARACTERS 120
 
-// Definición de la estructura de una publicación
-typedef struct Publication {
-    char text[MAX_CHARACTERS + 1];
-    struct Publication* next;
-} Publication;
+#define MAX_TEXT_LENGTH 120
 
-// Definición de la estructura de un usuario
-typedef struct User1 {
-    char username[50];
-    Publication* timeline;
-} Usuario;
+typedef struct Node {
+    char text[MAX_TEXT_LENGTH + 1];
+    struct Node* next;
+    struct Node* prev;
+} Node;
 
-
-Publication* createPublication(const char* text);
-void addPublicationToTimeline(Usuario* user, const char* text);
-void showTimeline(const Usuario* user);
-void freeTimeline(Usuario* user);
-
+Node* init_node(char text[MAX_TEXT_LENGTH + 1]);
+void addPost(Node* timeline, char text[MAX_TEXT_LENGTH + 1]);
+void printTimeline(Node* timeline);
 
 #endif //UNTITLED4_PUBLICATIONS_USERS_H

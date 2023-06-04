@@ -94,6 +94,8 @@ int main() {
                     printf("Elija una opcion:\n");
                     scanf("%d", &option_usuario);
 
+                    Node* timeline = NULL;
+
                     if (option_usuario == 1) {
                         char check_friend_name[USERNAME_LENGTH];
                         User *friend;
@@ -128,18 +130,12 @@ int main() {
 
                         user = search_user_id_name(users_list, check_user_name);
                         if (user != NULL) {
-                            showTimeline(user);
-                        }
-                        else {
+                        } else {
                             printf("Ese usuario no existe.\n");
                         }
-                    }
-                    else if (option_usuario == 6) {
-                        Usuario* user1;
-                        showTimeline(&user1);
-
-                    }
-                    else if (option_usuario == 0) {
+                    } else if (option_usuario == 6) {
+                        printTimeline(timeline);
+                    } else if (option_usuario == 0) {
                         printf("Cerrando sesion...\n");
                     } else {
                         printf("Tiene que elegir una opcion correcta.\n");

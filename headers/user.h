@@ -10,6 +10,7 @@
 #define MAX_FRIENDS 10
 #define MAX_GUSTOS 10
 #define GUSTOS_LENGTH 20
+#define MAX_CHARACTERS 120
 
 /**
  * Usuario del sistema

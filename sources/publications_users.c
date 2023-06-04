@@ -1,30 +1,15 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-#include <malloc.h>
 #include "../headers/publications_users.h"
-#include "../headers/publications_users.h"
+#include "../headers/user.h"
 
-// Función para crear una nueva publicación
-Publication* createPublication(const char* text) {
-    Publication* newPublication = (Publication*)malloc(sizeof(Publication));
-    strncpy(newPublication->text, text, MAX_CHARACTERS);
-    newPublication->text[MAX_CHARACTERS] = '\0';
-    newPublication->next = NULL;
-    return newPublication;
-}
-
-// Función para agregar una publicación al timeline de un usuario
-void addPublicationToTimeline(Usuario* user, const char* text) {
-    Publication* newPublication = createPublication(text);
-    if (user->timeline == NULL) {
-        user->timeline = newPublication;
-    } else {
-        Publication* current = user->timeline;
-        while (current->next != NULL) {
-            current = current->next;
-        }
-        current->next = newPublication;
-    }
+Node* init_node(char text[MAX_TEXT_LENGTH + 1]){
+    Node* newNode = (Node*) malloc(sizeof (Node));
+    strcpy(newNode->text, text);
+    newNode->next = NULL;
+    newNode->prev = NULL;
+    return newNode;
 }
 
 void addPost(Node* timeline, char text[MAX_TEXT_LENGTH + 1]){
@@ -41,6 +26,7 @@ void addPost(Node* timeline, char text[MAX_TEXT_LENGTH + 1]){
         newNode->prev = heap;
     }
 }
+
 
 void printTimeline(Node* timeline){
     Node* heap = timeline;
