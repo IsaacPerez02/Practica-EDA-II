@@ -14,6 +14,7 @@
 #define MAX_CORREO_LENGHT 30
 #define MAX_CITY_LENGHT 20
 #define MAX_GUSTOS 10
+#define MAX_USERS 20
 #define GUSTOS_LENGTH 20
 #define ERROR -1
 #define LINEA_ASTERISCOS "********************"

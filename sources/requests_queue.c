@@ -14,7 +14,31 @@ Requests* init_requests() {
     requests->size = 0;
     return requests;
 }
-
+/*
+int count_friends(int list[MAX_FRIENDS]){
+    int count = 0;
+    for (int i = 0; i < MAX_FRIENDS; i++){
+        if (list[i] != 0){
+            count++;
+        }
+    }
+    return count;
+}
+ */
+/*
+Requests* add_request(Requests* requests, int code_user, int code_request){
+    Requests* heap = requests;
+    int i = 0, index;
+    while (i < requests->size){
+        if (heap[i].code_user == code_user){
+            index = count_friends(heap[i].code_friends);
+            heap[i].code_friends[index] = code_request;
+        }
+    }
+    return heap;
+}
+ */
+/*
 //Comprueba si la cola de solicitudes está vacía
 int is_empty(Requests requests) {
     if (requests.size <= 0) {

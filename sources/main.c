@@ -16,7 +16,8 @@ int main() {
     int status = SUCCESS; //Variable para comprobar si el archivo de usuarios existe
     char gustos[MAX_GUSTOS][GUSTOS_LENGTH] = {"Deporte", "Arte", "Informática", "Religión", "Animales", "Videojuegos", "Fiesta", "Estudiar", "Viajes", "Política"}; //Gustos disponibles
     User_list* users_list = NULL; //Lista de usuarios
-    Requests** requests_list = (Requests**) malloc(sizeof(Requests*) * 10); //Lista de solicitudes de amistad de todos los usuarios del sistema
+    Manage_requests* requests_list = NULL; //Lista de solicitudes de amistad de todos los usuarios del sistema
+    Friends* friends = NULL; //Lista de amigos
     User* us; //Variable para la creación de un usuario
 
     //Comprobamos que el archivo existe. Si existe, cargamos la lista de usuarios del archivo y mostramos el menú

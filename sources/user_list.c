@@ -12,6 +12,7 @@
 #define MAX_CORREO_LENGHT 30
 #define MAX_CITY_LENGHT 20
 #define MAX_GUSTOS 10
+#define MAX_USERS 20
 #define GUSTOS_LENGTH 20
 #include <time.h>
 #define LINEA_ASTERISCOS "********************"
@@ -169,6 +170,9 @@ User* search_user_code(User_list* list, int code){
             return heap->us;
         }
         heap = heap->next;
+    }
+    if (heap->us->code == code) {
+        return heap->us;
     }
     return NULL;
 }

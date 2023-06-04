@@ -6,6 +6,7 @@
 #define MAX_CORREO_LENGHT 30
 #define MAX_CITY_LENGHT 20
 #define MAX_WORD_LENGHT 20
+#define MAX_USERS 20
 #include <stdio.h>
 #include "user.h"
 #include "dicctionary_topic.h"

@@ -91,6 +91,18 @@ build CMakeFiles/untitled4.dir/sources/publications_users.c.obj: C_COMPILER__unt
   OBJECT_DIR = CMakeFiles\untitled4.dir
   OBJECT_FILE_DIR = CMakeFiles\untitled4.dir\sources
 
+build CMakeFiles/untitled4.dir/sources/manage_friends_stack.c.obj: C_COMPILER__untitled4_Debug C$:/Users/Txuss/Desktop/Proyecto$ EDA$ II/Proyecto_EDA_II/sources/manage_friends_stack.c || cmake_object_order_depends_target_untitled4
+  DEP_FILE = CMakeFiles\untitled4.dir\sources\manage_friends_stack.c.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu11
+  OBJECT_DIR = CMakeFiles\untitled4.dir
+  OBJECT_FILE_DIR = CMakeFiles\untitled4.dir\sources
+
+build CMakeFiles/untitled4.dir/sources/manage_requests_queue.c.obj: C_COMPILER__untitled4_Debug C$:/Users/Txuss/Desktop/Proyecto$ EDA$ II/Proyecto_EDA_II/sources/manage_requests_queue.c || cmake_object_order_depends_target_untitled4
+  DEP_FILE = CMakeFiles\untitled4.dir\sources\manage_requests_queue.c.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu11
+  OBJECT_DIR = CMakeFiles\untitled4.dir
+  OBJECT_FILE_DIR = CMakeFiles\untitled4.dir\sources
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target untitled4
@@ -99,7 +111,7 @@ build CMakeFiles/untitled4.dir/sources/publications_users.c.obj: C_COMPILER__unt
 #############################################
 # Link the executable untitled4.exe
 
-build untitled4.exe: C_EXECUTABLE_LINKER__untitled4_Debug CMakeFiles/untitled4.dir/sources/main.c.obj CMakeFiles/untitled4.dir/sources/user.c.obj CMakeFiles/untitled4.dir/sources/user_list.c.obj CMakeFiles/untitled4.dir/sources/friends_stack.c.obj CMakeFiles/untitled4.dir/sources/requests_queue.c.obj CMakeFiles/untitled4.dir/sources/dicctionary_topic.c.obj CMakeFiles/untitled4.dir/sources/publications_users.c.obj
+build untitled4.exe: C_EXECUTABLE_LINKER__untitled4_Debug CMakeFiles/untitled4.dir/sources/main.c.obj CMakeFiles/untitled4.dir/sources/user.c.obj CMakeFiles/untitled4.dir/sources/user_list.c.obj CMakeFiles/untitled4.dir/sources/friends_stack.c.obj CMakeFiles/untitled4.dir/sources/requests_queue.c.obj CMakeFiles/untitled4.dir/sources/dicctionary_topic.c.obj CMakeFiles/untitled4.dir/sources/publications_users.c.obj CMakeFiles/untitled4.dir/sources/manage_friends_stack.c.obj CMakeFiles/untitled4.dir/sources/manage_requests_queue.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\untitled4.dir

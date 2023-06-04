@@ -19,8 +19,10 @@ typedef struct {
 }Requests;
 
 Requests* init_requests();
-int is_empty(Requests requests);
-int is_full(Requests requests);
+/*
+int count_requests(int list[MAX_FRIENDS]);
+//int is_empty(Requests requests);
+//int is_full(Requests requests);
 int first(Requests requests);
 void loading_requests_code(Requests** requests_list, User_list** user_list);
 int get_request_list_size(User_list** user_List);
