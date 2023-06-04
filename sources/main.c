@@ -5,6 +5,9 @@
 #include "../headers/user_list.h"
 #include "../headers/friends_stack.h"
 #include "../headers/requests_queue.h"
+#include "../headers/manage_requests_queue.h"
+#include "../headers/publications_users.h"
+
 #define ERROR -1
 #define SUCCESS 1
 #define LINEA_ASTERISCOS "******************************"
@@ -26,7 +29,7 @@ int main() {
     if (init == NULL) status = ERROR;
     if (status == SUCCESS){
         loading_users(init, &users_list);
-        loading_requests_code(requests_list, &users_list);
+        //loading_requests_code(&requests_list, &users_list);
         fclose(init);
     }
     else {
@@ -57,7 +60,7 @@ int main() {
                 add_user_created(&users_list, us);
             }
 
-            add_user_created_to_requests_list(requests_list, users_list, us);
+            //add_user_created_to_requests_list(&requests_list, users_list, us);
         }
         else if (option_menu == 2) {
             print_users(users_list);
@@ -105,7 +108,9 @@ int main() {
                         friend = search_user_id_name(users_list, check_friend_name);
                         if (friend != NULL) {
                             //Enviar solicitud a usuario
-                            send_request(requests_list, users_list, check_us->code, friend->code);
+                            int code_new_friend;
+                            //code_new_friend = request(check_friend_name, users_list);
+                            //send_request(&requests_list, users_list, check_us->code, friend->code);
                             printf("Solicitud enviada.\n");
                         }
                         else {
@@ -113,7 +118,7 @@ int main() {
                         }
                     }
                     else if (option_usuario == 2) {
-                        manage_requests(requests_list, users_list, check_us->code);
+                        //manage_requests(&requests_list, users_list, check_us->code);
                     }
                     else if (option_usuario == 3) {
 
@@ -122,9 +127,6 @@ int main() {
 
                     }
                     else if (option_usuario == 5) {
-
-                    }
-                    else if (option_usuario == 6) {
                         char check_user_name[USERNAME_LENGTH];
                         User* user;
                         printf("Introduzca el nombre de usuario al que quiera mirar sus publicaciones:\n");
@@ -132,11 +134,16 @@ int main() {
 
                         user = search_user_id_name(users_list, check_user_name);
                         if (user != NULL) {
-                            //Mostrar publicaciones del usuario seleccionado
+                            showTimeline(user);
                         }
                         else {
                             printf("Ese usuario no existe.\n");
                         }
+                    }
+                    else if (option_usuario == 6) {
+                        Usuario* user1;
+                        showTimeline(&user1);
+
                     }
                     else if (option_usuario == 0) {
                         printf("Cerrando sesion...\n");

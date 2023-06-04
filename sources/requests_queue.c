@@ -4,8 +4,7 @@
 
 //Función para inicializar la cola de solicitudes de un usuario
 Requests* init_requests() {
-    Requests* requests = (Requests*) malloc(sizeof (Requests));
-    requests->code_user = 0;
+    Requests* requests = NULL;
     for (int i = 0; i < MAX_FRIENDS; i++) {
         requests->code_friends[i] = 0;
     }
@@ -68,12 +67,13 @@ int first(Requests requests) {
         return requests.code_friends[requests.head];
     }
 }
-
+*/
 /**
  * Carga la cola de solicitudes de todos los usuarios del archivo
  * @param requests_list: Lista de la cola de solicitudes de los usuarios
  * @param user_list: Lista de usuarios
  */
+ /*
 void loading_requests_code(Requests** requests_list, User_list** user_list) {
     User_list* heap = *user_list;
     int i = 0;
@@ -91,6 +91,7 @@ void loading_requests_code(Requests** requests_list, User_list** user_list) {
  * @param user_list: Lista de usuarios
  * @param user: Usuario recién creado
  */
+ /*
 void add_user_created_to_requests_list(Requests** requests_list, User_list* user_list, User* user) {
     int idx = get_request_list_size(&user_list) - 1;
     requests_list[idx] = init_requests();
@@ -102,6 +103,7 @@ void add_user_created_to_requests_list(Requests** requests_list, User_list* user
  * @param user_List: Lista de usuarios
  * @return: Tamaño de la lista
  */
+ /*
 int get_request_list_size(User_list** user_List) {
     User_list* heap = *user_List;
     int size = 0;
@@ -119,6 +121,7 @@ int get_request_list_size(User_list** user_List) {
  * @param code_user: Código del usuario que envía la solicitud
  * @param request_code: Código del usuario al que enviamos la solicitud
  */
+ /*
 void send_request(Requests** requests_list, User_list* user_list, int code_user, int request_code) {
     int requests_list_size = get_request_list_size(&user_list); //Tamaño de la lista
     //Comprobamos en la lista al usuario que queramos enviar la solicitud mediante su código
@@ -143,6 +146,7 @@ void send_request(Requests** requests_list, User_list* user_list, int code_user,
  * @param user_list: Lista de usuarios
  * @param code_user: Código del usuario que está gestionando el menú
  */
+ /*
 void manage_requests(Requests** requests_list, User_list* user_list, int code_user) {
     int requests_list_size = get_request_list_size(&user_list); //Tamaño de la lista
     int option_request = -1;
@@ -167,12 +171,12 @@ void manage_requests(Requests** requests_list, User_list* user_list, int code_us
                     if (option_request == 1) {
                         //Aceptar solicitud
                         printf("Solicitud aceptada\n");
-                        delete_request(requests_list, user_list, code_user);
+                        //delete_request(requests_list, user_list, code_user);
                     }
                     else if (option_request == 2) {
                         //Rechazar solicitud
                         printf("Solicitud rechazada.\n");
-                        delete_request(requests_list, user_list, code_user);
+                        //delete_request(requests_list, user_list, code_user);
                     }
                     else {
                         printf("Escoja una opcion correcta.\n");
@@ -202,6 +206,7 @@ void manage_requests(Requests** requests_list, User_list* user_list, int code_us
  * @param head: Índice inicial de la cola
  * @param size: Tamaño de la cola
  */
+ /*
 void print_requests(int* requests_queue, User_list* user_list, int head, int size) {
     char* request_code;
     printf("\n%s\n", LINEA_ASTERISCOS);
@@ -217,6 +222,7 @@ void print_requests(int* requests_queue, User_list* user_list, int head, int siz
  * @param user_list: Lista de usuarios
  * @param code_user: Código del usuario gestionando las solicitudes
  */
+ /*
 void delete_request(Requests** requests_list, User_list* user_list, int code_user) {
     int requests_list_size = get_request_list_size(&user_list);
     for (int i = 0; i < requests_list_size; i++) {
@@ -232,3 +238,4 @@ void delete_request(Requests** requests_list, User_list* user_list, int code_use
         }
     }
 }
+*/

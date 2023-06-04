@@ -1,17 +1,15 @@
 #ifndef UNTITLED4_REQUESTS_QUEUE_H
 #define UNTITLED4_REQUESTS_QUEUE_H
 
-#include "user_list.h"
+//#include "user_list.h"
+#define MAX_FRIENDS 10
 
 /**
+ * Cola de solicitudes de un usuario
  * code_user: Código del propio usuario
  * code_friends: Lista de códigos de las solicitudes
- * head: Primer elemento
- * tail: Último elemento
- * size: Cantidad de solicitudes de un usuario
  */
 typedef struct {
-    int code_user;
     int code_friends[MAX_FRIENDS];
     int head;
     int tail;
@@ -30,6 +28,6 @@ void add_user_created_to_requests_list(Requests** requests_list, User_list* user
 void send_request(Requests** requests_list, User_list* user_list, int code_user, int request_code);
 void manage_requests(Requests** requests_list, User_list* user_list, int code_user);
 void print_requests(int* requests_queue, User_list* user_list, int head, int size);
-void delete_request(Requests** requests_list, User_list* user_list, int code_user);
-
+//void delete_request(Requests** requests_list, User_list* user_list, int code_user);
+*/
 #endif //UNTITLED4_REQUESTS_QUEUE_H

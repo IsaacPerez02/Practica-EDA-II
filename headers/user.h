@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include "requests_queue.h"
+
 #ifndef UNTITLED4_USER_H
 #define UNTITLED4_USER_H
 #define USERNAME_LENGTH 20 //Cantidad de caracteres máximo que puede tener un nombre de usuario
@@ -19,6 +21,7 @@ typedef struct {
     char ubicacion[UBICATION_LENGTH];
     char gustos [MAX_GUSTOS][GUSTOS_LENGTH];
     int code_amigos[MAX_FRIENDS];
+    Requests requests[MAX_FRIENDS];
 } User;
 
 User* create_user(char gustos[MAX_GUSTOS][GUSTOS_LENGTH]);
