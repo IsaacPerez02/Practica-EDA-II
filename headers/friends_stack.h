@@ -6,9 +6,10 @@
 /**
  * Friends_stack de un solo usuario
  */
-typedef struct {
+typedef struct Friends{
     int code_user;
-    User friends[MAX_FRIENDS];
+    User* friends;
+    struct Friends* next;
 }Friends;
 
 int count_friends(User friends[MAX_FRIENDS]);
