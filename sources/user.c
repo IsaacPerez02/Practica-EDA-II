@@ -116,6 +116,9 @@ User* create_user (char gustos[MAX_GUSTOS][GUSTOS_LENGTH]){
     }
 
     init_requests(&u->requests);
+    for (int i = 0; i < MAX_FRIENDS; i++) {
+        u->friends[i] = 0;
+    }
 
     printf("\n%s\n", LINEA_ASTERISCOS);
     return u;
@@ -315,9 +318,9 @@ int count_friends(int friends[MAX_FRIENDS]){
  * @param us persona que quiere añadir al amigo
  * @param new_id_code codigo de la persona a añadir
  */
-void add_friends(User* us, int new_id_code){
+void add_friends(User* us, int code_friend){
     int count = count_friends(us->friends);
-    us->friends[count + 1] = new_id_code;
+    us->friends[count] = code_friend;
 }
 
 /**

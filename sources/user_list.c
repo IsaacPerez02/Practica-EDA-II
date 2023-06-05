@@ -46,6 +46,9 @@ void first_user(User_list** list, char id_name[MAX_ID_NAME_LENGHT], char name[MA
     strcpy(first->us->gustos[3], gustos[3]);
     strcpy(first->us->gustos[4], gustos[4]);
     init_requests(&first->us->requests);
+    for (int i = 0; i < MAX_FRIENDS; i++) {
+        first->us->friends[i] = 0;
+    }
     first->next = NULL;
     first->prev = NULL;
     *list = first;
@@ -79,6 +82,9 @@ void add_user(User_list** list, char id_name[MAX_ID_NAME_LENGHT], char name[MAX_
     strcpy(new_user->us->gustos[3], gustos[3]);
     strcpy(new_user->us->gustos[4], gustos[4]);
     init_requests(&new_user->us->requests);
+    for (int i = 0; i < MAX_FRIENDS; i++) {
+        new_user->us->friends[i] = 0;
+    }
     new_user->next = NULL;
     new_user->prev = NULL;
     User_list* temp = *list;
@@ -326,20 +332,21 @@ void add_request_to_user_list(User_list** user_list, char* friend_name, int code
 void manage_requests(User_list** user_list, int code_user) {
     //Recorremos todos los nodos de la lista de usuarios hasta que el código de uno de ellos coincida con el del
     //usuario que quiere gestionar sus solicitudes
-    User_list* heap = *user_list;
+    User_list* heap_user = *user_list;
+    User_list* heap_friend;
     int option_requests = -1;
-    while (heap != NULL) {
-        if (heap->us->code == code_user) {
-            if (is_empty(&(heap->us->requests))) {
+    while (heap_user != NULL) {
+        if (heap_user->us->code == code_user) {
+            if (is_empty(&(heap_user->us->requests))) {
                 printf("No tienes solicitudes pendientes.\n");
             }
             else { //Una vez encontrado, mostramos por consola todas sus solicitudes y le damos la opción de aceptarlas o rechazarlas
-                print_requests(*user_list, heap->us->requests);
+                print_requests(*user_list, heap_user->us->requests);
 
                 while (option_requests != 0) {
-                    int head = heap->us->requests.head;
+                    int head = heap_user->us->requests.head;
                     printf("\n%s\n", LINEA_ASTERISCOS);
-                    printf("Que deseas hacer con la solicitud de %s?\n", search_user_code(*user_list, heap->us->requests.code_request[head])->id_name);
+                    printf("Que deseas hacer con la solicitud de %s?\n", search_user_code(*user_list, heap_user->us->requests.code_request[head])->id_name);
                     printf("1.- Aceptar\n");
                     printf("2.- Rechazar\n");
                     printf("0.- Atras\n");
@@ -348,20 +355,30 @@ void manage_requests(User_list** user_list, int code_user) {
 
                     if (option_requests == 1) {
                         //Aceptar solicitud
-                        delete_request(&(heap->us->requests));
-                        add_friends();
-                        printf("Solicitud aceptada\n");
+                        delete_request(&(heap_user->us->requests));
+
+                        //Buscamos el nodo del amigo al que estamos aceptando solicitud
+                        heap_friend = *user_list;
+                        while (heap_friend != NULL) {
+                            if (heap_friend->us->code == heap_user->us->requests.code_request[head]) {
+                                add_friends(heap_friend->us, code_user); //Le añadimos nuestro código al amigo
+                                int code_friend = heap_friend->us->code;
+                                add_friends(heap_user->us, code_friend); //Añadimos el código del amigo a nuestra lista
+                                printf("Solicitud aceptada\n");
+                            }
+                            heap_friend = heap_friend->next;
+                        }
                     }
                     else if (option_requests == 2) {
                         //Rechazar solicitud
-                        delete_request(&(heap->us->requests));
+                        delete_request(&(heap_user->us->requests));
                         printf("Solicitud rechazada.\n");
                     }
                     else {
                         printf("Escoja una opcion correcta.\n");
                     }
 
-                    if (heap->us->requests.size == 0) {
+                    if (heap_user->us->requests.size == 0) {
                         option_requests = 0;
                     }
 
@@ -372,7 +389,7 @@ void manage_requests(User_list** user_list, int code_user) {
             }
             break;
         }
-        heap = heap->next;
+        heap_user = heap_user->next;
     }
 }
 
@@ -390,9 +407,20 @@ void print_requests(User_list* user_list, Requests requests) {
     }
 }
 
+/**
+ * Imprime todos los amigos de un usuario por consola
+ * @param user_list: Lista de usuarios
+ * @param friends: Arreglo de códigos de los amigos
+ */
 void print_friends(User_list* user_list, int friends[MAX_FRIENDS]){
-    printf("\n%s\n", LINEA_ASTERISCOS);
-    for (int i = 0; i < MAX_FRIENDS; i++) {
-        printf("%d.- %s\n", i + 1, search_user_code(user_list, friends[i])->id_name);
+    int size = count_friends(friends);
+    if (size > 0) {
+        printf("\n%s\n", LINEA_ASTERISCOS);
+        for (int i = 0; i < size; i++) {
+            printf("%d.- %s\n", i + 1, search_user_code(user_list, friends[i])->id_name);
+        }
+    }
+    else {
+        printf("No tienes amigos ;(");
     }
 }

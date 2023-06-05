@@ -152,30 +152,6 @@ sources/dicctionary_topic.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled4.dir\build.make CMakeFiles/untitled4.dir/sources/dicctionary_topic.c.s
 .PHONY : sources/dicctionary_topic.c.s
 
-sources/friends_stack.obj: sources/friends_stack.c.obj
-.PHONY : sources/friends_stack.obj
-
-# target to build an object file
-sources/friends_stack.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled4.dir\build.make CMakeFiles/untitled4.dir/sources/friends_stack.c.obj
-.PHONY : sources/friends_stack.c.obj
-
-sources/friends_stack.i: sources/friends_stack.c.i
-.PHONY : sources/friends_stack.i
-
-# target to preprocess a source file
-sources/friends_stack.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled4.dir\build.make CMakeFiles/untitled4.dir/sources/friends_stack.c.i
-.PHONY : sources/friends_stack.c.i
-
-sources/friends_stack.s: sources/friends_stack.c.s
-.PHONY : sources/friends_stack.s
-
-# target to generate assembly for a file
-sources/friends_stack.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled4.dir\build.make CMakeFiles/untitled4.dir/sources/friends_stack.c.s
-.PHONY : sources/friends_stack.c.s
-
 sources/main.obj: sources/main.c.obj
 .PHONY : sources/main.obj
 
@@ -199,30 +175,6 @@ sources/main.s: sources/main.c.s
 sources/main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled4.dir\build.make CMakeFiles/untitled4.dir/sources/main.c.s
 .PHONY : sources/main.c.s
-
-sources/manage_requests_queue.obj: sources/manage_requests_queue.c.obj
-.PHONY : sources/manage_requests_queue.obj
-
-# target to build an object file
-sources/manage_requests_queue.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled4.dir\build.make CMakeFiles/untitled4.dir/sources/manage_requests_queue.c.obj
-.PHONY : sources/manage_requests_queue.c.obj
-
-sources/manage_requests_queue.i: sources/manage_requests_queue.c.i
-.PHONY : sources/manage_requests_queue.i
-
-# target to preprocess a source file
-sources/manage_requests_queue.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled4.dir\build.make CMakeFiles/untitled4.dir/sources/manage_requests_queue.c.i
-.PHONY : sources/manage_requests_queue.c.i
-
-sources/manage_requests_queue.s: sources/manage_requests_queue.c.s
-.PHONY : sources/manage_requests_queue.s
-
-# target to generate assembly for a file
-sources/manage_requests_queue.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled4.dir\build.make CMakeFiles/untitled4.dir/sources/manage_requests_queue.c.s
-.PHONY : sources/manage_requests_queue.c.s
 
 sources/publications_users.obj: sources/publications_users.c.obj
 .PHONY : sources/publications_users.obj
@@ -332,15 +284,9 @@ help:
 	@echo ... sources/dicctionary_topic.obj
 	@echo ... sources/dicctionary_topic.i
 	@echo ... sources/dicctionary_topic.s
-	@echo ... sources/friends_stack.obj
-	@echo ... sources/friends_stack.i
-	@echo ... sources/friends_stack.s
 	@echo ... sources/main.obj
 	@echo ... sources/main.i
 	@echo ... sources/main.s
-	@echo ... sources/manage_requests_queue.obj
-	@echo ... sources/manage_requests_queue.i
-	@echo ... sources/manage_requests_queue.s
 	@echo ... sources/publications_users.obj
 	@echo ... sources/publications_users.i
 	@echo ... sources/publications_users.s

@@ -107,7 +107,7 @@ int main() {
                         manage_requests(&users_list, login_us->code);
                     }
                     else if (option_usuario == 3) {
-                        User_list* heap = users_list;
+                        print_friends(users_list, login_us->friends);
                     }
                     else if (option_usuario == 4) {
                         char text;

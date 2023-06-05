@@ -43,7 +43,6 @@ void manage_requests(User_list** user_list, int code_user);
 void print_requests(User_list* user_list, Requests requests);
 
 //Funciones de los amigos
-void add_friend_to_user_list(User_list** user_list, int code_user, int friend_code);
 void print_friends(User_list* user_list, int friends[MAX_FRIENDS]);
 
 #endif //UNTITLED4_USER_LIST_H
