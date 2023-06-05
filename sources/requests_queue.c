@@ -1,7 +1,7 @@
-#include <malloc.h>
 #include <stdio.h>
 #include "../headers/requests_queue.h"
 #define LINEA_ASTERISCOS "******************************"
+
 
 /**
  * Inicializa los datos de la cola de solicitudes de un usuario

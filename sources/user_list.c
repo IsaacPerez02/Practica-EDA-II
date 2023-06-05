@@ -388,3 +388,10 @@ void print_requests(User_list* user_list, Requests requests) {
         request++;
     }
 }
+
+void print_friends(User_list* user_list, int friends[MAX_FRIENDS]){
+    printf("\n%s\n", LINEA_ASTERISCOS);
+    for (int i = 0; i < MAX_FRIENDS; i++) {
+        printf("%d.- %s\n", i + 1, search_user_code(user_list, friends[i])->id_name);
+    }
+}

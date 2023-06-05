@@ -1,11 +1,6 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "../headers/user.h"
 #include "../headers/user_list.h"
-#include "../headers/friends_stack.h"
-#include "../headers/requests_queue.h"
-#include "../headers/manage_requests_queue.h"
 #include "../headers/publications_users.h"
 
 #define ERROR -1

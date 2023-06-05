@@ -33,7 +33,7 @@ typedef struct {
     char correo[EMAIL_LENGTH];
     char ubicacion[UBICATION_LENGTH];
     char gustos [MAX_GUSTOS][GUSTOS_LENGTH];
-    int code_amigos[MAX_FRIENDS];
+    int friends[MAX_FRIENDS];
     Requests requests;
 } User;
 
@@ -45,5 +45,9 @@ int verify_correo_user(char* correo);
 int verify_edad_user(int edad);
 int verify_ciudad_user(char* city);
 int verify_gusto_user(char gustos[5][GUSTOS_LENGTH], char gusto[GUSTOS_LENGTH]); //FALTA
+
+int count_friends(int friends[MAX_FRIENDS]);
+void add_friends(User* us, int new_id_code);
+void delete_friends(User* us, int delete_id_code);
 
 #endif //UNTITLED4_USER_H

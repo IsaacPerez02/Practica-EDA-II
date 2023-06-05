@@ -286,11 +286,58 @@ int verify_ciudad_user(char* city) {
  * @param gusto: Gusto elegido
  * @return: Devuelve TRUE si el gusto recién elegido no coincide con un gusto anterior; FALSE si no es el caso
  */
-int verify_gusto_user(char gustos[5][GUSTOS_LENGTH], char gusto[GUSTOS_LENGTH]){
-    for (int i = 0; i < 5; i++){
+int verify_gusto_user(char gustos[5][GUSTOS_LENGTH], char gusto[GUSTOS_LENGTH]) {
+    for (int i = 0; i < 5; i++) {
         if (strcmp(gustos[i], gusto) == 0) {
             return FALSE;
         }
     }
     return TRUE;
+}
+
+/**
+ * Funcion para contar el numero de amigos totales que tenemos
+ * @param friends
+ * @return numero de amigos totales
+ */
+int count_friends(int friends[MAX_FRIENDS]){
+    int counter = 0;
+    for (int i = 0; i < MAX_FRIENDS; ++i) {
+        if (friends[i] != 0){
+            counter++;
+        }
+    }
+    return counter;
+}
+
+/**
+ * Añade un amigo a la lista del usuario
+ * @param us persona que quiere añadir al amigo
+ * @param new_id_code codigo de la persona a añadir
+ */
+void add_friends(User* us, int new_id_code){
+    int count = count_friends(us->friends);
+    us->friends[count + 1] = new_id_code;
+}
+
+/**
+ * Elimina a un amigo anterior
+ * @param us persona que quiere eleminar al amigo
+ * @param delete_id_code codigo de la persona a eliminar
+ */
+void delete_friends(User* us, int delete_id_code){
+    int new_list[MAX_FRIENDS];
+    for (int i = 0; i < MAX_FRIENDS; i++){
+        new_list[i] = 0;
+    }
+    int j = 0;
+    for (int i = 0; i < count_friends(us->friends); i++) {
+        if (us->friends[i] != delete_id_code) {
+            new_list[j] = us->friends[i];
+            j++;
+        }
+    }
+    for (int i = 0; i < MAX_FRIENDS; i++){
+        us->friends[i] = new_list[i];
+    }
 }
