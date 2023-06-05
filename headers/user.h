@@ -21,7 +21,7 @@
  * edad: Edad del usuario
  * correo: Correo electrónico del usuario
  * ubicacion: Localización del usuario
- * Gustos: Preferencias del usuario
+ * gustos: Preferencias del usuario
  * requests: Cola de solicitudes del usuario
  */
 typedef struct {

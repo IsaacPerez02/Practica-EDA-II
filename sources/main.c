@@ -23,7 +23,6 @@ int main() {
     if (init == NULL) status = ERROR;
     if (status == SUCCESS) {
         loading_users(init, &users_list);
-        //loading_requests_code(&requests_list, &users_list);
         fclose(init);
     } else {
         return 0;
@@ -52,7 +51,6 @@ int main() {
                 add_user_created(&users_list, us);
             }
 
-            //add_user_created_to_requests_list(&requests_list, users_list, us);
         } else if (option_menu == 2) {
             print_users(users_list);
         } else if (option_menu == 3) {
@@ -109,7 +107,7 @@ int main() {
                         manage_requests(&users_list, login_us->code);
                     }
                     else if (option_usuario == 3) {
-
+                        User_list* heap = users_list;
                     }
                     else if (option_usuario == 4) {
                         char text;

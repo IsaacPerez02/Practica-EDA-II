@@ -349,6 +349,7 @@ void manage_requests(User_list** user_list, int code_user) {
                     if (option_requests == 1) {
                         //Aceptar solicitud
                         delete_request(&(heap->us->requests));
+                        add_friends();
                         printf("Solicitud aceptada\n");
                     }
                     else if (option_requests == 2) {
