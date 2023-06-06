@@ -1,8 +1,8 @@
 #ifndef UNTITLED4_PUBLICATIONS_USERS_H
 #define UNTITLED4_PUBLICATIONS_USERS_H
-#include "../headers/user.h"
-#define MAX_CHARACTERS 120
 
+
+#define MAX_PUBLICATIONS 10
 #define MAX_TEXT_LENGTH 120
 
 /**

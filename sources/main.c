@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "../headers/user.h"
 #include "../headers/user_list.h"
 #include "../headers/publications_users.h"
@@ -121,10 +122,18 @@ int main() {
                         //print_friends(users_list, login_us->friends);
                     }
                     else if (option_usuario == 4) {
-                        char text;
+                        char text[MAX_TEXT_LENGTH];
                         printf("Escriba su publicacion (120 MAX): \n");
-                        scanf("%s", &text);
-                        addPost(timeline, &text);
+                        fgets(text, sizeof(text), stdin);
+                        text[strcspn(text, "\n")] = '\0'; // Eliminar salto de línea del final
+
+                        size_t text_length = strlen(text);
+                        if (text_length <= 120 && text[text_length-1] != '\n') {
+                            create_publication(&publications_list, login_us->code, text);
+                            printf("Publicacion realizada\n");
+                        } else {
+                            printf("Tu publicacion excede 120 caracteres.\n");
+                        }
                     }
                     else if (option_usuario == 5) {
                         char check_user_name[USERNAME_LENGTH];
@@ -134,11 +143,12 @@ int main() {
 
                         user = search_user_id_name(users_list, check_user_name);
                         if (user != NULL) {
+
                         } else {
                             printf("Ese usuario no existe.\n");
                         }
                     } else if (option_usuario == 6) {
-                        printTimeline(timeline);
+                        //printTimeline(timeline);
                     } else if (option_usuario == 0) {
                         printf("Cerrando sesion...\n");
                     } else {
