@@ -15,6 +15,7 @@ typedef struct {
 
 Friends* init_friends_user();
 void load_friends(Friends* friends, FILE* ff);
+void new_user_friends(Friends* friends, int new_user_code);
 void add_friend(Friends* friends, int new_friend);
 void delete_friend(Friends* friends, int delete_friend);
 Friends* search_user_friends(Friends* friends, int code_user);

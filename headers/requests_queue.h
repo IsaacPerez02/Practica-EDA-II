@@ -1,7 +1,11 @@
 #ifndef UNTITLED4_REQUESTS_QUEUE_H
 #define UNTITLED4_REQUESTS_QUEUE_H
+#include <malloc.h>
+#include <stdio.h>
+#include <string.h>
 
-#define MAX_FRIENDS 10
+#define MAX_USERS 20
+#define MAX_REQUESTS 10
 
 /**
  * Cola de solicitudes de un usuario
@@ -11,7 +15,8 @@
  * size: Cantidad de elementos de la cola
  */
 typedef struct {
-    int code_request[MAX_FRIENDS];
+    int code_user;
+    int code_request[MAX_REQUESTS];
     int head;
     int tail;
     int size;
@@ -23,5 +28,12 @@ int is_full(Requests* requests);
 int first(Requests* requests);
 void add_request(Requests* requests, int request_code);
 void delete_request(Requests* requests);
+
+Requests * init_requests_user();
+void load_requests(Requests* requests, FILE* fr);
+void new_user_requests(Requests* requests, int new_user_code);
+void add_requests(Requests* requests, int new_friend);
+void save_requests(Requests* requests, FILE* fr);
+void print_requests(Requests* requests);
 
 #endif //UNTITLED4_REQUESTS_QUEUE_H

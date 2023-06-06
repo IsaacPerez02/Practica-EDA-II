@@ -25,6 +25,16 @@ void load_friends(Friends* friends, FILE* ff){
     }
 }
 
+void new_user_friends(Friends* friends, int new_user_code){
+    int comp = 1;
+    for (int i = 0; i < MAX_USERS; ++i) {
+        if(friends[i].code_user == 0 && comp == 1){
+            friends[i].code_user = new_user_code;
+            comp = 0;
+        }
+    }
+}
+
 void add_friend(Friends* friends, int new_friend){
     friends->code_friends[friends->num_friends] = new_friend;
     friends->num_friends++;

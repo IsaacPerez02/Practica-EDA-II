@@ -18,6 +18,7 @@ int main() {
                                               "Fiesta", "Estudiar", "Viajes", "Política"}; //Gustos disponibles
     User_list* users_list = NULL; //Lista de usuarios
     Friends* friends_list;
+    Requests* request_list;
     Publications* publications_list;
     User *us; //Variable para la creación de un usuario
 
@@ -25,22 +26,24 @@ int main() {
     //Si no existe el archivo, cerramos el programa
     FILE *init = fopen("../resources/users.txt", "r");
     if (init == NULL) status = ERROR;
+    FILE *fr = fopen("../resources/requests.txt", "r");
+    if (fr == NULL) status = ERROR;
+    FILE *ff = fopen("../resources/friends.txt", "r");
+    if (ff == NULL) status = ERROR;
     if (status == SUCCESS) {
+        //users
         loading_users(init, &users_list);
         fclose(init);
-    } else {
-        return -1;
-    }
-
-    FILE *ff = fopen("../resources/friends_list.txt", "r");
-    if (init == NULL) status = ERROR;
-    if (status == SUCCESS) {
-        friends_list = init_friends_user(users_list);
-        publications_list = init_publications();
+        //requests
+        request_list = init_requests_user();
+        load_requests(request_list, fr);
+        fclose(fr);
+        //friends
+        friends_list = init_friends_user();
         load_friends(friends_list, ff);
         fclose(ff);
     } else {
-        return -3;
+        return -1;
     }
 
     //Menú de gestión del administrador. Opciones:
@@ -65,7 +68,8 @@ int main() {
             } else {
                 add_user_created(&users_list, us);
             }
-
+            new_user_friends(friends_list, us->code);
+            new_user_requests(request_list, us->code);
         } else if (option_menu == 2) {
             print_users(users_list);
         } else if (option_menu == 3) {
@@ -162,14 +166,25 @@ int main() {
             }
         } else if (option_menu == 0) {
             status = SUCCESS;
-            FILE *finish = fopen("../resources/users.txt", "w");
             //Comprobamos que el archivo existe. Si existe, guardamos todos los usuarios que hayamos agregado en el
             //archivo y salimos del programa
             //En caso de que el archivo no exista, saldrá un mensaje de error
+            FILE *finish = fopen("../resources/users.txt", "w");
             if (finish == NULL) status = ERROR;
+            FILE* requests_save = fopen("../resources/requests.txt", "w");
+            if(requests_save == NULL) status = ERROR;
+            FILE* friends_save = fopen("../resources/friends.txt", "w");
+            if(friends_save == NULL) status = ERROR;
             if (status == SUCCESS) {
+                //users
                 save_all_users(users_list, finish);
                 fclose(finish);
+                //requests
+                save_requests(request_list, requests_save);
+                fclose(requests_save);
+                //friends
+                save_friends(friends_list, friends_save);
+                fclose(friends_save);
             } else {
                 printf("¡¡No se ha encontrado el archivo!! ¡¡Los usuarios agregados NO van a ser guardados!!\n");
             }
