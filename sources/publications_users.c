@@ -11,7 +11,13 @@
  * @param publication
  */
 void create_publication(Publications** publications_list, int code_user, char publication[MAX_TEXT_LENGTH]) {
-    int i = 0;
+    int i = 0, comp = 1;
+    for (int j = 0; j < MAX_PUBLICATIONS; ++j) {
+        if(comp == 1 && publications_list[j] == 0){
+            publications_list[j]->code_user = code_user;
+            comp = 0;
+        }
+    }
     while (publications_list[i]->code_user != 0) {
         if (publications_list[i]->code_user == code_user) {
             int size = publications_list[i]->size;

@@ -116,10 +116,11 @@ int main() {
                         }
                     }
                     else if (option_usuario == 2) {
-                        manage_requests(&users_list, login_us->code);
+                        manage_requests(&users_list, login_us->code, friends);
                     }
                     else if (option_usuario == 3) {
-                        //print_friends(users_list, login_us->friends);
+                        Friends* friends_user = search_user_friends(friends, login_us->code);
+                        print_friends_graph(friends_user);
                     }
                     else if (option_usuario == 4) {
                         char text[MAX_TEXT_LENGTH];

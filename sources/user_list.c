@@ -329,9 +329,10 @@ void add_request_to_user_list(User_list** user_list, char* friend_name, int code
  * @param user_list: Lista de usuarios
  * @param code_user: Código del usuario gestionando las solicitudes
  */
-void manage_requests(User_list** user_list, int code_user) {
+void manage_requests(User_list** user_list, int code_user, Friends* friends) {
     //Recorremos todos los nodos de la lista de usuarios hasta que el código de uno de ellos coincida con el del
     //usuario que quiere gestionar sus solicitudes
+    Friends* friend_accepted;
     User_list* heap_user = *user_list;
     User_list* heap_friend;
     int option_requests = -1;
@@ -361,9 +362,11 @@ void manage_requests(User_list** user_list, int code_user) {
                         heap_friend = *user_list;
                         while (heap_friend != NULL) {
                             if (heap_friend->us->code == heap_user->us->requests.code_request[head]) {
-                                add_friends(heap_friend->us, code_user); //Le añadimos nuestro código al amigo
                                 int code_friend = heap_friend->us->code;
-                                add_friends(heap_user->us, code_friend); //Añadimos el código del amigo a nuestra lista
+                                friend_accepted = search_user_friends(friends, code_user);
+                                add_friend(friend_accepted, code_friend); //Añadimos el código del amigo a nuestra lista
+                                friend_accepted = search_user_friends(friends, code_friend);
+                                add_friend(friend_accepted, code_user); //Le añadimos nuestro código al amigo
                                 printf("Solicitud aceptada\n");
                             }
                             heap_friend = heap_friend->next;

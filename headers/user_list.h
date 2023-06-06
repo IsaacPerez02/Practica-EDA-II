@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include "user.h"
 #include "dicctionary_topic.h"
+#include "friends_graph.h"
 
 /**
  * Lista de usuarios del sistema
@@ -39,7 +40,7 @@ User* check_user_password(User_list * list, char id_name[MAX_ID_NAME_LENGHT] ,ch
 
 //Funciones de las solicitudes
 void add_request_to_user_list(User_list** user_list, char* friend_name, int code_user);
-void manage_requests(User_list** user_list, int code_user);
+void manage_requests(User_list** user_list, int code_user, Friends* friends);
 void print_requests(User_list* user_list, Requests requests);
 
 //Funciones de los amigos
