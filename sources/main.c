@@ -2,6 +2,7 @@
 #include "../headers/user.h"
 #include "../headers/user_list.h"
 #include "../headers/publications_users.h"
+#include "../headers/friends_graph.h"
 
 #define ERROR -1
 #define SUCCESS 1
@@ -14,7 +15,9 @@ int main() {
     int status = SUCCESS; //Variable para comprobar si el archivo de usuarios existe
     char gustos[MAX_GUSTOS][GUSTOS_LENGTH] = {"Deporte", "Arte", "Informática", "Religión", "Animales", "Videojuegos",
                                               "Fiesta", "Estudiar", "Viajes", "Política"}; //Gustos disponibles
-    User_list *users_list = NULL; //Lista de usuarios
+    User_list* users_list = NULL; //Lista de usuarios
+    Friends* friends;
+    Publications* publications_list = NULL;
     User *us; //Variable para la creación de un usuario
 
     //Comprobamos que el archivo existe. Si existe, cargamos la lista de usuarios del archivo y mostramos el menú
@@ -25,7 +28,17 @@ int main() {
         loading_users(init, &users_list);
         fclose(init);
     } else {
-        return 0;
+        return -1;
+    }
+
+    FILE *ff = fopen("../resources/friends.txt", "r");
+    if (init == NULL) status = ERROR;
+    if (status == SUCCESS) {
+        friends = init_friends_user(users_list);
+        load_friends(friends, ff);
+        fclose(ff);
+    } else {
+        return -3;
     }
 
     //Menú de gestión del administrador. Opciones:
@@ -87,8 +100,6 @@ int main() {
                     printf("Elija una opcion:\n");
                     scanf("%d", &option_usuario);
 
-                    Node* timeline = NULL;
-
                     if (option_usuario == 1) {
                         char check_friend_name[USERNAME_LENGTH];
                         User *friend;
@@ -107,7 +118,7 @@ int main() {
                         manage_requests(&users_list, login_us->code);
                     }
                     else if (option_usuario == 3) {
-                        print_friends(users_list, login_us->friends);
+                        //print_friends(users_list, login_us->friends);
                     }
                     else if (option_usuario == 4) {
                         char text;
@@ -157,4 +168,5 @@ int main() {
             printf("Tiene que elegir una opcion correcta.\n");
         }
     }
+    return 0;
 }

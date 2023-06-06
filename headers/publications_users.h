@@ -5,14 +5,16 @@
 
 #define MAX_TEXT_LENGTH 120
 
-typedef struct Node {
-    char text[MAX_TEXT_LENGTH + 1];
-    struct Node* next;
-    struct Node* prev;
-} Node;
+/**
+ * Arreglo de publicaciones de un usuario
+ */
+typedef struct {
+    int code_user;
+    char publication[MAX_PUBLICATIONS][MAX_TEXT_LENGTH];
+    int size;
+} Publications;
 
-Node* init_node(char text[MAX_TEXT_LENGTH + 1]);
-void addPost(Node* timeline, char text[MAX_TEXT_LENGTH + 1]);
-void printTimeline(Node* timeline);
+void create_publication(Publications** publications_list, int code_user, char publication[MAX_TEXT_LENGTH]);
+void print_publications(Publications* publications_list, int code);
 
 #endif //UNTITLED4_PUBLICATIONS_USERS_H
