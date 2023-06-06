@@ -18,7 +18,7 @@ int main() {
                                               "Fiesta", "Estudiar", "Viajes", "Política"}; //Gustos disponibles
     User_list* users_list = NULL; //Lista de usuarios
     Friends* friends;
-    Publications* publications_list = NULL;
+    Publications* publications_list;
     User *us; //Variable para la creación de un usuario
 
     //Comprobamos que el archivo existe. Si existe, cargamos la lista de usuarios del archivo y mostramos el menú
@@ -36,6 +36,7 @@ int main() {
     if (init == NULL) status = ERROR;
     if (status == SUCCESS) {
         friends = init_friends_user(users_list);
+        publications_list = init_publications();
         load_friends(friends, ff);
         fclose(ff);
     } else {
@@ -125,11 +126,11 @@ int main() {
                     else if (option_usuario == 4) {
                         char text[MAX_TEXT_LENGTH];
                         printf("Escriba su publicacion (120 MAX): \n");
+                        while (getchar() != '\n');
                         fgets(text, sizeof(text), stdin);
                         text[strcspn(text, "\n")] = '\0'; // Eliminar salto de línea del final
 
-                        size_t text_length = strlen(text);
-                        if (text_length <= 120 && text[text_length-1] != '\n') {
+                        if (strlen(text) <= 120) {
                             create_publication(&publications_list, login_us->code, text);
                             printf("Publicacion realizada\n");
                         } else {
@@ -144,7 +145,7 @@ int main() {
 
                         user = search_user_id_name(users_list, check_user_name);
                         if (user != NULL) {
-
+                            print_publications(publications_list, *user);
                         } else {
                             printf("Ese usuario no existe.\n");
                         }
