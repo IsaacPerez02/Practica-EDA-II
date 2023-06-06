@@ -108,13 +108,18 @@ int main() {
 
                     if (option_usuario == 1) {
                         char check_friend_name[USERNAME_LENGTH];
-                        User *friend;
+                        Requests* requests_user;
+                        User* user_requests;
                         printf("Introduzca el nombre de usuario al que quiera agregar como amigo:\n");
                         scanf("%s", check_friend_name);
 
-                        friend = search_user_id_name(users_list, check_friend_name);
-                        if (friend != NULL) {
-                            add_request_to_user_list(&users_list, friend->id_name, login_us->code);
+                        user_requests = search_user_id_name(users_list, check_friend_name);
+
+                        if (user_requests != NULL) {
+                            requests_user = search_user_requests(request_list, login_us->code);
+                            add_requests(requests_user, user_requests->code);
+                            requests_user = search_user_requests(request_list, user_requests->code);
+                            add_requests(requests_user, login_us->code);
                             printf("Solicitud enviada.\n");
                         } else {
                             printf("Ese usuario no existe.\n");

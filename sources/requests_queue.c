@@ -121,6 +121,21 @@ void new_user_requests(Requests* requests, int new_user_code){
     }
 }
 
+void add_requests(Requests* requests, int new_request){
+    requests->code_request[requests->tail] = new_request;
+    requests->tail++;
+    requests->size++;
+}
+
+Requests* search_user_requests(Requests* requests, int code_user){
+    for (int i = 0; i < MAX_USERS; ++i) {
+        if(requests[i].code_user == code_user){
+            return &requests[i];
+        }
+    }
+    return NULL;
+}
+
 void save_requests(Requests* requests, FILE* fr){
     for (int i = 0; i < MAX_USERS; ++i) {
         if(requests[i].code_user != 0){
@@ -130,4 +145,12 @@ void save_requests(Requests* requests, FILE* fr){
             }
         }
     }
+}
+
+void print_requests_graph(Requests* requests){
+    printf("%d. ", requests->code_user);
+    for (int j = requests->head; j < requests->tail; ++j) {
+        printf("%d, ", requests->code_request[j]);
+    }
+    printf("\n");
 }

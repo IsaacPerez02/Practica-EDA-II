@@ -32,8 +32,9 @@ void delete_request(Requests* requests);
 Requests * init_requests_user();
 void load_requests(Requests* requests, FILE* fr);
 void new_user_requests(Requests* requests, int new_user_code);
-void add_requests(Requests* requests, int new_friend);
+void add_requests(Requests* requests, int new_request);
+Requests* search_user_requests(Requests* requests, int code_user);
 void save_requests(Requests* requests, FILE* fr);
-void print_requests(Requests* requests);
+void print_requests_graph(Requests* requests);
 
 #endif //UNTITLED4_REQUESTS_QUEUE_H
