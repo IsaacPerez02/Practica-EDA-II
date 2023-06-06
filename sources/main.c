@@ -17,7 +17,7 @@ int main() {
     char gustos[MAX_GUSTOS][GUSTOS_LENGTH] = {"Deporte", "Arte", "Informática", "Religión", "Animales", "Videojuegos",
                                               "Fiesta", "Estudiar", "Viajes", "Política"}; //Gustos disponibles
     User_list* users_list = NULL; //Lista de usuarios
-    Friends* friends;
+    Friends* friends_list;
     Publications* publications_list;
     User *us; //Variable para la creación de un usuario
 
@@ -32,12 +32,12 @@ int main() {
         return -1;
     }
 
-    FILE *ff = fopen("../resources/friends.txt", "r");
+    FILE *ff = fopen("../resources/friends_list.txt", "r");
     if (init == NULL) status = ERROR;
     if (status == SUCCESS) {
-        friends = init_friends_user(users_list);
+        friends_list = init_friends_user(users_list);
         publications_list = init_publications();
-        load_friends(friends, ff);
+        load_friends(friends_list, ff);
         fclose(ff);
     } else {
         return -3;
@@ -117,10 +117,10 @@ int main() {
                         }
                     }
                     else if (option_usuario == 2) {
-                        manage_requests(&users_list, login_us->code, friends);
+                        manage_requests(&users_list, login_us->code, friends_list);
                     }
                     else if (option_usuario == 3) {
-                        Friends* friends_user = search_user_friends(friends, login_us->code);
+                        Friends* friends_user = search_user_friends(friends_list, login_us->code);
                         print_friends_graph(friends_user);
                     }
                     else if (option_usuario == 4) {
@@ -150,7 +150,7 @@ int main() {
                             printf("Ese usuario no existe.\n");
                         }
                     } else if (option_usuario == 6) {
-                        //printTimeline(timeline);
+                        show_timeline(publications_list, friends_list, users_list, *login_us);
                     } else if (option_usuario == 0) {
                         printf("Cerrando sesion...\n");
                     } else {

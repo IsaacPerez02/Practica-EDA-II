@@ -81,6 +81,9 @@
 		<Unit filename="C:/Users/adria/Desktop/UPF/1r/3r trimestre/Estructuras de datos y algoritmos II/Practica/Proyecto/headers/dicctionary_topic.h">
 			<Option target="untitled4"/>
 		</Unit>
+		<Unit filename="C:/Users/adria/Desktop/UPF/1r/3r trimestre/Estructuras de datos y algoritmos II/Practica/Proyecto/headers/friends_graph.h">
+			<Option target="untitled4"/>
+		</Unit>
 		<Unit filename="C:/Users/adria/Desktop/UPF/1r/3r trimestre/Estructuras de datos y algoritmos II/Practica/Proyecto/headers/publications_users.h">
 			<Option target="untitled4"/>
 		</Unit>
@@ -94,6 +97,9 @@
 			<Option target="untitled4"/>
 		</Unit>
 		<Unit filename="C:/Users/adria/Desktop/UPF/1r/3r trimestre/Estructuras de datos y algoritmos II/Practica/Proyecto/sources/dicctionary_topic.c">
+			<Option target="untitled4"/>
+		</Unit>
+		<Unit filename="C:/Users/adria/Desktop/UPF/1r/3r trimestre/Estructuras de datos y algoritmos II/Practica/Proyecto/sources/friends_graph.c">
 			<Option target="untitled4"/>
 		</Unit>
 		<Unit filename="C:/Users/adria/Desktop/UPF/1r/3r trimestre/Estructuras de datos y algoritmos II/Practica/Proyecto/sources/main.c">

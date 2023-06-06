@@ -152,6 +152,30 @@ sources/dicctionary_topic.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled4.dir\build.make CMakeFiles/untitled4.dir/sources/dicctionary_topic.c.s
 .PHONY : sources/dicctionary_topic.c.s
 
+sources/friends_graph.obj: sources/friends_graph.c.obj
+.PHONY : sources/friends_graph.obj
+
+# target to build an object file
+sources/friends_graph.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled4.dir\build.make CMakeFiles/untitled4.dir/sources/friends_graph.c.obj
+.PHONY : sources/friends_graph.c.obj
+
+sources/friends_graph.i: sources/friends_graph.c.i
+.PHONY : sources/friends_graph.i
+
+# target to preprocess a source file
+sources/friends_graph.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled4.dir\build.make CMakeFiles/untitled4.dir/sources/friends_graph.c.i
+.PHONY : sources/friends_graph.c.i
+
+sources/friends_graph.s: sources/friends_graph.c.s
+.PHONY : sources/friends_graph.s
+
+# target to generate assembly for a file
+sources/friends_graph.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled4.dir\build.make CMakeFiles/untitled4.dir/sources/friends_graph.c.s
+.PHONY : sources/friends_graph.c.s
+
 sources/main.obj: sources/main.c.obj
 .PHONY : sources/main.obj
 
@@ -284,6 +308,9 @@ help:
 	@echo ... sources/dicctionary_topic.obj
 	@echo ... sources/dicctionary_topic.i
 	@echo ... sources/dicctionary_topic.s
+	@echo ... sources/friends_graph.obj
+	@echo ... sources/friends_graph.i
+	@echo ... sources/friends_graph.s
 	@echo ... sources/main.obj
 	@echo ... sources/main.i
 	@echo ... sources/main.s
