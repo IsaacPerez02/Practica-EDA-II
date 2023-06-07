@@ -17,7 +17,7 @@
 #define MAX_USERS 20
 #define GUSTOS_LENGTH 20
 #define ERROR -1
-#define LINEA_ASTERISCOS "********************"
+#define LINEA_ASTERISCOS "***************************"
 
 /**
  * Crea a un nuevo usuario
@@ -35,7 +35,8 @@ User* create_user (char gustos[MAX_GUSTOS][GUSTOS_LENGTH]){
     printf("Introduzca su nombre de usuario: \n");
     scanf("%s", u->id_name);
     printf("El nombre de usuario ha sido introducido correctamente.\n");
-
+    printf("%s\n", LINEA_ASTERISCOS);
+    
     //Introducir el nombre
     printf("\n%s\n", LINEA_ASTERISCOS);
     printf("Introduzca su nombre: \n");
@@ -50,11 +51,11 @@ User* create_user (char gustos[MAX_GUSTOS][GUSTOS_LENGTH]){
 
     //Introducir la contraseña
     printf("\n%s\n", LINEA_ASTERISCOS);
-    printf("Introduzca su contrasena. La contraseña debe tener 8 caracteres, 1 minúscula, 1 mayúscula y 1 número:\n");
+    printf("Introduzca su contrasena. La contrasena debe tener 8 caracteres, 1 minuscula, 1 mayuscula y 1 numero:\n");
     scanf("%s", u->contrasena);
     status = verify_password_user(u->contrasena);
     while (status == FALSE) {
-        printf("Introduzca su contrasena. La contraseña debe tener 8 caracteres, 1 minúscula, 1 mayúscula y 1 número:\n");
+        printf("Introduzca su contrasena. La contrasena debe tener 8 caracteres, 1 minuscula, 1 mayuscula y 1 numero:\n");
         scanf("%s", u->contrasena);
         status = verify_password_user(u->contrasena);
     }

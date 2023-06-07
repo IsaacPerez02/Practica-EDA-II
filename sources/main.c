@@ -18,8 +18,8 @@ int main() {
     int option_menu = -1; //Opción del menú principal que el usuario escribirá por consola
     int option_usuario; //Opción de menú de operar como otro usuario
     int status = SUCCESS; //Variable para comprobar si el archivo de usuarios existe
-    char gustos[MAX_GUSTOS][GUSTOS_LENGTH] = {"Deporte", "Arte", "Informática", "Religión", "Animales", "Videojuegos",
-                                              "Fiesta", "Estudiar", "Viajes", "Política"}; //Gustos disponibles
+    char gustos[MAX_GUSTOS][GUSTOS_LENGTH] = {"Deporte", "Arte", "Informatica", "Religion", "Animales", "Videojuegos",
+                                              "Fiesta", "Estudiar", "Viajes", "Politica"}; //Gustos disponibles
     User_list* users_list = NULL; //Lista de usuarios
     Friends* friends_list;
     Requests* request_list;
@@ -68,7 +68,8 @@ int main() {
         printf("2.- Listar todos los usuarios\n");
         printf("3.- Operar como otro usuario\n");
         printf("0.- Salir del programa\n");
-        printf("Elija una opcion:\n");
+        printf("%s\n", LINEA_ASTERISCOS);
+        printf("\nElija una opcion:\n");
         scanf("%d", &option_menu);
 
         if (option_menu == 1) {
@@ -91,7 +92,7 @@ int main() {
             printf("\n%s\n", LINEA_ASTERISCOS);
             printf("Introduzca el nombre de usuario:\n");
             scanf("%s", login_user);
-            printf("Introduzca la contraseña:\n");
+            printf("Introduzca la contrasena:\n");
             scanf("%s", login_pass);
             //Comprobamos si el nombre de usuario introducido se encuentra en la lista de usuarios
             login_us = check_user_password(users_list, login_user, login_pass);
