@@ -6,6 +6,7 @@ Requests_stack init_stack() {
         requests_stack.requests_code[i] = 0;
     }
     requests_stack.top = 0;
+    return requests_stack;
 }
 
 int stack_is_empty(Requests_stack requests_stack) {

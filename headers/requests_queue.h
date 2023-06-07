@@ -3,9 +3,9 @@
 #include <malloc.h>
 #include <stdio.h>
 #include <string.h>
-#include "friends_graph.h"
 #include "defines.h"
 #include "user_list.h"
+#include "friends_graph.h"
 
 /**
  * Cola de solicitudes de un usuario

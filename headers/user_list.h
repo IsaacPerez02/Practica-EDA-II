@@ -2,7 +2,7 @@
 #define UNTITLED4_USER_LIST_H
 #include <stdio.h>
 #include "user.h"
-#include "dicctionary_topic.h"
+
 
 /**
  * Lista de usuarios del sistema

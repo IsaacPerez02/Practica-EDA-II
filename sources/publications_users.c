@@ -24,14 +24,10 @@ Publications* init_publications() {
  */
 void load_publications(Publications* publications, FILE* fp) {
     int code, i = 0;
-    char *text, *text_title;
+    char text[MAX_TEXT_LENGTH];
     while(fscanf(fp, "%d. ", &code) > 0){
         publications[i].code_user = code;
         fgets(text, MAX_TEXT_LENGTH * MAX_PUBLICATIONS, fp);
-        text_title = strtok(text, "|");
-        text = strtok(NULL, "|");
-        text[strcspn(text, "\n")] = '\0';
-        strcpy(publications[i].title_publication, text_title);
         strcpy(publications[i].publication, text);
         i++;
     }
@@ -52,12 +48,11 @@ Publications* search_user_publications(Publications* publications, int code_user
  * @param code_user: Código del usuario que ha publicado
  * @param publication: Publicación que ha escrito el usuario
  */
-void create_publication(Publications* publications_user, int code_user, char text[MAX_TEXT_LENGTH], char text_title[MAX_TITLE_LENGTH]) {
+void create_publication(Publications* publications_user, int code_user, char text[MAX_TEXT_LENGTH]) {
     int comp = 1;
     for (int i = 0; i < MAX_PUBLICATIONS; ++i) {
         if(publications_user[i].code_user == 0 && comp == 1){
             publications_user[i].code_user = code_user;
-            strcpy(publications_user[i].title_publication, text_title);
             strcpy(publications_user[i].publication, text);
             comp = 0;
         }
@@ -74,7 +69,7 @@ void print_publications(Publications* publications_list, User us) {
     printf("El usuario %s ha realizado las siguientes publicaciones:\n", us.id_name);
     for (int i = 0; i < MAX_PUBLICATIONS; ++i) {
         if(us.code == publications_list[i].code_user){
-            printf("%s --> %s.\n", publications_list[i].title_publication, publications_list[i].publication);
+            printf("%s\n", publications_list[i].publication);
         }
     }
 }
@@ -104,7 +99,7 @@ void show_timeline(Publications* publications_list, Friends* friends_list, User_
 void save_publications(Publications* publications, FILE* fp){
     for (int i = 0; i < MAX_USERS; ++i) {
         if(publications[i].code_user != 0){
-            fprintf(fp, "%d. %s|%s\n", publications[i].code_user, publications[i].title_publication, publications[i].publication);
+            fprintf(fp, "%d. %s\n", publications[i].code_user, publications[i].publication);
         }
     }
 }

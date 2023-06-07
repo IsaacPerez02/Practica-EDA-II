@@ -5,6 +5,7 @@
 #include "../headers/publications_users.h"
 #include "../headers/requests_queue.h"
 #include "../headers/requests_stack.h"
+#include "../headers/dicctionary_topic.h"
 
 #define MAX_FRIENDS 10
 #define MAX_USERS 20
@@ -24,7 +25,7 @@ int main() {
     Friends* friends_list;
     Requests* requests_list;
     Publications* publications_list;
-    Requests_stack requests_stack;
+    Dict* dict;
     User *us; //Variable para la creación de un usuario
 
     //Comprobamos que el archivo existe. Si existe, cargamos la lista de usuarios del archivo y mostramos el menú
@@ -43,7 +44,6 @@ int main() {
         fclose(init);
         //requests
         requests_list = init_requests_user();
-        //requests_stack = init_stack();
         load_requests(requests_list, fr);
         fclose(fr);
         //friends
@@ -51,8 +51,10 @@ int main() {
         load_friends(friends_list, ff);
         fclose(ff);
         //publicaciones
-        /*publications_list = init_publications();
-        load_publications(publications_list, fpub);*/
+        publications_list = init_publications();
+        load_publications(publications_list, fpub);
+        dict = initDict();
+        load_dict(dict, publications_list);
         fclose(fpub);
     } else {
         return -1;
@@ -167,18 +169,15 @@ int main() {
                         }
                     }
                     else if (option_usuario == 5) {
-                        char text_publications[MAX_TEXT_LENGTH], text_title[MAX_TITLE_LENGTH];
-                        printf("Escriba el titulo de la publicación: \n");
-                        while (getchar() !='\n');
-                        fgets(text_title, sizeof(text_title), stdin);
-                        text_publications[strcspn(text_title, "\n")] = '\0'; // Eliminar salto de línea del final
+                        char text_publications[MAX_TEXT_LENGTH];
                         printf("Escriba su publicación (120 MAX): \n");
-                        while (getchar() !='\n');
+                        while (getchar() !=
+                        '\n');
                         fgets(text_publications, sizeof(text_publications), stdin);
                         text_publications[strcspn(text_publications, "\n")] = '\0'; // Eliminar salto de línea del final
 
-                        if (strlen(text_title) <= MAX_TITLE_LENGTH && strlen(text_publications) <= MAX_TEXT_LENGTH) {
-                            create_publication(publications_list, login_us->code, text_publications, text_title);
+                        if (strlen(text_publications) <= MAX_TEXT_LENGTH) {
+                            create_publication(publications_list, login_us->code, text_publications);
                             printf("Publicacion realizada\n");
                         } else {
                             printf("Tu publicacion excede 120 caracteres.\n");
@@ -231,7 +230,7 @@ int main() {
                 save_friends(friends_list, friends_save);
                 fclose(friends_save);
                 //publications
-                //save_publications(publications_list, fpub_save);
+                save_publications(publications_list, fpub_save);
                 fclose(fpub_save);
             } else {
                 printf("¡¡No se han encontrado los archivos!! ¡¡Los usuarios agregados NO van a ser guardados y sus respectivas acciones tampoco!!\n");
