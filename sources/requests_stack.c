@@ -35,9 +35,7 @@ int top(Requests_stack requests_stack) {
 
 Requests_stack add_users_to_stack(User_list* users_list, Requests* requests_list, Friends* friends_list, int login_code) {
     Requests_stack requests_stack = init_stack();
-    printf("Hola\n");
     srand(time(NULL));
-    printf("Hola\n");
     int idx;
     int code;
 
@@ -71,7 +69,6 @@ Requests_stack add_users_to_stack(User_list* users_list, Requests* requests_list
             continue;
         }
 
-        printf("%d\n", code);
         add_request_stack(&requests_stack, code);
     }
 

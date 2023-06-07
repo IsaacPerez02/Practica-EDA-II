@@ -293,4 +293,6 @@ int get_num_users(User_list* user_list) {
         size++;
         heap = heap->next;
     }
+
+    return size;
 }

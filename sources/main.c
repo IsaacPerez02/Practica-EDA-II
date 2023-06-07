@@ -151,6 +151,7 @@ int main() {
                         Requests* requests_user = search_user_requests(requests_list, login_us->code);
                         Friends* friends_user = search_user_friends(friends_list, login_us->code);
                         requests_stack = add_users_to_stack(users_list, requests_user, friends_user, login_us->code);
+                        manage_stack(users_list, requests_list, requests_stack, login_us->code);
                     }
                     else if (option_usuario == 3) {
                         Requests* requests_loged_user = search_user_requests(requests_list, login_us->code);
