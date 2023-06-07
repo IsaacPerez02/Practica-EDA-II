@@ -51,8 +51,8 @@ int main() {
         load_friends(friends_list, ff);
         fclose(ff);
         //publicaciones
-        publications_list = init_publications();
-        load_publications(publications_list, fpub);
+        /*publications_list = init_publications();
+        load_publications(publications_list, fpub);*/
         fclose(fpub);
     } else {
         return -1;
@@ -231,7 +231,7 @@ int main() {
                 save_friends(friends_list, friends_save);
                 fclose(friends_save);
                 //publications
-                save_publications(publications_list, fpub_save);
+                //save_publications(publications_list, fpub_save);
                 fclose(fpub_save);
             } else {
                 printf("¡¡No se han encontrado los archivos!! ¡¡Los usuarios agregados NO van a ser guardados y sus respectivas acciones tampoco!!\n");
