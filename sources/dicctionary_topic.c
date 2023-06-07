@@ -10,6 +10,7 @@ Dict* initDict(){
     dict->size = MAX_NUM_WORDS;
     dict->words = (Words*) malloc(sizeof (Words) * MAX_NUM_WORDS);
     for (int i = 0; i < MAX_NUM_WORDS; ++i) {
+        dict->words[i].num_words = 0;
         strcpy(dict->words[i].word, " ");
     }
     return dict;
@@ -51,9 +52,9 @@ void modify_value(Dict* dict, char word[MAX_WORD_LENGHT]){
 
 void manage_words_dict(Dict* dict, char text[MAX_WORD_LENGHT]){
     int election;
-    char *word = strtok(text, " ");
+    char delimiters[] = ",. ?=|!';:-_";
+    char *word = strtok(text, delimiters);
     election = search_by_value(dict, word);
-    printf("%d", election);
     if(election == TRUE){
         modify_value(dict, word);
     }
@@ -61,7 +62,7 @@ void manage_words_dict(Dict* dict, char text[MAX_WORD_LENGHT]){
         add_value(dict, word);
     }
     while (word != NULL) {
-        word = strtok(NULL, " ");
+        word = strtok(NULL, delimiters);
         if(word != NULL){
             election = search_by_value(dict, word);
             if(election == TRUE){
@@ -77,35 +78,37 @@ void manage_words_dict(Dict* dict, char text[MAX_WORD_LENGHT]){
 int search_by_value(Dict* dict, char word[MAX_WORD_LENGHT]){
     for (int i = 0; i < MAX_NUM_WORDS; ++i) {
         if (strcmp(word, dict->words[i].word) == 0){
-            printf("True");
             return TRUE;
         }
     }
-    printf("False");
     return FALSE;
 }
 
 void order_selection_sort_dict(Dict* dict){
-    int minimo, aux_num;
-    char aux[MAX_WORD_LENGHT];
+    int min, count_word_aux;
+    char aux_word[MAX_WORD_LENGHT];
     for (int i = 0; i < MAX_NUM_WORDS - 1; ++i) {
-        minimo = i;
+        min = i;
         for (int j = i+1; j < MAX_NUM_WORDS; ++j) {
-            if (dict->words[j].num_words < dict->words[minimo].num_words){
-                minimo = j;
+            if (dict->words[j].num_words < dict->words[min].num_words){
+                min = j;
             }
         }
-        aux_num = dict->words[minimo].num_words;
-        strcmp(aux, dict->words[minimo].word);
-        dict->words[minimo].num_words =  dict->words[i].num_words;
-        strcmp(dict->words[minimo].word, dict->words[i].word);
-        dict->words[i].num_words = aux_num;
-        strcmp(dict->words[i].word, aux);
+        count_word_aux = dict->words[i].num_words;
+        strcpy(aux_word,dict->words[i].word);
+        dict->words[i].num_words = dict->words[min].num_words;
+        strcpy(dict->words[i].word,dict->words[min].word);
+        dict->words[min].num_words = count_word_aux;
+        strcpy(dict->words[min].word, aux_word);
     }
 }
 
 void print_words_10(Dict* dict){
-    for (int i = 0; i < dict->count; ++i) {
-        printf("%d. %s\n", dict->words[i].num_words ,dict->words[i].word);
+    int count = 0;
+    for (int i = dict->size - 1; i > -1; i--) {
+        if(dict->words[i].num_words != 0 && count < 10){
+            printf("%d. %s\n", dict->words[i].num_words ,dict->words[i].word);
+            count++;
+        }
     }
 }

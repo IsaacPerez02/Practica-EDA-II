@@ -56,6 +56,9 @@ int main() {
         dict = initDict();
         load_dict(dict, publications_list);
         fclose(fpub);
+        end = clock();
+        clock_time = ((double) (end - start)) / CLOCKS_PER_SEC;
+        printf("Tiempo de ejecucion de la carga de datos de los archivos: %f segundos.\n", clock_time);
     } else {
         return -1;
     }
@@ -89,6 +92,7 @@ int main() {
         } else if (option_menu == 2) {
             print_users(users_list);
         } else if (option_menu == 3) {
+            start = clock();
             char login_user[MAX_ID_NAME_LENGHT];
             char login_pass[MAX_PASSWORD_LENGHT];
             User *login_us;
@@ -211,9 +215,16 @@ int main() {
             } else {
                 printf("El nombre de usuario no existe o la contrasena no es correcta.\n");
             }
+            end = clock();
+            clock_time = ((double) (end - start)) / CLOCKS_PER_SEC;
+            printf("Tiempo de ejecucion durante la sesion de %s: %f segundos.\n", login_us->id_name, clock_time);
         }
         else if (option_menu == 4) {
-            //order_selection_sort_dict(dict);
+            start = clock();
+            order_selection_sort_dict(dict);
+            end = clock();
+            clock_time = ((double) (end - start)) / CLOCKS_PER_SEC;
+            printf("Tiempo de ejecucion para ordenar el diccionario: %f segundos.\n", clock_time);
             print_words_10(dict);
         }
         else if (option_menu == 0) {
