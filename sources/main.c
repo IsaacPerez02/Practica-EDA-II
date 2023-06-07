@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 #include "../headers/user.h"
 #include "../headers/user_list.h"
 #include "../headers/publications_users.h"
@@ -27,6 +28,8 @@ int main() {
     Publications* publications_list;
     Dict* dict;
     User *us; //Variable para la creación de un usuario
+    clock_t start, end;
+    double clock_time = 0.0;
 
     //Comprobamos que el archivo existe. Si existe, cargamos la lista de usuarios del archivo y mostramos el menú
     //Si no existe el archivo, cerramos el programa
@@ -40,6 +43,7 @@ int main() {
     if (fpub == NULL) status = ERROR;
     if (status == SUCCESS) {
         //users
+        start = clock();
         loading_users(init, &users_list);
         fclose(init);
         //requests
@@ -205,7 +209,11 @@ int main() {
                             printf("Ese usuario no existe.\n");
                         }
                     } else if (option_usuario == 7) {
+                        start = clock();
                         show_timeline(publications_list, friends_list, users_list, *login_us);
+                        end = clock();
+                        clock_time = ((double) (end - start)) / CLOCKS_PER_SEC;
+                        printf("Tiempo de ejecucion para mostrar el timeline: %f segundos.\n", clock_time);
                     } else if (option_usuario == 0) {
                         printf("Cerrando sesion...\n");
                     } else {
@@ -228,6 +236,7 @@ int main() {
             print_words_10(dict);
         }
         else if (option_menu == 0) {
+            start = clock();
             status = SUCCESS;
             //Comprobamos que el archivo existe. Si existe, guardamos todos los usuarios que hayamos agregado en el
             //archivo y salimos del programa
@@ -258,6 +267,9 @@ int main() {
             }
             printf("\n%s\n", LINEA_ASTERISCOS);
             printf("Saliendo del programa...");
+            end = clock();
+            clock_time = ((double) (end - start)) / CLOCKS_PER_SEC;
+            printf("Tiempo de ejecucion para guardar los datos de los archivos: %f segundos.\n", clock_time);
             return 1;
         } else {
             printf("Tiene que elegir una opcion correcta.\n");
