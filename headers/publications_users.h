@@ -3,12 +3,7 @@
 
 #include "user.h"
 #include "user_list.h"
-
-#define LINEA_ASTERISCOS "******************************"
-
-
-#define MAX_PUBLICATIONS 10
-#define MAX_TEXT_LENGTH 120
+#include "defines.h"
 
 /**
  * Arreglo de publicaciones de un usuario

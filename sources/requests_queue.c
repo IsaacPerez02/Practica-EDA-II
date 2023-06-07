@@ -1,16 +1,22 @@
 #include <stdio.h>
 #include "../headers/requests_queue.h"
-#define LINEA_ASTERISCOS "******************************"
-
 
 /**
- * Inicializa los datos de la cola de solicitudes de un usuario
- * @param requests: Cola de solicitudes
+ * Inicializamos todas las requests de los usuarios
+ * @return Requests inicializada completamente
  */
-void init_requests(Requests* requests) {
-    requests->head = 0;
-    requests->tail = 0;
-    requests->size = 0;
+Requests * init_requests_user(){
+    Requests* requests = (Requests*) malloc(MAX_USERS * sizeof (Requests));
+    for (int i = 0; i < MAX_USERS; ++i) {
+        requests[i].code_user = 0;
+        requests[i].tail = 0;
+        requests[i].head = 0;
+        requests[i].size = 0;
+        for (int j = 0; j < MAX_REQUESTS; ++j) {
+            requests[i].code_request[j] = 0;
+        }
+    }
+    return requests;
 }
 
 /**
@@ -32,70 +38,10 @@ int is_full(Requests* requests) {
 }
 
 /**
- * Devuelve el primer elemento de la cola
- * @param requests: Cola de solicitudes
- * @return: Devuelve el código del primer elemento de la cola
+ * Cargamos las requests anteriores de los usuarios
+ * @param requests request inicializada
+ * @param fr archivo
  */
-int first(Requests* requests) {
-    if (is_empty(requests)) {
-        return 0;
-    }
-    else {
-        return requests->code_request[requests->head];
-    }
-}
-
-/**
- * Añade una solicitud de amistad
- * @param requests: Cola de solicitudes
- * @param request_code: Código del usuario que envía la solicitud
- */
-void add_request(Requests* requests, int request_code) {
-    if (requests->size == MAX_REQUESTS) {
-        printf("No se pueden enviar mas solicitudes a este usuario.\n");
-    }
-    else {
-        int tail = requests->tail;
-        requests->code_request[tail] = request_code;
-        requests->tail++;
-        if (requests->tail > MAX_REQUESTS) {
-            requests->tail = 0;
-        }
-        requests->size++;
-    }
-}
-
-/**
- * Borra la primera solicitud de la cola
- * @param requests: Cola de solicitudes
- */
-void delete_request(Requests* requests) {
-    if (is_empty(requests)) {
-        printf("No hay mas solicitudes.\n");
-    }
-    else {
-        requests->head++;
-        if (requests->head > MAX_REQUESTS) {
-            requests->head = 0;
-        }
-        requests->size--;
-    }
-}
-
-Requests * init_requests_user(){
-    Requests* requests = (Requests*) malloc(MAX_USERS * sizeof (Requests));
-    for (int i = 0; i < MAX_USERS; ++i) {
-        requests[i].code_user = 0;
-        requests[i].tail = 0;
-        requests[i].head = 0;
-        requests[i].size = 0;
-        for (int j = 0; j < MAX_REQUESTS; ++j) {
-            requests[i].code_request[j] = 0;
-        }
-    }
-    return requests;
-}
-
 void load_requests(Requests* requests, FILE* fr){
     int code, code_requests, num_requests, i = 0;
     while(fscanf(fr, "%d. %d,", &code, &num_requests) > 1){
@@ -111,6 +57,11 @@ void load_requests(Requests* requests, FILE* fr){
     }
 }
 
+/**
+ * Inicializamos los requests del nuevo usuario
+ * @param requests request inicializada
+ * @param new_user_code codigo de usuario nuevo
+ */
 void new_user_requests(Requests* requests, int new_user_code){
     int comp = 1;
     for (int i = 0; i < MAX_USERS; ++i) {
@@ -121,12 +72,31 @@ void new_user_requests(Requests* requests, int new_user_code){
     }
 }
 
-void add_requests(Requests* requests, int new_request){
-    requests->code_request[requests->tail] = new_request;
-    requests->tail++;
-    requests->size++;
+/**
+ * Inicializamos una nueva requests
+ * @param requests request inicializada
+ * @param new_request codigo del nuevo requests
+ */
+void add_requests(Requests* requests, int new_request) {
+    if (requests->size == MAX_REQUESTS) {
+        printf("No se pueden enviar mas solicitudes a este usuario.\n");
+    }
+    else {
+        requests->code_request[requests->tail] = new_request;
+        requests->tail++;
+        if (requests->tail > MAX_REQUESTS) {
+            requests->tail = 0;
+        }
+        requests->size++;
+    }
 }
 
+/**
+ *
+ * @param requests
+ * @param code_user
+ * @return
+ */
 Requests* search_user_requests(Requests* requests, int code_user){
     for (int i = 0; i < MAX_USERS; ++i) {
         if(requests[i].code_user == code_user){
@@ -136,6 +106,13 @@ Requests* search_user_requests(Requests* requests, int code_user){
     return NULL;
 }
 
+
+
+/**
+ * Guardamos todas las requests antes de salir del programa
+ * @param requests actuales
+ * @param fr archivo de guardado
+ */
 void save_requests(Requests* requests, FILE* fr){
     for (int i = 0; i < MAX_USERS; ++i) {
         if(requests[i].code_user != 0){
@@ -143,14 +120,30 @@ void save_requests(Requests* requests, FILE* fr){
             for (int j = requests[i].head; j < requests[i].tail ; ++j) {
                 fprintf(fr, "%d, ", requests[i].code_request[j]);
             }
+            fprintf(fr, "\n");
         }
     }
 }
 
-void print_requests_graph(Requests* requests){
-    printf("%d. ", requests->code_user);
-    for (int j = requests->head; j < requests->tail; ++j) {
-        printf("%d, ", requests->code_request[j]);
+/**
+ *
+ * @param requests
+ */
+void print_requests_graph(User_list* list, Requests* requests){
+    int i = 1;
+    if(requests->head < requests->tail){
+        for (int j = requests->head; j < requests->tail; ++j) {
+            User* us = search_user_code(list, requests->code_request[j]);
+            printf("%d. %s\n ", i, us->id_name);
+            i++;
+        }
+        printf("\n");
     }
-    printf("\n");
+    else{
+        for (int j = requests->tail; j < requests->head; ++j) {
+            User* us = search_user_code(list, requests->code_request[j]);
+            printf("%d. %s\n ", i, us->id_name);
+            i++;
+        }
+    }
 }

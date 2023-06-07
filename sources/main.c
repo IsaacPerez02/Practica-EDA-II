@@ -3,7 +3,10 @@
 #include "../headers/user.h"
 #include "../headers/user_list.h"
 #include "../headers/publications_users.h"
-#include "../headers/friends_graph.h"
+#include "../headers/requests_queue.h"
+
+#define MAX_FRIENDS 10
+#define MAX_USERS 20
 
 #define ERROR -1
 #define SUCCESS 1
@@ -30,6 +33,8 @@ int main() {
     if (fr == NULL) status = ERROR;
     FILE *ff = fopen("../resources/friends.txt", "r");
     if (ff == NULL) status = ERROR;
+    FILE* fpub = fopen("../resources/publications.txt", "r");
+    if (fpub == NULL) status = ERROR;
     if (status == SUCCESS) {
         //users
         loading_users(init, &users_list);
@@ -42,6 +47,8 @@ int main() {
         friends_list = init_friends_user();
         load_friends(friends_list, ff);
         fclose(ff);
+        //publicaciones
+
     } else {
         return -1;
     }
@@ -73,8 +80,8 @@ int main() {
         } else if (option_menu == 2) {
             print_users(users_list);
         } else if (option_menu == 3) {
-            char login_user[USERNAME_LENGTH];
-            char login_pass[PASSWORD_LENGTH];
+            char login_user[MAX_ID_NAME_LENGHT];
+            char login_pass[MAX_PASSWORD_LENGHT];
             User *login_us;
             printf("\n%s\n", LINEA_ASTERISCOS);
             printf("Introduzca el nombre de usuario:\n");
@@ -107,7 +114,7 @@ int main() {
                     scanf("%d", &option_usuario);
 
                     if (option_usuario == 1) {
-                        char check_friend_name[USERNAME_LENGTH];
+                        char check_friend_name[MAX_ID_NAME_LENGHT];
                         Requests* requests_user;
                         User* user_requests;
                         printf("Introduzca el nombre de usuario al que quiera agregar como amigo:\n");
@@ -126,7 +133,9 @@ int main() {
                         }
                     }
                     else if (option_usuario == 2) {
-                        manage_requests(&users_list, login_us->code, friends_list);
+                        Requests* requests_loged_user = search_user_requests(request_list, login_us->code);
+                        print_requests_graph(users_list, request_list);
+                        manage_requests(users_list, requests_loged_user, friends_list);
                     }
                     else if (option_usuario == 3) {
                         Friends* friends_user = search_user_friends(friends_list, login_us->code);
@@ -147,7 +156,7 @@ int main() {
                         }
                     }
                     else if (option_usuario == 5) {
-                        char check_user_name[USERNAME_LENGTH];
+                        char check_user_name[MAX_ID_NAME_LENGHT];
                         User *user;
                         printf("Introduzca el nombre de usuario al que quiera mirar sus publicaciones:\n");
                         scanf("%s", check_user_name);
@@ -180,6 +189,8 @@ int main() {
             if(requests_save == NULL) status = ERROR;
             FILE* friends_save = fopen("../resources/friends.txt", "w");
             if(friends_save == NULL) status = ERROR;
+            FILE* fpub_save = fopen("../resources/publications.txt", "w");
+            if(fpub_save == NULL) status = ERROR;
             if (status == SUCCESS) {
                 //users
                 save_all_users(users_list, finish);
@@ -190,8 +201,10 @@ int main() {
                 //friends
                 save_friends(friends_list, friends_save);
                 fclose(friends_save);
+                //publications
+
             } else {
-                printf("¡¡No se ha encontrado el archivo!! ¡¡Los usuarios agregados NO van a ser guardados!!\n");
+                printf("¡¡No se han encontrado los archivos!! ¡¡Los usuarios agregados NO van a ser guardados y sus respectivas acciones tampoco!!\n");
             }
             printf("\n%s\n", LINEA_ASTERISCOS);
             printf("Saliendo del programa...");

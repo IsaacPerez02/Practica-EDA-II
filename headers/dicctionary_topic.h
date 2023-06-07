@@ -1,6 +1,7 @@
 #ifndef UNTITLED4_DICCTIONARY_TOPIC_H
 #define UNTITLED4_DICCTIONARY_TOPIC_H
-#define MAX_WORD_LENGHT 20
+
+#include "defines.h"
 
 typedef struct {
     char word[MAX_WORD_LENGHT];

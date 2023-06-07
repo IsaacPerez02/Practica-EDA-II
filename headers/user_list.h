@@ -1,12 +1,5 @@
 #ifndef UNTITLED4_USER_LIST_H
 #define UNTITLED4_USER_LIST_H
-#define MAX_ID_NAME_LENGHT 20
-#define MAX_NAME_LENGHT 20
-#define MAX_PASSWORD_LENGHT 20
-#define MAX_CORREO_LENGHT 30
-#define MAX_CITY_LENGHT 20
-#define MAX_WORD_LENGHT 20
-#define MAX_USERS 10
 #include <stdio.h>
 #include "user.h"
 #include "dicctionary_topic.h"

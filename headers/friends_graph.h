@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MAX_FRIENDS 10
-#define MAX_USERS 20
+#include "defines.h"
+#include "user_list.h"
 
 typedef struct {
     int code_user;

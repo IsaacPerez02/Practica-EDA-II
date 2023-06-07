@@ -78,10 +78,11 @@ void save_friends(Friends* friends, FILE* ff){
     }
 }
 
-void print_friends_graph(Friends* friends){
+void print_friends_graph(User_list* list, Friends* friends){
     printf("%d. ", friends->code_user);
     for (int j = 0; j < friends->num_friends; ++j) {
-        printf("%d, ", friends->code_friends[j]);
+        User* us = search_user_code(list, friends->code_friends[j])
+        printf("%s", us);
     }
     printf("\n");
 }

@@ -1,17 +1,8 @@
 #include <stdio.h>
-#include "requests_queue.h"
-
+#include "defines.h"
 
 #ifndef UNTITLED4_USER_H
 #define UNTITLED4_USER_H
-#define USERNAME_LENGTH 20 //Cantidad de caracteres máximo que puede tener un nombre de usuario
-#define PASSWORD_LENGTH 30 //Cantidad de caracteres máximo que puede tener una contraseña
-#define EMAIL_LENGTH 50 //Cantidad de caracteres máximo que puede tener un correo electrónico
-#define UBICATION_LENGTH 20 //cantidad de caracteres de la ciudad
-#define MAX_FRIENDS 10
-#define MAX_GUSTOS 10
-#define GUSTOS_LENGTH 20
-#define MAX_CHARACTERS 120
 
 /**
  * Usuario del sistema
@@ -26,13 +17,13 @@
  * requests: Cola de solicitudes del usuario
  */
 typedef struct {
-    char id_name[USERNAME_LENGTH];
+    char id_name[MAX_ID_NAME_LENGHT];
     int code;
-    char nombre[USERNAME_LENGTH];
-    char contrasena[PASSWORD_LENGTH];
+    char nombre[MAX_NAME_LENGHT];
+    char contrasena[MAX_PASSWORD_LENGHT];
     int edad;
-    char correo[EMAIL_LENGTH];
-    char ubicacion[UBICATION_LENGTH];
+    char correo[MAX_CORREO_LENGHT];
+    char ubicacion[MAX_CITY_LENGHT];
     char gustos [MAX_GUSTOS][GUSTOS_LENGTH];
     int friends[MAX_FRIENDS];
     Requests requests;

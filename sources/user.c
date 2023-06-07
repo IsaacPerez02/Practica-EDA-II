@@ -115,11 +115,6 @@ User* create_user (char gustos[MAX_GUSTOS][GUSTOS_LENGTH]){
         strcpy(u->gustos[i], gustos[indice]);
     }
 
-    init_requests(&u->requests);
-    for (int i = 0; i < MAX_FRIENDS; i++) {
-        u->friends[i] = 0;
-    }
-
     printf("\n%s\n", LINEA_ASTERISCOS);
     return u;
 }
@@ -311,36 +306,4 @@ int count_friends(int friends[MAX_FRIENDS]){
         }
     }
     return counter;
-}
-
-/**
- * Añade un amigo a la lista del usuario
- * @param us persona que quiere añadir al amigo
- * @param new_id_code codigo de la persona a añadir
- */
-void add_friends(User* us, int code_friend){
-    int count = count_friends(us->friends);
-    us->friends[count] = code_friend;
-}
-
-/**
- * Elimina a un amigo anterior
- * @param us persona que quiere eleminar al amigo
- * @param delete_id_code codigo de la persona a eliminar
- */
-void delete_friends(User* us, int delete_id_code){
-    int new_list[MAX_FRIENDS];
-    for (int i = 0; i < MAX_FRIENDS; i++){
-        new_list[i] = 0;
-    }
-    int j = 0;
-    for (int i = 0; i < count_friends(us->friends); i++) {
-        if (us->friends[i] != delete_id_code) {
-            new_list[j] = us->friends[i];
-            j++;
-        }
-    }
-    for (int i = 0; i < MAX_FRIENDS; i++){
-        us->friends[i] = new_list[i];
-    }
 }
