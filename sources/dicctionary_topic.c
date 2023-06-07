@@ -17,9 +17,12 @@ Dict* initDict(){
 }
 
 void load_dict (Dict* dict, Publications* publications){
+    char aux_text[MAX_TEXT_LENGTH];
     for (int i = 0; i < MAX_PUBLICATIONS; ++i) {
         if(publications[i].code_user != 0){
+            strcpy(aux_text, publications[i].publication);
             manage_words_dict(dict, publications[i].publication);
+            strcpy(publications[i].publication, aux_text);
         }
     }
 }

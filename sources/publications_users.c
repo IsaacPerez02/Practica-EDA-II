@@ -34,15 +34,6 @@ void load_publications(Publications* publications, FILE* fp) {
     }
 }
 
-Publications* search_user_publications(Publications* publications, int code_user){
-    for (int i = 0; i < MAX_USERS; ++i) {
-        if(publications[i].code_user == code_user){
-            return &publications[i];
-        }
-    }
-    return NULL;
-}
-
 /**
  * Crea una publicación y la guarda en el arreglo del usuario
  * @param publications_list: Lista de publicaciones de los usuarios

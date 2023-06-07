@@ -76,7 +76,7 @@ Requests_stack add_users_to_stack(User_list* users_list, Requests* requests_list
 }
 
 
-void manage_stack(User_list* user_list, Requests* requests_list, Requests_stack requests_stack, int login_code) {
+void manage_stack(User_list* user_list, Requests* requests_list, Requests_stack requests_stack, int login_code, Publications* publications) {
     int option_requests = -1;
     int i;
     User* stack_user;
@@ -98,6 +98,8 @@ void manage_stack(User_list* user_list, Requests* requests_list, Requests_stack 
         for (int j = 0; j < 5; j++) {
             printf("%s ", stack_user->gustos[j]);
         }
+        printf("\n");
+        print_publications(publications, *stack_user);
 
         while (option_requests != 0) {
             printf("\n\nDeseas enviarle una solicitud a %s?\n", stack_user->id_name);
