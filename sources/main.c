@@ -69,6 +69,7 @@ int main() {
         printf("1.- Crear nuevo usuario\n");
         printf("2.- Listar todos los usuarios\n");
         printf("3.- Operar como otro usuario\n");
+        printf("4.- Mostrar 10 palabras mas usadas\n");
         printf("0.- Salir del programa\n");
         printf("%s\n", LINEA_ASTERISCOS);
         printf("\nElija una opcion:\n");
@@ -134,9 +135,8 @@ int main() {
                         if (user_requests != NULL) {
                             if (user_requests != login_us) {
                                 requests_user = search_user_requests(requests_list, user_requests->code);
-                                if(requests_user != NULL){}
+                                //if(requests_user != NULL){}
                                 add_requests(requests_user, login_us->code);
-                                printf("Solicitud enviada.\n");
                             }
                             else {
                                 printf("No puedes enviarte una solicitud a ti mismo.\n");
@@ -147,7 +147,10 @@ int main() {
                         }
                     }
                     else if (option_usuario == 2) {
-                        requests_stack = add_users_to_stack(users_list, requests_list, friends_list, login_us->code);
+                        Requests_stack requests_stack;
+                        Requests* requests_user = search_user_requests(requests_list, login_us->code);
+                        Friends* friends_user = search_user_friends(friends_list, login_us->code);
+                        requests_stack = add_users_to_stack(users_list, requests_user, friends_user, login_us->code);
                     }
                     else if (option_usuario == 3) {
                         Requests* requests_loged_user = search_user_requests(requests_list, login_us->code);
@@ -206,7 +209,11 @@ int main() {
             } else {
                 printf("El nombre de usuario no existe o la contrasena no es correcta.\n");
             }
-        } else if (option_menu == 0) {
+        }
+        else if (option_menu == 4) {
+            //Mostrar 10 palabras más usadas
+        }
+        else if (option_menu == 0) {
             status = SUCCESS;
             //Comprobamos que el archivo existe. Si existe, guardamos todos los usuarios que hayamos agregado en el
             //archivo y salimos del programa

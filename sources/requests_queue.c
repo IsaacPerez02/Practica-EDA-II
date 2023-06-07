@@ -88,6 +88,7 @@ void add_requests(Requests* requests, int new_request) {
             requests->tail = 0;
         }
         requests->size++;
+        printf("Solicitud enviada.\n");
     }
 }
 
