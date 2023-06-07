@@ -173,7 +173,7 @@ int main() {
                         text[strcspn(text, "\n")] = '\0'; // Eliminar salto de línea del final
 
                         if (strlen(text) <= 120) {
-                            create_publication(publications_list, text);
+                            create_publication(publications_list, login_us->code, text);
                             printf("Publicacion realizada\n");
                         } else {
                             printf("Tu publicacion excede 120 caracteres.\n");

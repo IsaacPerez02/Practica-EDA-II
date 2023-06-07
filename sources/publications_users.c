@@ -28,9 +28,7 @@ void load_publications(Publications* publications, FILE* fp) {
     while(fscanf(fp, "%d. ", &code) > 0){
         publications[i].code_user = code;
         fgets(text, MAX_TEXT_LENGTH * MAX_PUBLICATIONS, fp);
-        sscanf(text, "%s|", text);
         strcpy(publications[i].publication, text);
-        printf("%s\n", publications[i].publication);
         i++;
     }
 }
@@ -50,10 +48,11 @@ Publications* search_user_publications(Publications* publications, int code_user
  * @param code_user: Código del usuario que ha publicado
  * @param publication: Publicación que ha escrito el usuario
  */
-void create_publication(Publications* publications_user, char text[MAX_TEXT_LENGTH]) {
+void create_publication(Publications* publications_user, int code_user, char text[MAX_TEXT_LENGTH]) {
     int comp = 1;
     for (int i = 0; i < MAX_PUBLICATIONS; ++i) {
         if(publications_user[i].code_user == 0 && comp == 1){
+            publications_user[i].code_user = code_user;
             strcpy(publications_user[i].publication, text);
             comp = 0;
         }
