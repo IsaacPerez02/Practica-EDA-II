@@ -11,13 +11,14 @@
  */
 typedef struct {
     int code_user;
+    char title_publication[MAX_TITLE_LENGTH];
     char publication[MAX_TEXT_LENGTH];
 } Publications;
 
 Publications* init_publications();
 void load_publications(Publications* publications, FILE* fp);
 Publications* search_user_publications(Publications* publications, int code_user);
-void create_publication(Publications* publications_user, int code_user, char text[MAX_TEXT_LENGTH]);
+void create_publication(Publications* publications_user, int code_user, char text[MAX_TEXT_LENGTH], char text_title[MAX_TITLE_LENGTH]);
 void print_publications(Publications* publications_list, User us);
 void show_timeline(Publications* publications_list, Friends* friends_list, User_list* user_list, User us);
 void save_publications(Publications* publications, FILE* fp);

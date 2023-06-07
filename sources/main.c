@@ -166,14 +166,18 @@ int main() {
                         }
                     }
                     else if (option_usuario == 5) {
-                        char text[MAX_TEXT_LENGTH];
-                        printf("Escriba su publicacion (120 MAX): \n");
-                        while (getchar() != '\n');
-                        fgets(text, sizeof(text), stdin);
-                        text[strcspn(text, "\n")] = '\0'; // Eliminar salto de línea del final
+                        char text_publications[MAX_TEXT_LENGTH], text_title[MAX_TITLE_LENGTH];
+                        printf("Escriba el titulo de la publicación: \n");
+                        while (getchar() !='\n');
+                        fgets(text_title, sizeof(text_title), stdin);
+                        text_publications[strcspn(text_title, "\n")] = '\0'; // Eliminar salto de línea del final
+                        printf("Escriba su publicación (120 MAX): \n");
+                        while (getchar() !='\n');
+                        fgets(text_publications, sizeof(text_publications), stdin);
+                        text_publications[strcspn(text_publications, "\n")] = '\0'; // Eliminar salto de línea del final
 
-                        if (strlen(text) <= 120) {
-                            create_publication(publications_list, login_us->code, text);
+                        if (strlen(text_title) <= MAX_TITLE_LENGTH && strlen(text_publications) <= MAX_TEXT_LENGTH) {
+                            create_publication(publications_list, login_us->code, text_publications, text_title);
                             printf("Publicacion realizada\n");
                         } else {
                             printf("Tu publicacion excede 120 caracteres.\n");
