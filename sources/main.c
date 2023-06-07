@@ -22,7 +22,7 @@ int main() {
                                               "Fiesta", "Estudiar", "Viajes", "Politica"}; //Gustos disponibles
     User_list* users_list = NULL; //Lista de usuarios
     Friends* friends_list;
-    Requests* request_list;
+    Requests* requests_list;
     Publications* publications_list;
     Requests_stack requests_stack;
     User *us; //Variable para la creación de un usuario
@@ -42,9 +42,9 @@ int main() {
         loading_users(init, &users_list);
         fclose(init);
         //requests
-        request_list = init_requests_user();
+        requests_list = init_requests_user();
         //requests_stack = init_stack();
-        load_requests(request_list, fr);
+        load_requests(requests_list, fr);
         fclose(fr);
         //friends
         friends_list = init_friends_user();
@@ -82,7 +82,7 @@ int main() {
                 add_user_created(&users_list, us);
             }
             new_user_friends(friends_list, us->code);
-            new_user_requests(request_list, us->code);
+            new_user_requests(requests_list, us->code);
         } else if (option_menu == 2) {
             print_users(users_list);
         } else if (option_menu == 3) {
@@ -131,7 +131,7 @@ int main() {
 
                         if (user_requests != NULL) {
                             if (user_requests != login_us) {
-                                requests_user = search_user_requests(request_list, user_requests->code);
+                                requests_user = search_user_requests(requests_list, user_requests->code);
                                 if(requests_user != NULL){}
                                 add_requests(requests_user, login_us->code);
                                 printf("Solicitud enviada.\n");
@@ -145,10 +145,10 @@ int main() {
                         }
                     }
                     else if (option_usuario == 2) {
-
+                        requests_stack = add_users_to_stack(users_list, requests_list, friends_list, login_us->code);
                     }
                     else if (option_usuario == 3) {
-                        Requests* requests_loged_user = search_user_requests(request_list, login_us->code);
+                        Requests* requests_loged_user = search_user_requests(requests_list, login_us->code);
                         if (requests_loged_user != NULL){
                             print_requests_graph(users_list, requests_loged_user);
                             manage_requests(users_list, requests_loged_user, friends_list);
@@ -225,7 +225,7 @@ int main() {
                 save_all_users(users_list, finish);
                 fclose(finish);
                 //requests
-                save_requests(request_list, requests_save);
+                save_requests(requests_list, requests_save);
                 fclose(requests_save);
                 //friends
                 save_friends(friends_list, friends_save);
