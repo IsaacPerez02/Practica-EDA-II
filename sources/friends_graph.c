@@ -59,7 +59,7 @@ void delete_friend(Friends* friends, int delete_friend){
 }
 
 Friends* search_user_friends(Friends* friends, int code_user){
-    for (int i = 0; i < MAX_FRIENDS; ++i) {
+    for (int i = 0; i < MAX_USERS; ++i) {
         if(friends[i].code_user == code_user){
             return &friends[i];
         }
@@ -74,15 +74,17 @@ void save_friends(Friends* friends, FILE* ff){
             for (int j = 0; j < friends[i].num_friends; ++j) {
                 fprintf(ff, "%d, ", friends[i].code_friends[j]);
             }
+            fprintf(ff,"\n");
         }
     }
 }
 
 void print_friends_graph(User_list* list, Friends* friends){
-    printf("%d. ", friends->code_user);
+    int i = 1;
     for (int j = 0; j < friends->num_friends; ++j) {
-        User* us = search_user_code(list, friends->code_friends[j])
-        printf("%s", us);
+        User* us = search_user_code(list, friends->code_friends[j]);
+        printf("%d. %s\n", i, us->id_name);
+        i++;
     }
     printf("\n");
 }

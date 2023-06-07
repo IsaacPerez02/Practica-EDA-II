@@ -1,22 +1,12 @@
 
 #include "../headers/user.h"
 #include "../headers/user_list.h"
-#define FALSE 0
-#define TRUE 1
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define MAX_ID_NAME_LENGHT 20
-#define MAX_NAME_LENGHT 20
-#define MAX_PASSWORD_LENGHT 20
-#define MAX_CORREO_LENGHT 30
-#define MAX_CITY_LENGHT 20
-#define MAX_GUSTOS 10
-#define MAX_USERS 20
-#define GUSTOS_LENGTH 20
 #include <time.h>
-#define LINEA_ASTERISCOS "********************"
-#define LINEA_GUION "---------------"
+
 
 /**
  * Añade a un usuario del archivo de usuarios a la lista de usuarios si esta está vacía

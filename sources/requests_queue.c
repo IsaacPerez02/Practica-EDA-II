@@ -156,8 +156,8 @@ void manage_requests(User_list* user_list, Requests* requests_list, Friends* fri
             scanf("%d", &option_requests);
 
             if (option_requests == 1) {
-                delete_request(requests_list);
                 accept_requests(requests_list, friends, requests_list->code_user, requests_list->code_request[i]);
+                delete_request(requests_list);
                 printf("Solicitud aceptada.\n");
             }
             else if (option_requests == 2) {
@@ -170,7 +170,7 @@ void manage_requests(User_list* user_list, Requests* requests_list, Friends* fri
         }
     }
     else{
-        for (int j = requests_list->tail; j < requests_list->head; ++j){
+        for (int j = requests_list->tail; j < requests_list->head; j++){
             printf("\n%s\n", LINEA_ASTERISCOS);
             printf("Que deseas hacer con la solicitud de %s?\n", search_user_code(user_list, requests_list->code_request[j])->id_name);
             printf("1.- Aceptar\n");
@@ -205,10 +205,18 @@ void save_requests(Requests* requests, FILE* fr){
     for (int i = 0; i < MAX_USERS; ++i) {
         if(requests[i].code_user != 0){
             fprintf(fr, "%d. %d, ", requests[i].code_user, requests[i].size);
-            for (int j = requests[i].head; j < requests[i].tail ; ++j) {
-                fprintf(fr, "%d, ", requests[i].code_request[j]);
+            if(requests[i].head < requests[i].tail){
+                for (int j = requests[i].head; j < requests[i].tail ; j++) {
+                    fprintf(fr, "%d, ", requests[i].code_request[j]);
+                }
+                fprintf(fr, "\n");
             }
-            fprintf(fr, "\n");
+            else{
+                for (int j = requests[i].tail; j < requests[i].head ; j++) {
+                    fprintf(fr, "%d, ", requests[i].code_request[j]);
+                }
+                fprintf(fr, "\n");
+            }
         }
     }
 }
@@ -220,7 +228,7 @@ void save_requests(Requests* requests, FILE* fr){
 void print_requests_graph(User_list* list, Requests* requests){
     int i = 1;
     if(requests->head < requests->tail){
-        for (int j = requests->head; j < requests->tail; ++j) {
+        for (int j = requests->head; j < requests->tail; j++) {
             User* us = search_user_code(list, requests->code_request[j]);
             printf("%d. %s\n ", i, us->id_name);
             i++;
@@ -228,7 +236,7 @@ void print_requests_graph(User_list* list, Requests* requests){
         printf("\n");
     }
     else{
-        for (int j = requests->tail; j < requests->head; ++j) {
+        for (int j = requests->tail; j < requests->head; j++) {
             User* us = search_user_code(list, requests->code_request[j]);
             printf("%d. %s\n ", i, us->id_name);
             i++;

@@ -12,10 +12,7 @@ Publications* init_publications() {
     Publications* publications_list = (Publications*) malloc(sizeof (Publications) * MAX_USERS);
     for (int i = 0; i < MAX_USERS; i++) {
         publications_list[i].code_user = 0;
-        publications_list[i].size = 0;
-        for (int j = 0; j < MAX_PUBLICATIONS; j++) {
-            strcpy(publications_list[i].publication[j], "\0");
-        }
+        strcpy(publications_list[i].publication, " ");
     }
     return publications_list;
 }
@@ -25,8 +22,26 @@ Publications* init_publications() {
  * @param publications
  * @param fp
  */
-void load_publications(Publications** publications, FILE* fp) {
+void load_publications(Publications* publications, FILE* fp) {
+    int code, i = 0;
+    char text[MAX_TEXT_LENGTH];
+    while(fscanf(fp, "%d. ", &code) > 0){
+        publications[i].code_user = code;
+        fgets(text, MAX_TEXT_LENGTH * MAX_PUBLICATIONS, fp);
+        sscanf(text, "%s|", text);
+        strcpy(publications[i].publication, text);
+        printf("%s\n", publications[i].publication);
+        i++;
+    }
+}
 
+Publications* search_user_publications(Publications* publications, int code_user){
+    for (int i = 0; i < MAX_USERS; ++i) {
+        if(publications[i].code_user == code_user){
+            return &publications[i];
+        }
+    }
+    return NULL;
 }
 
 /**
@@ -35,25 +50,15 @@ void load_publications(Publications** publications, FILE* fp) {
  * @param code_user: Código del usuario que ha publicado
  * @param publication: Publicación que ha escrito el usuario
  */
-void create_publication(Publications** publications_list, int code_user, char publication[MAX_TEXT_LENGTH]) {
-    int i = 0, comp = 1;
-    for (int j = 0; j < MAX_PUBLICATIONS; ++j) {
-        if(comp == 1 && publications_list[j] == 0){
-            publications_list[j]->code_user = code_user;
+void create_publication(Publications* publications_user, char text[MAX_TEXT_LENGTH]) {
+    int comp = 1;
+    for (int i = 0; i < MAX_PUBLICATIONS; ++i) {
+        if(publications_user[i].code_user == 0 && comp == 1){
+            strcpy(publications_user[i].publication, text);
             comp = 0;
         }
     }
-    //Buscamos el código del usuario en la lista de publicaciones
-    while (publications_list[i]->code_user != 0) {
-        if (publications_list[i]->code_user == code_user) {
-            //Una vez encontrado, añadimos el mensaje escrito en su lista de publicaciones
-            int size = publications_list[i]->size;
-            strcpy(publications_list[i]->publication[size], publication);
-            publications_list[i]->size++;
-            return;
-        }
-        i++;
-    }
+
 }
 
 /**
@@ -62,20 +67,11 @@ void create_publication(Publications** publications_list, int code_user, char pu
  * @param us: Usuario que queremos ver sus publicaciones
  */
 void print_publications(Publications* publications_list, User us) {
-    int i = 0;
-    //Buscamos el código del usuario en la lista de publicaciones
-    while (publications_list[i].code_user != 0) {
-        if (publications_list[i].code_user == us.code) {
-            //Una vez encontrado, mostramos por pantalla todas sus publicaciones
-            printf("\n%s\n", LINEA_ASTERISCOS);
-            printf("Publicaciones de %s:\n", us.id_name);
-            int size = publications_list[i].size;
-            for (int j = 0; j < size; j++) {
-                printf("%s\n\n", publications_list[i].publication[j]);
-            }
-            return;
+    printf("El usuario %s ha realizado las siguientes publicaciones:\n", us.id_name);
+    for (int i = 0; i < MAX_PUBLICATIONS; ++i) {
+        if(us.code == publications_list[i].code_user){
+            printf("%s.\n", publications_list->publication);
         }
-        i++;
     }
 }
 
@@ -98,5 +94,19 @@ void show_timeline(Publications* publications_list, Friends* friends_list, User_
             return;
         }
         i++;
+    }
+}
+
+void save_publications(Publications* publications, FILE* fp){
+    for (int i = 0; i < MAX_USERS; ++i) {
+        if(publications[i].code_user != 0){
+            fprintf(fp, "%d. ", publications[i].code_user);
+            for (int j = 0; j < MAX_PUBLICATIONS; ++j) {
+                if(publications[i].code_user != 0){
+                    fprintf(fp, "%s| ", publications[i].publication);
+                }
+            }
+            fprintf(fp,"\n");
+        }
     }
 }

@@ -5,6 +5,9 @@
 #define MAX_FRIENDS 10
 #define MAX_REQUESTS 10
 #define LINEA_ASTERISCOS "******************************"
+#define LINEA_GUION "---------------"
+#define FALSE 0
+#define TRUE 1
 #define MAX_WORD_LENGHT 20
 #define MAX_PUBLICATIONS 10
 #define MAX_TEXT_LENGTH 120

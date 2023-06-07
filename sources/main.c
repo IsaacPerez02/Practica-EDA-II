@@ -48,7 +48,9 @@ int main() {
         load_friends(friends_list, ff);
         fclose(ff);
         //publicaciones
-
+        publications_list = init_publications();
+        load_publications(publications_list, fpub);
+        fclose(fpub);
     } else {
         return -1;
     }
@@ -134,12 +136,22 @@ int main() {
                     }
                     else if (option_usuario == 2) {
                         Requests* requests_loged_user = search_user_requests(request_list, login_us->code);
-                        print_requests_graph(users_list, request_list);
-                        manage_requests(users_list, requests_loged_user, friends_list);
+                        if (requests_loged_user != NULL){
+                            print_requests_graph(users_list, requests_loged_user);
+                            manage_requests(users_list, requests_loged_user, friends_list);
+                        }
+                        else{
+                            printf("El usuario no tiene inicializados los requests!!!\n");
+                        }
                     }
                     else if (option_usuario == 3) {
                         Friends* friends_user = search_user_friends(friends_list, login_us->code);
-                        print_friends_graph(users_list, friends_user);
+                        if(friends_user != NULL){
+                            print_friends_graph(users_list, friends_user);
+                        }
+                        else{
+                            printf("El usuario no tiene inicializados los amigos!!!\n");
+                        }
                     }
                     else if (option_usuario == 4) {
                         char text[MAX_TEXT_LENGTH];
@@ -149,7 +161,7 @@ int main() {
                         text[strcspn(text, "\n")] = '\0'; // Eliminar salto de línea del final
 
                         if (strlen(text) <= 120) {
-                            create_publication(&publications_list, login_us->code, text);
+                            create_publication(publications_list, text);
                             printf("Publicacion realizada\n");
                         } else {
                             printf("Tu publicacion excede 120 caracteres.\n");
@@ -202,7 +214,8 @@ int main() {
                 save_friends(friends_list, friends_save);
                 fclose(friends_save);
                 //publications
-
+                save_publications(publications_list, fpub_save);
+                fclose(fpub_save);
             } else {
                 printf("¡¡No se han encontrado los archivos!! ¡¡Los usuarios agregados NO van a ser guardados y sus respectivas acciones tampoco!!\n");
             }

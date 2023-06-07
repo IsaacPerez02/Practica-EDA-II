@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include "user.h"
 #include "dicctionary_topic.h"
-#include "friends_graph.h"
 
 /**
  * Lista de usuarios del sistema
