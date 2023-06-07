@@ -106,6 +106,94 @@ Requests* search_user_requests(Requests* requests, int code_user){
     return NULL;
 }
 
+/**
+ *
+ * @param friends
+ * @param code_user
+ * @param code_new_friend
+ */
+void accept_requests(Requests* requests, Friends* friends, int code_user, int code_new_friend){
+    Friends* friend = search_user_friends(friends, code_user);
+    add_friend(friend, code_new_friend);
+    friend = search_user_friends(friends, code_new_friend);
+    add_friend(friend, code_user);
+}
+
+/**
+ * Borra la primera solicitud de la cola
+ * @param requests: Cola de solicitudes
+ */
+void delete_request(Requests* requests) {
+    if (is_empty(requests)) {
+        printf("No hay mas solicitudes.\n");
+    }
+    else {
+        requests->code_request[requests->head] = 0;
+        requests->head++;
+        if (requests->head > MAX_REQUESTS) {
+            requests->head = 0;
+        }
+        requests->size--;
+    }
+}
+
+/**
+ * Gestiona las solicitudes del usuario logeado
+ * @param requests_list: Lista de solicitudes
+ * @param code_user: Código del usuario logeado
+ * @param friends: Lista de amigos
+ */
+void manage_requests(User_list* user_list, Requests* requests_list, Friends* friends) {
+    int option_requests = -1;
+    if(requests_list->head < requests_list->tail){
+        for (int i = requests_list->head; i < requests_list->tail && option_requests != 0; i++) {
+            printf("\n%s\n", LINEA_ASTERISCOS);
+            printf("Que deseas hacer con la solicitud de %s?\n", search_user_code(user_list, requests_list->code_request[i])->id_name);
+            printf("1.- Aceptar\n");
+            printf("2.- Rechazar\n");
+            printf("0.- Atras\n");
+            printf("Elija una opcion:\n");
+            scanf("%d", &option_requests);
+
+            if (option_requests == 1) {
+                delete_request(requests_list);
+                accept_requests(requests_list, friends, requests_list->code_user, requests_list->code_request[i]);
+                printf("Solicitud aceptada.\n");
+            }
+            else if (option_requests == 2) {
+                delete_request(requests_list);
+                printf("Solicitud rechazada.\n");
+            }
+            else if (option_requests == 0) {
+                printf("Saliendo de la gestion de solicitudes...\n");
+            }
+        }
+    }
+    else{
+        for (int j = requests_list->tail; j < requests_list->head; ++j){
+            printf("\n%s\n", LINEA_ASTERISCOS);
+            printf("Que deseas hacer con la solicitud de %s?\n", search_user_code(user_list, requests_list->code_request[j])->id_name);
+            printf("1.- Aceptar\n");
+            printf("2.- Rechazar\n");
+            printf("0.- Atras\n");
+            printf("Elija una opcion:\n");
+            scanf("%d", &option_requests);
+            if (option_requests == 1) {
+                delete_request(requests_list);
+                accept_requests(requests_list, friends, requests_list->code_user, requests_list->code_request[j]);
+                printf("Solicitud aceptada.\n");
+            }
+            else if (option_requests == 2) {
+                delete_request(requests_list);
+                printf("Solicitud rechazada.\n");
+            }
+            else if (option_requests == 0) {
+                printf("Saliendo de la gestion de solicitudes...\n");
+            }
+        }
+    }
+}
+
 
 
 /**

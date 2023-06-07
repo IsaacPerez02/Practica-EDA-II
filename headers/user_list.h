@@ -31,12 +31,4 @@ void loading_users(FILE* fa, User_list** list);
 void save_all_users(User_list* list, FILE* fa); //FALTA, Isaac lo hace
 User* check_user_password(User_list * list, char id_name[MAX_ID_NAME_LENGHT] ,char password[MAX_PASSWORD_LENGHT]);
 
-//Funciones de las solicitudes
-void add_request_to_user_list(User_list** user_list, char* friend_name, int code_user);
-void manage_requests(User_list** user_list, int code_user, Friends* friends);
-void print_requests(User_list* user_list, Requests requests);
-
-//Funciones de los amigos
-void print_friends(User_list* user_list, int friends[MAX_FRIENDS]);
-
 #endif //UNTITLED4_USER_LIST_H

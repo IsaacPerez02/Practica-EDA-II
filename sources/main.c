@@ -139,7 +139,7 @@ int main() {
                     }
                     else if (option_usuario == 3) {
                         Friends* friends_user = search_user_friends(friends_list, login_us->code);
-                        print_friends_graph(friends_user);
+                        print_friends_graph(users_list, friends_user);
                     }
                     else if (option_usuario == 4) {
                         char text[MAX_TEXT_LENGTH];

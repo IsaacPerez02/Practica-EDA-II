@@ -25,8 +25,6 @@ typedef struct {
     char correo[MAX_CORREO_LENGHT];
     char ubicacion[MAX_CITY_LENGHT];
     char gustos [MAX_GUSTOS][GUSTOS_LENGTH];
-    int friends[MAX_FRIENDS];
-    Requests requests;
 } User;
 
 User* create_user(char gustos[MAX_GUSTOS][GUSTOS_LENGTH]);
@@ -37,9 +35,5 @@ int verify_correo_user(char* correo);
 int verify_edad_user(int edad);
 int verify_ciudad_user(char* city);
 int verify_gusto_user(char gustos[5][GUSTOS_LENGTH], char gusto[GUSTOS_LENGTH]); //FALTA
-
-int count_friends(int friends[MAX_FRIENDS]);
-void add_friends(User* us, int code_friend);
-void delete_friends(User* us, int delete_id_code);
 
 #endif //UNTITLED4_USER_H

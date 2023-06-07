@@ -77,10 +77,6 @@ void add_user(User_list** list, char id_name[MAX_ID_NAME_LENGHT], char name[MAX_
     strcpy(new_user->us->gustos[2], gustos[2]);
     strcpy(new_user->us->gustos[3], gustos[3]);
     strcpy(new_user->us->gustos[4], gustos[4]);
-    init_requests(&new_user->us->requests);
-    for (int i = 0; i < MAX_FRIENDS; i++) {
-        new_user->us->friends[i] = 0;
-    }
     new_user->next = NULL;
     new_user->prev = NULL;
     User_list* temp = *list;
