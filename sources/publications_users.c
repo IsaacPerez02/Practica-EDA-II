@@ -28,6 +28,7 @@ void load_publications(Publications* publications, FILE* fp) {
     while(fscanf(fp, "%d. ", &code) > 0){
         publications[i].code_user = code;
         fgets(text, MAX_TEXT_LENGTH * MAX_PUBLICATIONS, fp);
+        text[strcspn(text, "\n")] = '\0'; // Eliminar salto de línea del final
         strcpy(publications[i].publication, text);
         i++;
     }
