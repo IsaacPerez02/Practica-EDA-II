@@ -208,10 +208,11 @@ int main() {
                             printf("Ese usuario no existe.\n");
                         }
                     } else if (option_usuario == 7) {
-                        start = clock();
+                        clock_t start2, end2;
+                        start2 = clock();
                         show_timeline(publications_list, friends_list, users_list, *login_us);
-                        end = clock();
-                        clock_time = ((double) (end - start)) / CLOCKS_PER_SEC;
+                        end2 = clock();
+                        clock_time = ((double) (end2 - start2)) / CLOCKS_PER_SEC;
                         printf("Tiempo de ejecucion para mostrar el timeline: %f segundos.\n", clock_time);
                     } else if (option_usuario == 0) {
                         printf("Cerrando sesion...\n");
@@ -265,7 +266,7 @@ int main() {
                 printf("¡¡No se han encontrado los archivos!! ¡¡Los usuarios agregados NO van a ser guardados y sus respectivas acciones tampoco!!\n");
             }
             printf("\n%s\n", LINEA_ASTERISCOS);
-            printf("Saliendo del programa...");
+            printf("Saliendo del programa...\n");
             end = clock();
             clock_time = ((double) (end - start)) / CLOCKS_PER_SEC;
             printf("Tiempo de ejecucion para guardar los datos de los archivos: %f segundos.\n", clock_time);
