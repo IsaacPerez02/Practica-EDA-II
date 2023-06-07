@@ -43,7 +43,7 @@ int main() {
         fclose(init);
         //requests
         request_list = init_requests_user();
-        requests_stack = init_stack();
+        //requests_stack = init_stack();
         load_requests(request_list, fr);
         fclose(fr);
         //friends
