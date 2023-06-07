@@ -24,11 +24,12 @@ Publications* init_publications() {
  */
 void load_publications(Publications* publications, FILE* fp) {
     int code, i = 0;
-    char text[MAX_TEXT_LENGTH], text_title[MAX_TITLE_LENGTH];
+    char *text, *text_title;
     while(fscanf(fp, "%d. ", &code) > 0){
         publications[i].code_user = code;
         fgets(text, MAX_TEXT_LENGTH * MAX_PUBLICATIONS, fp);
-        sscanf(text, "%s|%s", text_title, text);
+        text_title = strtok(text, "|");
+        text = strtok(NULL, "|");
         text[strcspn(text, "\n")] = '\0';
         strcpy(publications[i].title_publication, text_title);
         strcpy(publications[i].publication, text);
