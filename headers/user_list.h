@@ -29,5 +29,6 @@ User* search_user_code(User_list* list, int code);
 void loading_users(FILE* fa, User_list** list);
 void save_all_users(User_list* list, FILE* fa); //FALTA, Isaac lo hace
 User* check_user_password(User_list * list, char id_name[MAX_ID_NAME_LENGHT] ,char password[MAX_PASSWORD_LENGHT]);
+int get_num_users(User_list* user_list);
 
 #endif //UNTITLED4_USER_LIST_H

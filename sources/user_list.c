@@ -285,3 +285,12 @@ int create_code(User_list** list) {
     }
     return code; //Al final, devolvemos el código que no coincida con ningún otro usuario
 }
+
+int get_num_users(User_list* user_list) {
+    User_list* heap = user_list;
+    int size = 0;
+    while (heap != NULL) {
+        size++;
+        heap = heap->next;
+    }
+}

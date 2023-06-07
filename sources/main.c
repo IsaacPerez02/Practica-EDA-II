@@ -4,6 +4,7 @@
 #include "../headers/user_list.h"
 #include "../headers/publications_users.h"
 #include "../headers/requests_queue.h"
+#include "../headers/requests_stack.h"
 
 #define MAX_FRIENDS 10
 #define MAX_USERS 20
@@ -23,6 +24,7 @@ int main() {
     Friends* friends_list;
     Requests* request_list;
     Publications* publications_list;
+    Requests_stack requests_stack;
     User *us; //Variable para la creación de un usuario
 
     //Comprobamos que el archivo existe. Si existe, cargamos la lista de usuarios del archivo y mostramos el menú
@@ -41,6 +43,7 @@ int main() {
         fclose(init);
         //requests
         request_list = init_requests_user();
+        requests_stack = init_stack();
         load_requests(request_list, fr);
         fclose(fr);
         //friends
@@ -106,11 +109,12 @@ int main() {
                 while (option_usuario != 0) {
                     printf("\n%s\n", LINEA_ASTERISCOS);
                     printf("1.- Enviar solicitud de amistad\n");
-                    printf("2.- Gestionar solicitudes pendientes\n");
-                    printf("3.- Listar amigos\n");
-                    printf("4.- Realizar una publicacion\n");
-                    printf("5.- Listar las publicaciones de un usuario\n");
-                    printf("6.- Revisar timeline\n");
+                    printf("2.- Conocer a usuarios desconocidos\n");
+                    printf("3.- Gestionar solicitudes pendientes\n");
+                    printf("4.- Listar amigos\n");
+                    printf("5.- Realizar una publicacion\n");
+                    printf("6.- Listar las publicaciones de un usuario\n");
+                    printf("7.- Revisar timeline\n");
                     printf("0.- Cerrar sesion y volver al menu principal\n");
                     printf("Elija una opcion:\n");
                     scanf("%d", &option_usuario);
@@ -125,16 +129,24 @@ int main() {
                         user_requests = search_user_id_name(users_list, check_friend_name);
 
                         if (user_requests != NULL) {
-                            requests_user = search_user_requests(request_list, login_us->code);
-                            add_requests(requests_user, user_requests->code);
-                            requests_user = search_user_requests(request_list, user_requests->code);
-                            add_requests(requests_user, login_us->code);
-                            printf("Solicitud enviada.\n");
+                            if (user_requests != login_us) {
+                                requests_user = search_user_requests(request_list, user_requests->code);
+                                if(requests_user != NULL){}
+                                add_requests(requests_user, login_us->code);
+                                printf("Solicitud enviada.\n");
+                            }
+                            else {
+                                printf("No puedes enviarte una solicitud a ti mismo.\n");
+                            }
+
                         } else {
                             printf("Ese usuario no existe.\n");
                         }
                     }
                     else if (option_usuario == 2) {
+
+                    }
+                    else if (option_usuario == 3) {
                         Requests* requests_loged_user = search_user_requests(request_list, login_us->code);
                         if (requests_loged_user != NULL){
                             print_requests_graph(users_list, requests_loged_user);
@@ -144,7 +156,7 @@ int main() {
                             printf("El usuario no tiene inicializados los requests!!!\n");
                         }
                     }
-                    else if (option_usuario == 3) {
+                    else if (option_usuario == 4) {
                         Friends* friends_user = search_user_friends(friends_list, login_us->code);
                         if(friends_user != NULL){
                             print_friends_graph(users_list, friends_user);
@@ -153,7 +165,7 @@ int main() {
                             printf("El usuario no tiene inicializados los amigos!!!\n");
                         }
                     }
-                    else if (option_usuario == 4) {
+                    else if (option_usuario == 5) {
                         char text[MAX_TEXT_LENGTH];
                         printf("Escriba su publicacion (120 MAX): \n");
                         while (getchar() != '\n');
@@ -167,7 +179,7 @@ int main() {
                             printf("Tu publicacion excede 120 caracteres.\n");
                         }
                     }
-                    else if (option_usuario == 5) {
+                    else if (option_usuario == 6) {
                         char check_user_name[MAX_ID_NAME_LENGHT];
                         User *user;
                         printf("Introduzca el nombre de usuario al que quiera mirar sus publicaciones:\n");
@@ -179,7 +191,7 @@ int main() {
                         } else {
                             printf("Ese usuario no existe.\n");
                         }
-                    } else if (option_usuario == 6) {
+                    } else if (option_usuario == 7) {
                         show_timeline(publications_list, friends_list, users_list, *login_us);
                     } else if (option_usuario == 0) {
                         printf("Cerrando sesion...\n");
