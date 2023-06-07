@@ -52,8 +52,8 @@ void modify_value(Dict* dict, char word[MAX_WORD_LENGHT]){
 void manage_words_dict(Dict* dict, char text[MAX_WORD_LENGHT]){
     int election;
     char *word = strtok(text, " ");
-    add_value(dict, word);
     election = search_by_value(dict, word);
+    printf("%d", election);
     if(election == TRUE){
         modify_value(dict, word);
     }
@@ -77,8 +77,35 @@ void manage_words_dict(Dict* dict, char text[MAX_WORD_LENGHT]){
 int search_by_value(Dict* dict, char word[MAX_WORD_LENGHT]){
     for (int i = 0; i < MAX_NUM_WORDS; ++i) {
         if (strcmp(word, dict->words[i].word) == 0){
+            printf("True");
             return TRUE;
         }
     }
+    printf("False");
     return FALSE;
+}
+
+void order_selection_sort_dict(Dict* dict){
+    int minimo, aux_num;
+    char aux[MAX_WORD_LENGHT];
+    for (int i = 0; i < MAX_NUM_WORDS - 1; ++i) {
+        minimo = i;
+        for (int j = i+1; j < MAX_NUM_WORDS; ++j) {
+            if (dict->words[j].num_words < dict->words[minimo].num_words){
+                minimo = j;
+            }
+        }
+        aux_num = dict->words[minimo].num_words;
+        strcmp(aux, dict->words[minimo].word);
+        dict->words[minimo].num_words =  dict->words[i].num_words;
+        strcmp(dict->words[minimo].word, dict->words[i].word);
+        dict->words[i].num_words = aux_num;
+        strcmp(dict->words[i].word, aux);
+    }
+}
+
+void print_words_10(Dict* dict){
+    for (int i = 0; i < dict->count; ++i) {
+        printf("%d. %s\n", dict->words[i].num_words ,dict->words[i].word);
+    }
 }

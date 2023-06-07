@@ -181,6 +181,7 @@ int main() {
 
                         if (strlen(text_publications) <= MAX_TEXT_LENGTH) {
                             create_publication(publications_list, login_us->code, text_publications);
+                            manage_words_dict(dict, text_publications);
                             printf("Publicacion realizada\n");
                         } else {
                             printf("Tu publicacion excede 120 caracteres.\n");
@@ -211,7 +212,8 @@ int main() {
             }
         }
         else if (option_menu == 4) {
-            //Mostrar 10 palabras más usadas
+            //order_selection_sort_dict(dict);
+            print_words_10(dict);
         }
         else if (option_menu == 0) {
             status = SUCCESS;
