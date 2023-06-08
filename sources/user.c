@@ -282,18 +282,3 @@ int verify_gusto_user(char gustos[5][GUSTOS_LENGTH], char gusto[GUSTOS_LENGTH]) 
     }
     return TRUE;
 }
-
-/**
- * Funcion para contar el numero de amigos totales que tenemos
- * @param friends
- * @return numero de amigos totales
- */
-int count_friends(int friends[MAX_FRIENDS]){
-    int counter = 0;
-    for (int i = 0; i < MAX_FRIENDS; ++i) {
-        if (friends[i] != 0){
-            counter++;
-        }
-    }
-    return counter;
-}

@@ -287,6 +287,11 @@ int create_code(User_list** list) {
     return code; //Al final, devolvemos el código que no coincida con ningún otro usuario
 }
 
+/**
+ * Devuelve la cantidad de usuarios que hay en el sistema
+ * @param user_list: lista de usuarios del sistema
+ * @return: cantidad de usuarios de la lista
+ */
 int get_num_users(User_list* user_list) {
     User_list* heap = user_list;
     int size = 0;

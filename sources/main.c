@@ -17,16 +17,15 @@ int main() {
     char gustos[MAX_GUSTOS][GUSTOS_LENGTH] = {"Deporte", "Arte", "Informatica", "Religion", "Animales", "Videojuegos",
                                               "Fiesta", "Estudiar", "Viajes", "Politica"}; //Gustos disponibles
     User_list* users_list = NULL; //Lista de usuarios
-    Friends* friends_list;
-    Requests* requests_list;
-    Publications* publications_list;
-    Dict* dict;
+    Friends* friends_list; //Lista de amigos de los usuarios
+    Requests* requests_list; //Lista de solicitudes de los usuarios
+    Publications* publications_list; //Lista de publicaciones de los usuarios
+    Dict* dict; //Diccionario que contiene todas las palabras distintas de todas las publicaciones y la cantidad de veces que aparecen
     User *us; //Variable para la creación de un usuario
-    clock_t start, end;
+    clock_t start, end; //Variables para medir el tiempo de ejecución
     double clock_time = 0.0;
 
-    //Comprobamos que el archivo existe. Si existe, cargamos la lista de usuarios del archivo y mostramos el menú
-    //Si no existe el archivo, cerramos el programa
+    //Comprobación de que existan los archivos
     FILE *init = fopen("../resources/users.txt", "r");
     if (init == NULL) status = ERROR;
     FILE *fr = fopen("../resources/requests.txt", "r");
@@ -91,7 +90,6 @@ int main() {
         } else if (option_menu == 2) {
             print_users(users_list);
         } else if (option_menu == 3) {
-            start = clock();
             char login_user[MAX_ID_NAME_LENGHT];
             char login_pass[MAX_PASSWORD_LENGHT];
             User *login_us;
@@ -106,6 +104,7 @@ int main() {
 
             //Si el usuario se encuentra en la lista, abrimos el menú de gestión del usuario
             if (login_us != NULL) {
+                start = clock();
                 printf("Bienvenido, %s.\n", login_us->id_name);
                 option_usuario = -1;
                 //Menú de gestión del usuario. Opciones:
@@ -130,17 +129,18 @@ int main() {
 
                     if (option_usuario == 1) {
                         char check_friend_name[MAX_ID_NAME_LENGHT];
-                        Requests* requests_user;
-                        User* user_requests;
+                        Requests* requests_user; //Lista de solicitudes del usuario al que queremos enviar solicitud
+                        User* user_requests; //Usuario al que queremos mandar la solicitud
                         printf("Introduzca el nombre de usuario al que quiera agregar como amigo:\n");
                         scanf("%s", check_friend_name);
 
                         user_requests = search_user_id_name(users_list, check_friend_name);
 
+                        //Comprobamos que el usuario exista y que no sea el propio usuario
                         if (user_requests != NULL) {
                             if (user_requests != login_us) {
+                                //Coge la lista de solicitudes del usuario al que mandamos solicitud y le agregamos nuestro código
                                 requests_user = search_user_requests(requests_list, user_requests->code);
-                                //if(requests_user != NULL){}
                                 add_requests(requests_user, login_us->code);
                             }
                             else {
@@ -159,6 +159,7 @@ int main() {
                         manage_stack(users_list, requests_list, requests_stack, login_us->code, publications_list);
                     }
                     else if (option_usuario == 3) {
+                        //Coge nuestra lista de solicitudes
                         Requests* requests_loged_user = search_user_requests(requests_list, login_us->code);
                         if (requests_loged_user != NULL){
                             print_requests_graph(users_list, requests_loged_user);
@@ -169,6 +170,7 @@ int main() {
                         }
                     }
                     else if (option_usuario == 4) {
+                        //Coge nuestra lista de amigos
                         Friends* friends_user = search_user_friends(friends_list, login_us->code);
                         if(friends_user != NULL){
                             print_friends_graph(users_list, friends_user);
