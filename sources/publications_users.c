@@ -6,7 +6,7 @@
 
 /**
  * Inicializa las variables de las publicaciones de los usuarios del sistema
- * @return
+ * @return: arreglo de publicaciones de todos los usuarios inicializado
  */
 Publications* init_publications() {
     Publications* publications_list = (Publications*) malloc(sizeof (Publications) * MAX_USERS);
@@ -18,9 +18,10 @@ Publications* init_publications() {
 }
 
 /**
- * Carga las publicaciones del archivo de todos los usuarios
- * @param publications
- * @param fp
+ * Carga las publicaciones del archivo de publicaciones
+ * Estructura del archivo: 'código del usuario' 'texto de la publicación'
+ * @param publications: lista de publicaciones de los usuarios
+ * @param fp: archivo de publicaciones
  */
 void load_publications(Publications* publications, FILE* fp) {
     int code, i = 0;
@@ -88,10 +89,16 @@ void show_timeline(Publications* publications_list, Friends* friends_list, User_
     }
 }
 
+/**
+ * Guarda la lista de publicaciones de todos los usuarios en el archivo de publicaciones
+ * @param publications: lista de publicaciones de los usuarios
+ * @param fp: archivo de publicaciones
+ */
 void save_publications(Publications* publications, FILE* fp){
     for (int i = 0; i < MAX_USERS; ++i) {
         if(publications[i].code_user != 0){
             fprintf(fp, "%d. %s\n", publications[i].code_user, publications[i].publication);
         }
     }
+    free(publications);
 }

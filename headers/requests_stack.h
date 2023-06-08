@@ -8,6 +8,11 @@
 #include <stdlib.h>
 #include <time.h>
 
+/**
+ * Stack de solicitudes. Su función es buscar 3 usuarios al azar para enviarles solicitud o no
+ * requests_code: Lista de solicitudes de los usuarios elegidos al azar
+ * top: ïndice del siguiente usuario a añadir
+ */
 typedef struct {
     int requests_code[3];
     int top;

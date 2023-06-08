@@ -8,17 +8,6 @@
 #define TRUE 1
 #define FALSE 0
 
-#define MAX_ID_NAME_LENGHT 20
-#define MAX_NAME_LENGHT 20
-#define MAX_PASSWORD_LENGHT 20
-#define MAX_CORREO_LENGHT 30
-#define MAX_CITY_LENGHT 20
-#define MAX_GUSTOS 10
-#define MAX_USERS 20
-#define GUSTOS_LENGTH 20
-#define ERROR -1
-#define LINEA_ASTERISCOS "***************************"
-
 /**
  * Crea a un nuevo usuario
  * @param gustos: Gustos que podrá elegir el usuario

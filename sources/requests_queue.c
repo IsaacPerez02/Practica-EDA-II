@@ -93,10 +93,10 @@ void add_requests(Requests* requests, int new_request) {
 }
 
 /**
- *
- * @param requests
- * @param code_user
- * @return
+ * Busca la lista de solicitudes de un usuario
+ * @param requests: lista de solicitudes de todos los usuarios
+ * @param code_user: código del usuario a buscar
+ * @return: lista de solicitudes del usuario a buscar
  */
 Requests* search_user_requests(Requests* requests, int code_user){
     for (int i = 0; i < MAX_USERS; ++i) {
@@ -108,12 +108,12 @@ Requests* search_user_requests(Requests* requests, int code_user){
 }
 
 /**
- *
- * @param friends
- * @param code_user
- * @param code_new_friend
+ * Acepta la solicitud de un usuario y se vuelven amigos
+ * @param friends: lista de amigos de todos los usuarios
+ * @param code_user: código del usuario que acepta la solicitud
+ * @param code_new_friend: código del usuario de la solicitud
  */
-void accept_requests(Requests* requests, Friends* friends, int code_user, int code_new_friend){
+void accept_requests(Friends* friends, int code_user, int code_new_friend){
     Friends* friend = search_user_friends(friends, code_user);
     add_friend(friend, code_new_friend);
     friend = search_user_friends(friends, code_new_friend);
@@ -147,6 +147,7 @@ void delete_request(Requests* requests) {
 void manage_requests(User_list* user_list, Requests* requests_list, Friends* friends) {
     int option_requests = -1;
     if(requests_list->head < requests_list->tail){
+        //Gestión de solicitud de un usuario. Al no tener más solicitudes, saldremos de la gestión de solicitudes
         for (int i = requests_list->head; i < requests_list->tail && option_requests != 0; i++) {
             printf("\n%s\n", LINEA_ASTERISCOS);
             printf("Que deseas hacer con la solicitud de %s?\n", search_user_code(user_list, requests_list->code_request[i])->id_name);
@@ -157,12 +158,12 @@ void manage_requests(User_list* user_list, Requests* requests_list, Friends* fri
             scanf("%d", &option_requests);
 
             if (option_requests == 1) {
-                accept_requests(requests_list, friends, requests_list->code_user, requests_list->code_request[i]);
-                delete_request(requests_list);
+                accept_requests(friends, requests_list->code_user, requests_list->code_request[i]);
+                delete_request(requests_list); //Al aceptar la solicitud, la borramos de la lista del usuario
                 printf("Solicitud aceptada.\n");
             }
             else if (option_requests == 2) {
-                delete_request(requests_list);
+                delete_request(requests_list); //Borramos la solicitud directamente sin añadirlo como amigo
                 printf("Solicitud rechazada.\n");
             }
             else if (option_requests == 0) {
@@ -180,12 +181,12 @@ void manage_requests(User_list* user_list, Requests* requests_list, Friends* fri
             printf("Elija una opcion:\n");
             scanf("%d", &option_requests);
             if (option_requests == 1) {
-                delete_request(requests_list);
-                accept_requests(requests_list, friends, requests_list->code_user, requests_list->code_request[j]);
+                accept_requests(friends, requests_list->code_user, requests_list->code_request[j]);
+                delete_request(requests_list); //Al aceptar la solicitud, la borramos de la lista del usuario
                 printf("Solicitud aceptada.\n");
             }
             else if (option_requests == 2) {
-                delete_request(requests_list);
+                delete_request(requests_list); //Borramos la solicitud directamente sin añadirlo como amigo
                 printf("Solicitud rechazada.\n");
             }
             else if (option_requests == 0) {
@@ -220,11 +221,13 @@ void save_requests(Requests* requests, FILE* fr){
             }
         }
     }
+    free(requests);
 }
 
 /**
- *
- * @param requests
+ * Muestra por consola la lista de solicitudes de un usuario
+ * @param list: lista de usuarios del sistema
+ * @param requests: lista de solicitudes del usuario logeado
  */
 void print_requests_graph(User_list* list, Requests* requests){
     int i = 1;

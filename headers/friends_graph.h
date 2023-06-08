@@ -7,6 +7,12 @@
 #include "defines.h"
 #include "user_list.h"
 
+/**
+ * Lista de amigos que tiene un usuario
+ * code_user: Código de la lista de amigos de un usuario
+ * num_friends: Cantidad de amigos que tiene un usuario
+ * code_friends: Arreglo de amigos que tiene un usuario
+ */
 typedef struct {
     int code_user;
     int num_friends;

@@ -7,6 +7,8 @@
 
 /**
  * Arreglo de publicaciones de un usuario
+ * code_user: Código de la lista de publicaciones de un usuario
+ * publication: Publicaciones del usuario
  */
 typedef struct {
     int code_user;

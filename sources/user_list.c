@@ -144,6 +144,7 @@ void save_all_users(User_list* list, FILE* fa){
         heap = heap->next;
     }
     fprintf(fa, "%s %s %d %s %d %s %s %s %s %s %s %s\n", heap->us->id_name, heap->us->nombre, heap->us->code, heap->us->contrasena, heap->us->edad, heap->us->correo, heap->us->ubicacion, heap->us->gustos[0], heap->us->gustos[1], heap->us->gustos[2], heap->us->gustos[3], heap->us->gustos[4]);
+    free(list);
 }
 
 /**

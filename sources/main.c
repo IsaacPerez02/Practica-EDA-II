@@ -262,6 +262,7 @@ int main() {
                 //publications
                 save_publications(publications_list, fpub_save);
                 fclose(fpub_save);
+                free_dict(dict);
             } else {
                 printf("¡¡No se han encontrado los archivos!! ¡¡Los usuarios agregados NO van a ser guardados y sus respectivas acciones tampoco!!\n");
             }

@@ -32,7 +32,7 @@ void add_requests(Requests* requests, int new_request);
 Requests* search_user_requests(Requests* requests, int code_user);
 void manage_requests(User_list* user_list, Requests* requests_list, Friends* friends);
 int is_empty_requests(Requests* requests);
-void accept_requests(Requests* requests, Friends* friends, int code_user, int code_new_friend);
+void accept_requests(Friends* friends, int code_user, int code_new_friend);
 void delete_request(Requests* requests);
 void save_requests(Requests* requests, FILE* fr);
 void print_requests_graph(User_list* list, Requests* requests);
