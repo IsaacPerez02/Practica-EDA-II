@@ -174,6 +174,7 @@ void delete_user (User_list** list, User* us){
 void print_users(User_list* list){
     User_list* heap = list;
     while (heap != NULL){
+        printf("\n%s%s\n\n", LINEA_ASTERISCOS, LINEA_ASTERISCOS);
         printf("***Nombre usuario: %s***\n", heap->us->id_name);
         printf("Nombre: %s\n", heap->us->nombre);
         printf("Codigo: %d\n", heap->us->code);
@@ -182,8 +183,7 @@ void print_users(User_list* list){
         printf("Ubicacion: %s\n", heap->us->ubicacion);
         printf("Correo: %s\n", heap->us->correo);
         printf("Gustos: %s, %s, %s, %s, %s\n", heap->us->gustos[0], heap->us->gustos[1], heap->us->gustos[2], heap->us->gustos[3], heap->us->gustos[4]);
-        //printf("%s %s %d %s %d %s %s %s %s %s %s %s\n", heap->us->id_name, heap->us->nombre, heap->us->code_user, heap->us->contrasena, heap->us->edad, heap->us->ubicacion, heap->us->correo, heap->us->gustos[0], heap->us->gustos[1], heap->us->gustos[2], heap->us->gustos[3], heap->us->gustos[4]);
-        printf("%s\n", LINEA_GUION);
+        printf("\n%s%s\n\n", LINEA_ASTERISCOS, LINEA_ASTERISCOS);
         heap = heap->next;
     }
 }

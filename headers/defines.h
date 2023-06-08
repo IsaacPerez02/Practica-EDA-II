@@ -9,7 +9,7 @@
 //Cantidad máxima de solicitudes que puede tener un usuario
 #define MAX_REQUESTS 10
 //String para imprimir por consola
-#define LINEA_ASTERISCOS "******************************"
+#define LINEA_ASTERISCOS "**********************************"
 //String para imprimir por consola
 #define LINEA_GUION "---------------"
 //FALSE
@@ -21,7 +21,7 @@
 //Cantidad máxima de publicaciones que puede tener un usuario
 #define MAX_PUBLICATIONS 10
 //Cantidad máxima de caracteres que puede tener una publicación
-#define MAX_TEXT_LENGTH 120
+#define MAX_TEXT_LENGTH 1000
 //Cantidad máxima de palabras que puede haber en el sistema
 #define MAX_NUM_WORDS 1000
 //Cantidad máxima de caracteres que puede haber en un nombre de usuario
@@ -38,5 +38,9 @@
 #define MAX_GUSTOS 10
 //Cantidad máxima de caracteres que puede haber en un gusto
 #define GUSTOS_LENGTH 20
+//Error en una función del programa
+#define ERROR -1
+//Éxito en una función del programa
+#define SUCCESS 1
 
 #endif //UNTITLED4_DEFINES_H

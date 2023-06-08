@@ -28,7 +28,7 @@ void load_publications(Publications* publications, FILE* fp) {
     char text[MAX_TEXT_LENGTH];
     while(fscanf(fp, "%d. ", &code) > 0){
         publications[i].code_user = code;
-        fgets(text, MAX_TEXT_LENGTH * MAX_PUBLICATIONS, fp);
+        fgets(text, MAX_TEXT_LENGTH, fp);
         text[strcspn(text, "\n")] = '\0'; // Eliminar salto de línea del final
         strcpy(publications[i].publication, text);
         i++;
@@ -63,6 +63,7 @@ void print_publications(Publications* publications_list, User us) {
     for (int i = 0; i < MAX_PUBLICATIONS; ++i) {
         if(us.code == publications_list[i].code_user){
             printf("%s\n", publications_list[i].publication);
+            printf("\n%s%s\n\n", LINEA_ASTERISCOS, LINEA_ASTERISCOS);
         }
     }
 }

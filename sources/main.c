@@ -8,14 +8,8 @@
 #include "../headers/requests_stack.h"
 #include "../headers/dicctionary_topic.h"
 
-#define MAX_FRIENDS 10
-#define MAX_USERS 20
-
-#define ERROR -1
-#define SUCCESS 1
-#define LINEA_ASTERISCOS "******************************"
-
 int main() {
+    printf("\n\n\t\t\tWork with friends\n\n");
     //Declaración de variables
     int option_menu = -1; //Opción del menú principal que el usuario escribirá por consola
     int option_usuario; //Opción de menú de operar como otro usuario
@@ -71,13 +65,15 @@ int main() {
     //2: Lista la información de todos los usuarios de la lista
     //3: Iniciamos sesión con un usuario. Para ello, necesitamos el nombre de usuario y su contraseña
     while (option_menu != 0) {
-        printf("\n%s\n", LINEA_ASTERISCOS);
+        printf("\n%s%s\n\n", LINEA_ASTERISCOS, LINEA_ASTERISCOS);
         printf("1.- Crear nuevo usuario\n");
         printf("2.- Listar todos los usuarios\n");
         printf("3.- Operar como otro usuario\n");
         printf("4.- Mostrar 10 palabras mas usadas\n");
+        printf("5.- Imprimir la lista adyacente de requests por pantalla\n");
+        printf("6.- Imprimir la lista adyacente de amigos por pantalla\n");
         printf("0.- Salir del programa\n");
-        printf("%s\n", LINEA_ASTERISCOS);
+        printf("\n%s%s\n\n", LINEA_ASTERISCOS, LINEA_ASTERISCOS);
         printf("\nElija una opcion:\n");
         scanf("%d", &option_menu);
 
@@ -99,11 +95,12 @@ int main() {
             char login_user[MAX_ID_NAME_LENGHT];
             char login_pass[MAX_PASSWORD_LENGHT];
             User *login_us;
-            printf("\n%s\n", LINEA_ASTERISCOS);
+            printf("\n%s%s\n\n", LINEA_ASTERISCOS, LINEA_ASTERISCOS);
             printf("Introduzca el nombre de usuario:\n");
             scanf("%s", login_user);
             printf("Introduzca la contrasena:\n");
             scanf("%s", login_pass);
+            printf("\n%s%s\n\n", LINEA_ASTERISCOS, LINEA_ASTERISCOS);
             //Comprobamos si el nombre de usuario introducido se encuentra en la lista de usuarios
             login_us = check_user_password(users_list, login_user, login_pass);
 
@@ -118,7 +115,7 @@ int main() {
                 //4: Muestra todas las publicaciones de un usuario específico
                 //5: Muestra todas las publicaciones de todos tus amigos
                 while (option_usuario != 0) {
-                    printf("\n%s\n", LINEA_ASTERISCOS);
+                    printf("\n%s%s\n\n", LINEA_ASTERISCOS, LINEA_ASTERISCOS);
                     printf("1.- Enviar solicitud de amistad\n");
                     printf("2.- Conocer a usuarios desconocidos\n");
                     printf("3.- Gestionar solicitudes pendientes\n");
@@ -127,6 +124,7 @@ int main() {
                     printf("6.- Listar las publicaciones de un usuario\n");
                     printf("7.- Revisar timeline\n");
                     printf("0.- Cerrar sesion y volver al menu principal\n");
+                    printf("\n%s%s\n\n", LINEA_ASTERISCOS, LINEA_ASTERISCOS);
                     printf("Elija una opcion:\n");
                     scanf("%d", &option_usuario);
 
@@ -235,6 +233,24 @@ int main() {
             printf("Tiempo de ejecucion para ordenar el diccionario: %f segundos.\n", clock_time);
             print_words_10(dict);
         }
+        else if (option_menu == 5){
+            for (int i = 0; i < MAX_FRIENDS; ++i) {
+                if(requests_list[i].code_user != 0){
+                    User* user_graph_friends = search_user_code(users_list, requests_list[i].code_user);
+                    printf("Los amigos de %s son: \n", user_graph_friends->id_name);
+                    print_requests_graph(users_list, &requests_list[i]);
+                }
+            }
+        }
+        else if (option_menu == 6){
+            for (int i = 0; i < MAX_FRIENDS; ++i) {
+                if(friends_list[i].code_user != 0){
+                    User* user_graph_friends = search_user_code(users_list, friends_list[i].code_user);
+                    printf("Los amigos de %s son: \n", user_graph_friends->id_name);
+                    print_friends_graph(users_list, friends_list);
+                }
+            }
+        }
         else if (option_menu == 0) {
             start = clock();
             status = SUCCESS;
@@ -266,8 +282,9 @@ int main() {
             } else {
                 printf("¡¡No se han encontrado los archivos!! ¡¡Los usuarios agregados NO van a ser guardados y sus respectivas acciones tampoco!!\n");
             }
-            printf("\n%s\n", LINEA_ASTERISCOS);
-            printf("Saliendo del programa...\n");
+            printf("\n%s%s\n", LINEA_ASTERISCOS, LINEA_ASTERISCOS);
+            printf("\t\t\tSaliendo del programa...\n");
+            printf("\n%s%s\n", LINEA_ASTERISCOS, LINEA_ASTERISCOS);
             end = clock();
             clock_time = ((double) (end - start)) / CLOCKS_PER_SEC;
             printf("Tiempo de ejecucion para guardar los datos de los archivos: %f segundos.\n", clock_time);

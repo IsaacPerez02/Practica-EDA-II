@@ -128,5 +128,5 @@ void print_friends_graph(User_list* list, Friends* friends){
         printf("%d. %s\n", i, us->id_name);
         i++;
     }
-    printf("\n");
+    printf("\n%s%s\n\n", LINEA_ASTERISCOS, LINEA_ASTERISCOS);
 }

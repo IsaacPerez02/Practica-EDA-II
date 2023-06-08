@@ -246,4 +246,5 @@ void print_requests_graph(User_list* list, Requests* requests){
             i++;
         }
     }
+    printf("\n%s%s\n\n", LINEA_ASTERISCOS, LINEA_ASTERISCOS);
 }

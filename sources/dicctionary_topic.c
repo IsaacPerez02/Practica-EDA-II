@@ -155,10 +155,11 @@ void print_words_10(Dict* dict){
     int count = 0;
     for (int i = dict->size - 1; i > -1; i--) {
         if(dict->words[i].num_words != 0 && count < 10){
-            printf("%d. %s\n", dict->words[i].num_words ,dict->words[i].word);
+            printf("%d. La palabra %s se utiliza %d veces\n", count + 1,dict->words[i].word, dict->words[i].num_words);
             count++;
         }
     }
+    printf("\n%s%s\n\n", LINEA_ASTERISCOS, LINEA_ASTERISCOS);
 }
 
 /**
