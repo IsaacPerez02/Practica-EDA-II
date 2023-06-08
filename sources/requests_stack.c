@@ -25,7 +25,7 @@ void add_request_stack(Requests_stack* requests_stack, int code_request) {
 
 void delete_request_stack(Requests_stack* requests_stack) {
     int top = requests_stack->top;
-    requests_stack->requests_code[top] = 0;
+    requests_stack->requests_code[top - 1] = 0;
     requests_stack->top--;
 }
 
@@ -82,12 +82,12 @@ void manage_stack(User_list* user_list, Requests* requests_list, Requests_stack 
     User* stack_user;
     Requests* stack_requests;
     printf("***** Usuarios *****\n");
-    for (i = 0; i < requests_stack.top; i++) {
+    for (i = 0; i < 3; i++) {
         printf("%d.- %s\n", i + 1, search_user_code(user_list, requests_stack.requests_code[i])->id_name);
     }
 
-    for (i = 0; i < requests_stack.top; i++) {
-        stack_user = search_user_code(user_list, requests_stack.requests_code[i]);
+    for (i = 0; i < 3; i++) {
+        stack_user = search_user_code(user_list, requests_stack.requests_code[requests_stack.top - 1]);
         printf("\n%s\n", LINEA_ASTERISCOS);
         printf("Nombre usuario: %s\n", stack_user->id_name);
         printf("Nombre real: %s\n", stack_user->nombre);
@@ -112,13 +112,15 @@ void manage_stack(User_list* user_list, Requests* requests_list, Requests_stack 
             if (option_requests == 1) {
                 stack_requests = search_user_requests(requests_list, stack_user->code);
                 add_requests(stack_requests, login_code);
+                delete_request_stack(&requests_stack);
                 break;
             }
             else if (option_requests == 2) {
+                delete_request_stack(&requests_stack);
                 break;
             }
             else if (option_requests == 0) {
-                printf("Saliendo de la gestion de enviar solicitudes...");
+                printf("Saliendo de la gestion de enviar solicitudes...\n");
                 return;
             }
             else {
