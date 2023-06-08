@@ -38,11 +38,11 @@ En este proyecto se nos ha propuesto el desafío de crear en lenguaje de código
 
 #### **Primer objetivo:**
 
-El primer objetivo fue implementar una lista, esto lo hicimos con nuestro archivo C y header llamado user_list, donde tenemos un double linked list creada mediante la estructura creada en el header en la línea 13. En esta estructura, prev és un nodo anterior de la lista de usuarios y next, es un nodo siguiente de la lista de usuarios. En nuestro archivo C incluimos el header user.h, para así tener acceso a todos los datos de los diferentes usuarios. Al ser una doble linked list, cada usuario tendrá su propia lista y avanzamos o retrocedemos mediante el uso de los nodos (prev y next). Primeramente inicializamos a todos los usuarios que se encuentran en el archivo de texto users.txt y a cada uno de ellos le asignamos un espacio en la lista para guardar su información de usuario. Para ello nuestro archivo tipo C dispone de unas funciones como **crear usuario**(first_user_created o add_user_created), **cargar estos usuarios**(loading_users), save_all_users sirve para que cuando cerremos el programa, este guarde todos los usuarios que ya estaban introducidos anteriormente y los nuevos que han sido agregados durante la ejecución del programa. Creemos que en esta lista podríamos aprovechar más algunos datos de la estructura de usuarios, pero aun así creemos para el objetivo que tenemos propuesto, ésta más que aceptable el cómo está implementada.
+El primer objetivo fue implementar una lista, esto lo hicimos con nuestro archivo C y header llamado user_list, donde tenemos un double linked list creada mediante la estructura creada en el header en la línea 13. En esta estructura, prev és un nodo anterior de la lista de usuarios y next, es un nodo siguiente de la lista de usuarios. En nuestro archivo C incluimos el header user.h, para así tener acceso a todos los datos de los diferentes usuarios. Al ser una doble linked list, avanzamos o retrocedemos mediante el uso de los nodos (prev y next). Primeramente inicializamos a todos los usuarios que se encuentran en el archivo de texto users.txt y a cada uno de ellos le asignamos un espacio en la lista para guardar su información de usuario. Para ello nuestro archivo tipo C dispone de unas funciones como **crear usuario**(first_user_created o add_user_created), **cargar estos usuarios**(loading_users), save_all_users sirve para que cuando cerremos el programa, este guarde todos los usuarios que ya estaban introducidos anteriormente y los nuevos que han sido agregados durante la ejecución del programa. Creemos que en esta lista podríamos aprovechar más algunos datos de la estructura de usuarios, pero aun así creemos para el objetivo que tenemos propuesto, aun asi intuimos que esta implementado de forma correcta.
 
 #### **Segundo objetivo:**
 
-Como segundo objetivo, creamos una pila en el bloque de código y header llamado request_queue, en este bloque han sido implementados 2 objetivos, los cuales han sido el segundo (la pila) y el tercero (la cola), a diferencia de la cola, este stack funciona de forma que el programa escogerá entre la lista de usuarios tres al azar y los meterá dentro del stack y el usuario escogerá si quiere aceptar o rechazar a estos usuarios.
+Como segundo objetivo, creamos una pila en el bloque de código y header llamado request_queue, en este bloque han sido implementados 2 objetivos, los cuales han sido el segundo (la pila) y el tercero (la cola), a diferencia de la cola, este stack funciona de forma que el programa escogerá entre la lista de usuarios tres al azar y los meterá dentro del stack y el usuario escogerá si quiere enviar o no las solicitudes.
 
 #### **Tercer objetivo:**
 
@@ -50,7 +50,7 @@ El tercer objetivo fue crear una cola para, este objetivo ha sido implementado e
 
 #### **segundo objetivo**
 
-Hemos implementado un algoritmo de búsqueda tipo Linear Search, en el bloque de código C user_list, donde buscamos de forma secuencial a diversos usuarios. Más en concreto a partir de la línea 196 donde empiezan a salir estos algoritmos de búsqueda.
+Hemos implementado un algoritmo de búsqueda tipo Linear Search, en el bloque de código C user_list, donde buscamos de forma secuencial a diversos usuarios(muchos LinearSearch ). Más en concreto a partir de la línea 196 donde empiezan a salir estos algoritmos de búsqueda.
 
 #### **tercer objetivo**
 
