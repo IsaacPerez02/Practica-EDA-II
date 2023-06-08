@@ -17,7 +17,7 @@
 
 Max Mirosa Beuter, Isaac Pérez Anguiano, Adrian Montes Muñoz
 
-Número de los estudiantes
+u215076, u214402, 
 
 8/06/2023
 
