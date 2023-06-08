@@ -37,7 +37,7 @@ int stack_is_full(Requests_stack requests_stack) {
  * @param code_request: código del usuario generado aleatoriamente
  */
 void add_request_stack(Requests_stack* requests_stack, int code_request) {
-    int top = requests_stack->top;
+    int top = requests_stack->top; //Posición siguiente a añadir
     requests_stack->requests_code[top] = code_request;
     requests_stack->top++;
 }
@@ -47,7 +47,7 @@ void add_request_stack(Requests_stack* requests_stack, int code_request) {
  * @param requests_stack: stack de usuarios aleatorios
  */
 void delete_request_stack(Requests_stack* requests_stack) {
-    int top = requests_stack->top;
+    int top = requests_stack->top; //Posición siguiente a añadir
     requests_stack->requests_code[top - 1] = 0;
     requests_stack->top--;
 }
@@ -101,6 +101,7 @@ Requests_stack add_users_to_stack(User_list* users_list, Requests* requests_list
             }
         }
 
+        //Si el código está duplicado...
         if (isDuplicate) {
             i--; //Reiniciamos el bucle para generar un nuevo código
             continue;
@@ -123,8 +124,8 @@ Requests_stack add_users_to_stack(User_list* users_list, Requests* requests_list
 void manage_stack(User_list* user_list, Requests* requests_list, Requests_stack requests_stack, int login_code, Publications* publications) {
     int option_requests = -1;
     int i;
-    User* stack_user;
-    Requests* stack_requests;
+    User* stack_user; //Usuario actual del stack
+    Requests* stack_requests; //Lista de solicitudes del usuario actual del stack
     //Imprimimos los nombres de los usuarios del stack
     printf("***** Usuarios *****\n");
     for (i = 0; i < 3; i++) {
@@ -155,19 +156,19 @@ void manage_stack(User_list* user_list, Requests* requests_list, Requests_stack 
             printf("Elija una opcion:\n");
             scanf("%d", &option_requests);
 
-            if (option_requests == 1) {
+            if (option_requests == 1) { //Si
                 //Enviamos solicitud y lo quitamos del stack
                 stack_requests = search_user_requests(requests_list, stack_user->code);
                 add_requests(stack_requests, login_code);
                 delete_request_stack(&requests_stack);
                 break;
             }
-            else if (option_requests == 2) {
+            else if (option_requests == 2) { //No
                 //Lo quitamos del stack directamente
                 delete_request_stack(&requests_stack);
                 break;
             }
-            else if (option_requests == 0) {
+            else if (option_requests == 0) { //Cancelar
                 printf("Saliendo de la gestion de enviar solicitudes...\n");
                 return;
             }
