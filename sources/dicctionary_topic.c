@@ -86,27 +86,46 @@ void manage_words_dict(Dict* dict, char text[MAX_WORD_LENGHT]){
     int election;
     char delimiters[] = ",. ?=|!';:-_";
     char *word = strtok(text, delimiters); //Divide la palabra si contiene alguno de los caracteres definidos
-    //Comprobamos si la palabra está repetida o no en el diccionario
-    election = search_by_value(dict, word);
-    if(election == TRUE){
-        modify_value(dict, word);
+    //siempre que la palabra tenga más de 3 caracteres
+    if(len_word(word) > 3){
+        //Comprobamos si la palabra está repetida o no en el diccionario
+        election = search_by_value(dict, word);
+        if(election == TRUE){
+            modify_value(dict, word);
+        }
+        else{
+            add_value(dict, word);
+        }
     }
-    else{
-        add_value(dict, word);
-    }
-    //Ahora comprobamos todas las palabras
-    while (word != NULL) {
+    //siempre que la palabra tenga más de 3 caracteres
+    if(len_word(word) > 3){
+        //Comprobamos si la palabra está repetida o no en el diccionario
         word = strtok(NULL, delimiters);
         if(word != NULL){
-            election = search_by_value(dict, word);
-            if(election == TRUE){
-                modify_value(dict, word);
-            }
-            else{
-                add_value(dict, word);
+            if(len_word(word) > 3){
+                election = search_by_value(dict, word);
+                if(election == TRUE){
+                    modify_value(dict, word);
+                }
+                else{
+                    add_value(dict, word);
+                }
             }
         }
     }
+}
+
+/**
+ * Retornamos el tamaño de las palabras
+ * @param word palabra a contar
+ * @return tamaño de caracteres de una palabra
+ */
+int len_word(char word[MAX_WORD_LENGHT]){
+    int count = 0;
+    for (int i = 0; i < MAX_WORD_LENGHT && word[i] != '\0'; ++i) {
+        count++;
+    }
+    return count;
 }
 
 /**
@@ -155,7 +174,7 @@ void print_words_10(Dict* dict){
     int count = 0;
     for (int i = dict->size - 1; i > -1; i--) {
         if(dict->words[i].num_words != 0 && count < 10){
-            printf("%d. La palabra %s se utiliza %d veces\n", count + 1,dict->words[i].word, dict->words[i].num_words);
+            printf("%d. La palabra '%s' se utiliza %d veces\n", count + 1,dict->words[i].word, dict->words[i].num_words);
             count++;
         }
     }

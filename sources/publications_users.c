@@ -9,7 +9,9 @@
  * @return: arreglo de publicaciones de todos los usuarios inicializado
  */
 Publications* init_publications() {
+    //reservamos memoria para las publicaciones
     Publications* publications_list = (Publications*) malloc(sizeof (Publications) * MAX_USERS);
+    //inicializamos publicacion tras publicacion
     for (int i = 0; i < MAX_USERS; i++) {
         publications_list[i].code_user = 0;
         strcpy(publications_list[i].publication, " ");
@@ -26,6 +28,7 @@ Publications* init_publications() {
 void load_publications(Publications* publications, FILE* fp) {
     int code, i = 0;
     char text[MAX_TEXT_LENGTH];
+    //vamos leyendo el archivo para ir cargando las publicaciones
     while(fscanf(fp, "%d. ", &code) > 0){
         publications[i].code_user = code;
         fgets(text, MAX_TEXT_LENGTH, fp);
@@ -43,6 +46,7 @@ void load_publications(Publications* publications, FILE* fp) {
  */
 void create_publication(Publications* publications_user, int code_user, char text[MAX_TEXT_LENGTH]) {
     int comp = 1;
+    //vamos iterando hasta encontrar un hueco para la nueva publicacion
     for (int i = 0; i < MAX_PUBLICATIONS; ++i) {
         if(publications_user[i].code_user == 0 && comp == 1){
             publications_user[i].code_user = code_user;
@@ -59,7 +63,8 @@ void create_publication(Publications* publications_user, int code_user, char tex
  * @param us: Usuario que queremos ver sus publicaciones
  */
 void print_publications(Publications* publications_list, User us) {
-    printf("El usuario %s ha realizado las siguientes publicaciones:\n", us.id_name);
+    //imprimimos las publicaciones del usuario que queramos
+    printf("\nEl usuario %s ha realizado las siguientes publicaciones:\n", us.id_name);
     for (int i = 0; i < MAX_PUBLICATIONS; ++i) {
         if(us.code == publications_list[i].code_user){
             printf("%s\n", publications_list[i].publication);

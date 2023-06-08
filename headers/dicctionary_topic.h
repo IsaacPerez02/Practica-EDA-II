@@ -35,6 +35,7 @@ void modify_value(Dict* dict, char word[MAX_WORD_LENGHT]);
 void realloc_dict(Dict* dict);
 void manage_words_dict(Dict* dict, char text[MAX_WORD_LENGHT]);
 int search_by_value(Dict* dict, char word[MAX_WORD_LENGHT]);
+int len_word(char word[MAX_WORD_LENGHT]);
 void order_selection_sort_dict(Dict* dict);
 void print_words_10(Dict* dict);
 void free_dict(Dict* dict);

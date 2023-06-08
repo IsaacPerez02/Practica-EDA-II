@@ -14,6 +14,7 @@
  * @return: Devuelve al usuario recién creado con casi todos sus campos completos
  */
 User* create_user (char gustos[MAX_GUSTOS][GUSTOS_LENGTH]){
+    //reservamos memoria para el nuevo usuario
     User* u = (User*) malloc(sizeof (User));
     int indice, status, status_gusto;
 
@@ -26,7 +27,7 @@ User* create_user (char gustos[MAX_GUSTOS][GUSTOS_LENGTH]){
     printf("El nombre de usuario ha sido introducido correctamente.\n");
     printf("%s\n", LINEA_ASTERISCOS);
     
-    //Introducir el nombre
+    //Introducir y comprobar el nombre
     printf("\n%s\n", LINEA_ASTERISCOS);
     printf("Introduzca su nombre: \n");
     scanf("%s", u->nombre);
@@ -38,7 +39,7 @@ User* create_user (char gustos[MAX_GUSTOS][GUSTOS_LENGTH]){
     }
     printf("El nombre ha sido introducido correctamente.\n");
 
-    //Introducir la contraseña
+    //Introducir y comprobar la contraseña
     printf("\n%s\n", LINEA_ASTERISCOS);
     printf("Introduzca su contrasena. La contrasena debe tener 8 caracteres, 1 minuscula, 1 mayuscula y 1 numero:\n");
     scanf("%s", u->contrasena);
@@ -50,7 +51,7 @@ User* create_user (char gustos[MAX_GUSTOS][GUSTOS_LENGTH]){
     }
     printf("La contrasena ha sido introducida correctamente.\n");
 
-    //Introducir la edad
+    //Introducir y comprobar la edad
     printf("\n%s\n", LINEA_ASTERISCOS);
     printf("Introduzca su edad: \n");
     scanf("%d", &u->edad);
@@ -62,7 +63,7 @@ User* create_user (char gustos[MAX_GUSTOS][GUSTOS_LENGTH]){
     }
     printf("La edad ha sido introducida correctamente.\n");
 
-    //Introducir el correo
+    //Introducir y comprobar el correo
     printf("\n%s\n", LINEA_ASTERISCOS);
     printf("Introduzca su correo: \n");
     scanf("%s", u->correo);
@@ -74,7 +75,7 @@ User* create_user (char gustos[MAX_GUSTOS][GUSTOS_LENGTH]){
     }
     printf("El correo ha sido introducido correctamente.\n");
 
-    //Introducir ubicación
+    //Introducir y comprobar la ubicación
     printf("\n%s\n", LINEA_ASTERISCOS);
     printf("Introduzca su ubicacion: \n");
     scanf("%s", u->ubicacion);
@@ -86,7 +87,7 @@ User* create_user (char gustos[MAX_GUSTOS][GUSTOS_LENGTH]){
     }
     printf("La ciudad ha sido introducida correctamente.\n");
 
-    //Introducir gustos
+    //Introducir y comprobar los gustos
     printf("\n%s\n", LINEA_ASTERISCOS);
     for (int i = 0; i < MAX_GUSTOS; i++){
         printf("%d. %s \n", i + 1, gustos[i]);
@@ -109,10 +110,6 @@ User* create_user (char gustos[MAX_GUSTOS][GUSTOS_LENGTH]){
     return u;
 }
 
-int verify_id_name_user(char* id){
-
-}
-
 /**
  * Comprueba que el nombre real introducido no tenga números
  * @param name: Nombre real introducido
@@ -120,7 +117,9 @@ int verify_id_name_user(char* id){
  */
 int verify_name_user(char* name) {
     int i = 0;
+    //recorremos todos los caracteres del nombre
     while (name[i] != '\0') { //\0 = NULL
+        //siempre que no sea una letra sucedera lo siguiente
         if (48 >= name[i] || name[i] <= 57) {
             printf("Tu nombre no puede contener números.\n");
             return FALSE;
@@ -148,6 +147,7 @@ int verify_password_user(char* pass) {
     //un string indicando qué condiciones faltan al final.
     int condiciones_cumplidas = 0; //Por cada condición cumplida, sumamos 1. Si se cumplen todas, la contraseña es correcta
 
+    //recorremos todos los caracteres de la contraseña
     while (pass[i] != '\0') {
         //Comprobamos si contiene una minúscula
         if (islower(pass[i]) > 0) {
@@ -216,6 +216,7 @@ int verify_password_user(char* pass) {
 int verify_correo_user(char* correo) {
     int i = 0;
     int contador = 0;
+    //recorremos caracter a caracter el correo
     while (correo[i] != '\0'){
         if(correo[i] == '@'){
             contador ++;
@@ -240,12 +241,18 @@ int verify_correo_user(char* correo) {
  * @return: Devuelve TRUE si la edad introducida es un número positivo mayor que 18; FALSE si no cumple las dos condiciones
  */
 int verify_edad_user(int edad) {
+    //comprobamos que el usuario no sea menor de edad
     if (0 < edad && edad < 18) {
         printf("La edad mínima debe ser de 18 años.\n");
         return FALSE;
     }
+    //y que a su vez tampoco sea negativa
     else if (edad <= 0){
         printf("La edad debe ser positiva.\n");
+        return FALSE;
+    }
+    else if (edad >= 150){
+        printf("A esa edad me gustaria llegar a mi!\n");
         return FALSE;
     }
     return TRUE;
@@ -258,7 +265,9 @@ int verify_edad_user(int edad) {
  */
 int verify_ciudad_user(char* city) {
     int i = 0;
+    //recorremos caracter a caracter la ciudad
     while(city[i] != '\0'){
+        //si tenemos un numero entonces
         if(isdigit(city[i])){
             printf("La ciudad no puede tener números.\n");
             return FALSE;
@@ -275,6 +284,7 @@ int verify_ciudad_user(char* city) {
  * @return: Devuelve TRUE si el gusto recién elegido no coincide con un gusto anterior; FALSE si no es el caso
  */
 int verify_gusto_user(char gustos[5][GUSTOS_LENGTH], char gusto[GUSTOS_LENGTH]) {
+    //recorremos todos los caracteres seleccionados por el usuario para que no se repitan
     for (int i = 0; i < 5; i++) {
         if (strcmp(gustos[i], gusto) == 0) {
             return FALSE;

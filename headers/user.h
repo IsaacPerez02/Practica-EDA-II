@@ -28,7 +28,6 @@ typedef struct {
 } User;
 
 User* create_user(char gustos[MAX_GUSTOS][GUSTOS_LENGTH]);
-int verify_id_name_user(char* id);
 int verify_name_user(char* name);
 int verify_password_user(char* pass);
 int verify_correo_user(char* correo);

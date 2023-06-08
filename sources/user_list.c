@@ -1,4 +1,3 @@
-
 #include "../headers/user.h"
 #include "../headers/user_list.h"
 
@@ -21,8 +20,10 @@
  * @param gustos: Preferencias del usuario
  */
 void first_user(User_list** list, char id_name[MAX_ID_NAME_LENGHT], char name[MAX_NAME_LENGHT], int code, int edad, char password[MAX_PASSWORD_LENGHT], char correo[MAX_CORREO_LENGHT], char ciudad[MAX_CITY_LENGHT], char gustos[5][GUSTOS_LENGTH]){
+    //reservamos memoria para el usuario en la lista
     User_list* first = (User_list*) malloc(sizeof (User_list));
     first->us = (User*) malloc(sizeof (User));
+    //asignamos los valores correspondientes al usuario
     strcpy(first->us->id_name, id_name);
     strcpy(first->us->nombre, name);
     strcpy(first->us->contrasena, password);
@@ -53,8 +54,10 @@ void first_user(User_list** list, char id_name[MAX_ID_NAME_LENGHT], char name[MA
  * @param gustos: Preferencias del usuario
  */
 void add_user(User_list** list, char id_name[MAX_ID_NAME_LENGHT], char name[MAX_NAME_LENGHT], int code, int edad, char password[MAX_PASSWORD_LENGHT], char correo[MAX_CORREO_LENGHT], char ciudad[MAX_CITY_LENGHT], char gustos[5][GUSTOS_LENGTH]){
+    //reservamos memoria para el usuario en la lista
     User_list* new_user = (User_list*) malloc(sizeof (User_list));
     new_user->us = (User*) malloc(sizeof (User));
+    //asignamos los valores correspondientes al usuario
     strcpy(new_user->us->id_name, id_name);
     strcpy(new_user->us->nombre, name);
     strcpy(new_user->us->contrasena, password);
@@ -70,6 +73,7 @@ void add_user(User_list** list, char id_name[MAX_ID_NAME_LENGHT], char name[MAX_
     new_user->next = NULL;
     new_user->prev = NULL;
     User_list* temp = *list;
+    //asignaremos el usuario en la ultima posición de la lista
     while (temp->next != NULL) {
         temp = temp->next;
     }
@@ -83,8 +87,10 @@ void add_user(User_list** list, char id_name[MAX_ID_NAME_LENGHT], char name[MAX_
  * @param us: Usuario recién creado
  */
 void first_user_created(User_list** list, User* us){
+    //reservamos memoria para el usuario en la lista
     int code = create_code(list);
     User_list* first = (User_list*) calloc(1, sizeof (User_list));
+    //asignamos los valores correspondientes al usuario
     first->next = NULL;
     first->prev = NULL;
     first->us = us;
@@ -98,14 +104,17 @@ void first_user_created(User_list** list, User* us){
  * @param us: Usuario recién creado
  */
 void add_user_created (User_list** list, User* us){
+    //reservamos memoria para el usuario en la lista
     int code = create_code(list);
     User_list* new_user = (User_list*) malloc(sizeof (User_list));
+    //asignamos los valores correspondientes al usuario
     new_user->next = NULL;
     new_user->prev = NULL;
     new_user->us = us;
     new_user->us->code = code;
     new_user->us->code = create_code(list);
     User_list* temp = *list;
+    //asignaremos el usuario en la ultima posición de la lista
     while (temp->next != NULL) {
         temp = temp->next;
     }
@@ -121,6 +130,7 @@ void add_user_created (User_list** list, User* us){
 void loading_users(FILE * fa, User_list** list){
     char id_name[MAX_ID_NAME_LENGHT], name[MAX_NAME_LENGHT], contrasena[MAX_PASSWORD_LENGHT], ubicacion[MAX_CITY_LENGHT], correo[MAX_CORREO_LENGHT], gustos[5][GUSTOS_LENGTH];
     int edad, code;
+    //vamos leyendo uno por uno los usuarios para cargarlos en la linked_list
     while (fscanf(fa, "%s %s %d %s %d %s %s %s %s %s %s %s", id_name, name, &code, contrasena, &edad, correo, ubicacion, gustos[0], gustos[1], gustos[2], gustos[3], gustos[4]) > 11) { //leer datos aquí
         if (*list == NULL) {
             first_user(list, id_name, name, code, edad, contrasena, correo, ubicacion, gustos);
@@ -139,32 +149,13 @@ void loading_users(FILE * fa, User_list** list){
  */
 void save_all_users(User_list* list, FILE* fa){
     User_list* heap = list;
+    //guardamos a los usuarios de la linked_list uno por uno
     while (heap->next != NULL){
         fprintf(fa, "%s %s %d %s %d %s %s %s %s %s %s %s\n", heap->us->id_name, heap->us->nombre, heap->us->code, heap->us->contrasena, heap->us->edad, heap->us->correo, heap->us->ubicacion, heap->us->gustos[0], heap->us->gustos[1], heap->us->gustos[2], heap->us->gustos[3], heap->us->gustos[4]);
         heap = heap->next;
     }
     fprintf(fa, "%s %s %d %s %d %s %s %s %s %s %s %s\n", heap->us->id_name, heap->us->nombre, heap->us->code, heap->us->contrasena, heap->us->edad, heap->us->correo, heap->us->ubicacion, heap->us->gustos[0], heap->us->gustos[1], heap->us->gustos[2], heap->us->gustos[3], heap->us->gustos[4]);
     free(list);
-}
-
-/**
- * Borra a un usuario introducido de la lista
- * @param list: Lista de usuarios
- * @param us: Usuario que queremos borrar
- */
-void delete_user (User_list** list, User* us){
-    User_list* heap = *list;
-    while (heap->us->id_name != us->id_name){
-        heap = heap->next;
-    }
-    if (heap->next != NULL){
-        heap->prev->next = heap->next;
-        heap->next->prev = heap->prev;
-    }
-    else {
-        heap->prev->next = heap->next;
-    }
-    free(heap);
 }
 
 /**
@@ -196,12 +187,14 @@ void print_users(User_list* list){
  */
 User* search_user_id_name(User_list* list, char* check_user) {
     User_list* heap = list;
+    //buscamos por id_name usuario por usuario hasta encontrar el que buscamos
     while (heap != NULL){
         if (strcmp(heap->us->id_name, check_user) == 0) {
             return heap->us;
         }
         heap = heap->next;
     }
+    //si no lo encontramos, retornamos NULL
     return NULL;
 }
 
@@ -213,15 +206,14 @@ User* search_user_id_name(User_list* list, char* check_user) {
  */
 User* search_user_code(User_list* list, int code){
     User_list* heap = list;
+    //buscamos por code usuario por usuario hasta encontrar el que buscamos
     while (heap != NULL){
         if (heap->us->code == code) {
             return heap->us;
         }
         heap = heap->next;
     }
-    if (heap->us->code == code) {
-        return heap->us;
-    }
+    //si no lo encontramos, retornamos NULL
     return NULL;
 }
 
@@ -234,6 +226,7 @@ User* search_user_code(User_list* list, int code){
  */
 User* check_user_password(User_list * list, char id_name[MAX_ID_NAME_LENGHT] ,char password[MAX_PASSWORD_LENGHT]){
     User_list* heap = list;
+    //recorremos hasta encontrar al usuario que esta iniciando sesion
     while (heap != NULL) {
         if (strcmp(id_name, heap->us->id_name) == 0){
             if(strcmp(password, heap->us->contrasena) == 0){
@@ -245,16 +238,8 @@ User* check_user_password(User_list * list, char id_name[MAX_ID_NAME_LENGHT] ,ch
         }
         heap = heap->next;
     }
-    //por si casualmente el usuario en iniciar sesion es el ultimo de la lista volvemos a comprobar
-    if (strcmp(id_name, heap->us->id_name) == 0){
-        if(strcmp(password, heap->us->contrasena) == 0){
-            return heap->us; //devolvemos el usuario que inicia sesion
-        }
-        else {
-            return NULL;
-        }
-    }
-    return NULL; //si no esta devolvemos NULL
+    //si no lo encontramos, retornamos NULL
+    return NULL;
 }
 
 /**
@@ -295,6 +280,7 @@ int create_code(User_list** list) {
 int get_num_users(User_list* user_list) {
     User_list* heap = user_list;
     int size = 0;
+    //calculamos cuantos usuarios tenemos
     while (heap != NULL) {
         size++;
         heap = heap->next;

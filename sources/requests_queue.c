@@ -6,7 +6,9 @@
  * @return Requests inicializada completamente
  */
 Requests * init_requests_user(){
+    //reservamos memoria para las requests
     Requests* requests = (Requests*) malloc(MAX_USERS * sizeof (Requests));
+    //inicializamos todos los valores de las requests
     for (int i = 0; i < MAX_USERS; ++i) {
         requests[i].code_user = 0;
         requests[i].tail = 0;
@@ -29,21 +31,13 @@ int is_empty(Requests* requests) {
 }
 
 /**
- * Comprueba si la cola está llena
- * @param requests: Cola de solicitudes
- * @return: Devuelve si la cola está llena (1) o no (0)
- */
-int is_full(Requests* requests) {
-    return (requests->size == MAX_REQUESTS);
-}
-
-/**
  * Cargamos las requests anteriores de los usuarios
  * @param requests request inicializada
  * @param fr archivo
  */
 void load_requests(Requests* requests, FILE* fr){
     int code, code_requests, num_requests, i = 0;
+    //vamos leyendo todos los datos para cargarlos
     while(fscanf(fr, "%d. %d,", &code, &num_requests) > 1){
         requests[i].code_user = code;
         requests[i].head = 0;
@@ -64,6 +58,7 @@ void load_requests(Requests* requests, FILE* fr){
  */
 void new_user_requests(Requests* requests, int new_user_code){
     int comp = 1;
+    //inicializamos las posibles request del nuevo usuario
     for (int i = 0; i < MAX_USERS; ++i) {
         if(requests[i].code_user == 0 && comp == 1){
             requests[i].code_user = new_user_code;
@@ -78,9 +73,11 @@ void new_user_requests(Requests* requests, int new_user_code){
  * @param new_request codigo del nuevo requests
  */
 void add_requests(Requests* requests, int new_request) {
+    //si las requests del usuario estan llenas entonces
     if (requests->size == MAX_REQUESTS) {
         printf("No se pueden enviar mas solicitudes a este usuario.\n");
     }
+    //si no mandamos solicitud
     else {
         requests->code_request[requests->tail] = new_request;
         requests->tail++;
@@ -99,6 +96,7 @@ void add_requests(Requests* requests, int new_request) {
  * @return: lista de solicitudes del usuario a buscar
  */
 Requests* search_user_requests(Requests* requests, int code_user){
+    //buscamos por codigo las requests del usuario
     for (int i = 0; i < MAX_USERS; ++i) {
         if(requests[i].code_user == code_user){
             return &requests[i];
@@ -114,6 +112,7 @@ Requests* search_user_requests(Requests* requests, int code_user){
  * @param code_new_friend: código del usuario de la solicitud
  */
 void accept_requests(Friends* friends, int code_user, int code_new_friend){
+    //si acceptamos requests añadimos a ambos los codigos pertinentes de cada uno en su lista de amigos
     Friends* friend = search_user_friends(friends, code_user);
     add_friend(friend, code_new_friend);
     friend = search_user_friends(friends, code_new_friend);
@@ -125,9 +124,11 @@ void accept_requests(Friends* friends, int code_user, int code_new_friend){
  * @param requests: Cola de solicitudes
  */
 void delete_request(Requests* requests) {
+    //si esta vacia entonces
     if (is_empty(requests)) {
         printf("No hay mas solicitudes.\n");
     }
+    //si no vamos eliminando las solicitudes rechazadas
     else {
         requests->code_request[requests->head] = 0;
         requests->head++;
@@ -146,6 +147,8 @@ void delete_request(Requests* requests) {
  */
 void manage_requests(User_list* user_list, Requests* requests_list, Friends* friends) {
     int option_requests = -1;
+    //vamos iterando por todas las requests del usuario para que pueda aceptar o rechazar
+    //siempre que la primera requests este por delante de la ultima entonces (por propiedades de queue)
     if(requests_list->head < requests_list->tail){
         //Gestión de solicitud de un usuario. Al no tener más solicitudes, saldremos de la gestión de solicitudes
         for (int i = requests_list->head; i < requests_list->tail && option_requests != 0; i++) {
@@ -157,20 +160,24 @@ void manage_requests(User_list* user_list, Requests* requests_list, Friends* fri
             printf("Elija una opcion:\n");
             scanf("%d", &option_requests);
 
+            //si accepta entonces
             if (option_requests == 1) {
                 accept_requests(friends, requests_list->code_user, requests_list->code_request[i]);
                 delete_request(requests_list); //Al aceptar la solicitud, la borramos de la lista del usuario
                 printf("Solicitud aceptada.\n");
             }
+            //si rechaza entonces
             else if (option_requests == 2) {
                 delete_request(requests_list); //Borramos la solicitud directamente sin añadirlo como amigo
                 printf("Solicitud rechazada.\n");
             }
+            //si decide salir abandonamos la funcion
             else if (option_requests == 0) {
                 printf("Saliendo de la gestion de solicitudes...\n");
             }
         }
     }
+    //si la ultima requests esta delante de la primera requests entonces
     else{
         for (int j = requests_list->tail; j < requests_list->head; j++){
             printf("\n%s\n", LINEA_ASTERISCOS);
@@ -180,15 +187,19 @@ void manage_requests(User_list* user_list, Requests* requests_list, Friends* fri
             printf("0.- Atras\n");
             printf("Elija una opcion:\n");
             scanf("%d", &option_requests);
+
+            //si accepta entonces
             if (option_requests == 1) {
                 accept_requests(friends, requests_list->code_user, requests_list->code_request[j]);
                 delete_request(requests_list); //Al aceptar la solicitud, la borramos de la lista del usuario
                 printf("Solicitud aceptada.\n");
             }
+            //si rechaza entonces
             else if (option_requests == 2) {
                 delete_request(requests_list); //Borramos la solicitud directamente sin añadirlo como amigo
                 printf("Solicitud rechazada.\n");
             }
+            //si decide salir abandonamos la funcion
             else if (option_requests == 0) {
                 printf("Saliendo de la gestion de solicitudes...\n");
             }
@@ -204,15 +215,18 @@ void manage_requests(User_list* user_list, Requests* requests_list, Friends* fri
  * @param fr archivo de guardado
  */
 void save_requests(Requests* requests, FILE* fr){
+    //vamos guardando usuario por usuario con sus requests pertinentes
     for (int i = 0; i < MAX_USERS; ++i) {
         if(requests[i].code_user != 0){
             fprintf(fr, "%d. %d, ", requests[i].code_user, requests[i].size);
+            //siempre que la primera requests este por delante de la ultima entonces (por propiedades de queue)
             if(requests[i].head < requests[i].tail){
                 for (int j = requests[i].head; j < requests[i].tail ; j++) {
                     fprintf(fr, "%d, ", requests[i].code_request[j]);
                 }
                 fprintf(fr, "\n");
             }
+            //si la ultima requests esta delante de la primera requests entonces
             else{
                 for (int j = requests[i].tail; j < requests[i].head ; j++) {
                     fprintf(fr, "%d, ", requests[i].code_request[j]);
@@ -231,6 +245,8 @@ void save_requests(Requests* requests, FILE* fr){
  */
 void print_requests_graph(User_list* list, Requests* requests){
     int i = 1;
+    //vamos requests por requests impriiendolas
+    //siempre que la primera requests este por delante de la ultima entonces (por propiedades de queue)
     if(requests->head < requests->tail){
         for (int j = requests->head; j < requests->tail; j++) {
             User* us = search_user_code(list, requests->code_request[j]);
@@ -239,6 +255,7 @@ void print_requests_graph(User_list* list, Requests* requests){
         }
         printf("\n");
     }
+    //si la ultima requests esta delante de la primera requests entonces
     else{
         for (int j = requests->tail; j < requests->head; j++) {
             User* us = search_user_code(list, requests->code_request[j]);

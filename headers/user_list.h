@@ -21,8 +21,6 @@ void add_user(User_list** list, char id_name[MAX_ID_NAME_LENGHT], char name[MAX_
 int create_code(User_list** list);
 void first_user_created(User_list** list, User* us);
 void add_user_created (User_list** list, User* us);
-void add_file_users(User_list** list);
-void delete_user (User_list** list, User* us);
 void print_users(User_list* list);
 User* search_user_id_name(User_list * list, char* check_user); //FALTA HACERLA CORRECTAMENTE
 User* search_user_code(User_list* list, int code);
